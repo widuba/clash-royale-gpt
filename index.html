@@ -2,148 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Siege Cards: Arena Rivals</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Siege Cards: Arena Rivals — Phase 3</title>
   <style>
     :root{
-      --bg:#0b1220;
-      --panel:#121c31;
-      --panel-2:#182642;
-      --panel-3:#213359;
+      --bg:#09101c;
+      --panel:#111b30;
+      --panel2:#162540;
+      --panel3:#1e3258;
+      --line:rgba(255,255,255,.09);
       --text:#eef4ff;
-      --muted:#9fb3d7;
+      --muted:#9eb2d7;
       --gold:#f6c453;
-      --green:#56d08a;
-      --red:#ff6b6b;
-      --blue:#60a5fa;
-      --purple:#9b87f5;
-      --line:rgba(255,255,255,.08);
-      --shadow:0 14px 30px rgba(0,0,0,.3);
-      --radius:18px;
-      --radius-sm:12px;
-      --safe-bottom: max(12px, env(safe-area-inset-bottom));
-      --safe-top: max(12px, env(safe-area-inset-top));
+      --green:#53d48a;
+      --red:#ff7676;
+      --blue:#6bb6ff;
+      --purple:#9a88ff;
+      --shadow:0 14px 30px rgba(0,0,0,.34);
+      --radius:20px;
+      --safe-top:max(12px, env(safe-area-inset-top));
+      --safe-bottom:max(12px, env(safe-area-inset-bottom));
     }
-
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    html,body{margin:0;height:100%;background:linear-gradient(180deg,#08111d,#0d1526);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    html,body{margin:0;height:100%;background:linear-gradient(180deg,#08101b,#0c1423);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
     button,input,select{font:inherit}
     button{cursor:pointer;border:none}
-    .app{min-height:100%;display:flex;flex-direction:column}
-    .screen{display:none;min-height:100vh;padding:16px 16px calc(16px + var(--safe-bottom));padding-top:calc(16px + var(--safe-top))}
+    .app{min-height:100%}
+    .screen{display:none;min-height:100vh;padding:calc(16px + var(--safe-top)) 16px calc(16px + var(--safe-bottom))}
     .screen.active{display:block}
-    .wrap{max-width:1200px;margin:0 auto}
-    .topbar{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      margin-bottom:16px;flex-wrap:wrap
-    }
-    .brand{
-      display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.2rem;letter-spacing:.2px
-    }
+    .wrap{max-width:1250px;margin:0 auto}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.15rem}
     .brand-badge{
-      width:42px;height:42px;border-radius:14px;
-      background:linear-gradient(135deg,var(--blue),var(--purple));
+      width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--purple));
       display:grid;place-items:center;box-shadow:var(--shadow)
     }
     .pill-row{display:flex;gap:10px;flex-wrap:wrap}
     .pill{
-      background:rgba(255,255,255,.07);
-      border:1px solid var(--line);
-      color:var(--text);
-      padding:10px 14px;border-radius:999px;font-weight:700
+      background:rgba(255,255,255,.07);border:1px solid var(--line);padding:10px 14px;border-radius:999px;font-weight:800
     }
-    .coins{color:var(--gold)}
-    .xp{color:var(--green)}
+    .pill.coins{color:var(--gold)}
+    .pill.xp{color:var(--green)}
     .card{
-      background:linear-gradient(180deg,var(--panel),var(--panel-2));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow)
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)
     }
     .section{padding:16px}
-    .hero{
-      display:grid;grid-template-columns:1.2fr .9fr;gap:16px
-    }
-    @media (max-width: 920px){
-      .hero{grid-template-columns:1fr}
-    }
+    .hero{display:grid;grid-template-columns:1.15fr .95fr;gap:16px}
+    @media (max-width:950px){.hero{grid-template-columns:1fr}}
     .hero-left{
       padding:18px;
+      min-height:260px;
+      display:flex;flex-direction:column;justify-content:space-between;
       background:
-        radial-gradient(circle at 20% 20%, rgba(96,165,250,.23), transparent 34%),
-        radial-gradient(circle at 80% 20%, rgba(155,135,245,.18), transparent 28%),
-        linear-gradient(180deg,#172948,#101a2f);
-      min-height:260px;display:flex;flex-direction:column;justify-content:space-between
+        radial-gradient(circle at 18% 20%, rgba(107,182,255,.18), transparent 30%),
+        radial-gradient(circle at 78% 20%, rgba(154,136,255,.15), transparent 28%),
+        linear-gradient(180deg,#172848,#0f1b31);
     }
-    .hero h1{margin:0 0 10px;font-size:2rem;line-height:1.05}
-    .hero p{margin:0;color:var(--muted);max-width:55ch;line-height:1.5}
+    .hero h1{margin:0 0 10px;font-size:2rem;line-height:1.03}
+    .hero p{margin:0;color:var(--muted);max-width:58ch;line-height:1.5}
     .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    @media (max-width: 640px){
-      .menu-grid{grid-template-columns:1fr}
-    }
+    @media (max-width:640px){.menu-grid{grid-template-columns:1fr}}
     .menu-btn{
-      background:linear-gradient(180deg,var(--panel-2),var(--panel-3));
-      border:1px solid var(--line);color:var(--text);
-      border-radius:18px;padding:18px;text-align:left;
-      display:flex;justify-content:space-between;align-items:center;font-weight:800
+      background:linear-gradient(180deg,var(--panel2),var(--panel3));
+      border:1px solid var(--line);color:var(--text);border-radius:18px;padding:18px;
+      text-align:left;display:flex;justify-content:space-between;align-items:center;font-weight:900
     }
-    .menu-btn small{display:block;color:var(--muted);font-weight:600;margin-top:6px}
-    .menu-btn.primary{
-      background:linear-gradient(180deg,#2450a4,#183a7c)
-    }
-
+    .menu-btn small{display:block;margin-top:6px;color:var(--muted);font-weight:700}
+    .menu-btn.primary{background:linear-gradient(180deg,#2550a4,#17397b)}
     .subgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-    @media (max-width: 920px){
-      .subgrid{grid-template-columns:1fr}
-    }
-
-    .title-row{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      margin-bottom:12px;flex-wrap:wrap
-    }
+    @media (max-width:950px){.subgrid{grid-template-columns:1fr}}
+    .title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
     .title-row h2,.title-row h3{margin:0}
     .muted{color:var(--muted)}
+    .tiny{font-size:.78rem}
     .small{font-size:.92rem}
-
-    .deck-slots{
-      display:grid;grid-template-columns:repeat(4,1fr);gap:10px
+    .tag{
+      font-size:.76rem;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--muted);font-weight:800
     }
-    @media (max-width: 640px){
-      .deck-slots{grid-template-columns:repeat(2,1fr)}
+    .btn{
+      background:linear-gradient(180deg,#284980,#1a3562);color:var(--text);border-radius:12px;padding:10px 12px;font-weight:900;border:1px solid rgba(255,255,255,.08)
     }
+    .btn.alt{background:rgba(255,255,255,.08)}
+    .btn.good{background:linear-gradient(180deg,#1f9359,#156f43)}
+    .btn.warn{background:linear-gradient(180deg,#a04541,#7b302d)}
+    .btn.gold{background:linear-gradient(180deg,#d8a93a,#b9851c);color:#1b1200}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .notice{padding:12px;border-radius:14px;background:rgba(255,255,255,.06);color:var(--muted)}
+    .deck-slots{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    @media (max-width:640px){.deck-slots{grid-template-columns:repeat(2,1fr)}}
     .slot{
-      min-height:112px;border-radius:16px;padding:10px;border:1px dashed rgba(255,255,255,.18);
+      min-height:118px;border-radius:16px;padding:10px;border:1px dashed rgba(255,255,255,.18);
       background:rgba(255,255,255,.03)
     }
-    .slot.filled{
-      border-style:solid;background:linear-gradient(180deg,#1a2c4b,#16243d)
-    }
-
-    .collection-grid{
-      display:grid;grid-template-columns:repeat(4,1fr);gap:10px
-    }
-    @media (max-width: 920px){
-      .collection-grid{grid-template-columns:repeat(3,1fr)}
-    }
-    @media (max-width: 640px){
-      .collection-grid{grid-template-columns:repeat(2,1fr)}
-    }
-
+    .slot.filled{border-style:solid;background:linear-gradient(180deg,#1a2c4b,#16243d)}
+    .collection-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    @media (max-width:980px){.collection-grid{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:640px){.collection-grid{grid-template-columns:repeat(2,1fr)}}
     .ccard{
       background:linear-gradient(180deg,#1a2b4a,#14233d);
-      border:1px solid var(--line);border-radius:18px;padding:10px;
-      display:flex;flex-direction:column;gap:8px;min-height:140px
+      border:1px solid var(--line);border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:182px
     }
     .ccard.sel{outline:2px solid var(--blue)}
-    .ccard-header{
-      display:flex;justify-content:space-between;gap:8px;align-items:center
-    }
-    .tag{
-      font-size:.78rem;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.09);color:var(--muted);font-weight:700
-    }
+    .ccard-header{display:flex;justify-content:space-between;gap:8px;align-items:center}
     .cost{
       min-width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
-      background:linear-gradient(180deg,#7cc4ff,#4794ff);color:#08111d;font-weight:900
+      background:linear-gradient(180deg,#8cd0ff,#4e98ff);color:#08111d;font-weight:900
     }
     .card-art{
       height:60px;border-radius:12px;
@@ -151,203 +115,104 @@
       display:grid;place-items:center;font-size:1.8rem
     }
     .ccard strong{font-size:.98rem}
-    .ccard .stats{display:flex;flex-wrap:wrap;gap:6px;font-size:.76rem;color:var(--muted)}
-    .ccard .stats span{background:rgba(255,255,255,.06);padding:4px 6px;border-radius:999px}
+    .stats{display:flex;flex-wrap:wrap;gap:6px;font-size:.74rem;color:var(--muted)}
+    .stats span{background:rgba(255,255,255,.06);padding:4px 6px;border-radius:999px}
     .btn-row{display:flex;gap:8px;flex-wrap:wrap}
-    .btn{
-      background:linear-gradient(180deg,#27467d,#1b3560);color:var(--text);
-      border-radius:12px;padding:10px 12px;font-weight:800;border:1px solid rgba(255,255,255,.08)
-    }
-    .btn.alt{background:rgba(255,255,255,.08)}
-    .btn.good{background:linear-gradient(180deg,#1e8d55,#156d42)}
-    .btn.warn{background:linear-gradient(180deg,#9c433f,#7a312d)}
-    .btn:disabled{opacity:.45;cursor:not-allowed}
-
-    /* Battle */
-    .battle-wrap{
-      max-width:1300px;margin:0 auto;display:grid;grid-template-columns:330px 1fr 300px;gap:14px;align-items:start
-    }
-    @media (max-width: 1100px){
-      .battle-wrap{grid-template-columns:1fr}
-    }
-
-    .battle-side{
-      display:flex;flex-direction:column;gap:12px
-    }
-
-    .battle-card{
-      padding:14px
-    }
-
-    .arena-shell{
-      display:flex;flex-direction:column;gap:12px
-    }
-
-    .battle-hud{
-      display:grid;grid-template-columns:repeat(4,1fr);gap:10px
-    }
-    @media (max-width: 640px){
-      .battle-hud{grid-template-columns:repeat(2,1fr)}
-    }
-    .hud-box{
-      padding:12px;border-radius:16px;background:linear-gradient(180deg,#162540,#102038);border:1px solid var(--line)
-    }
-    .hud-box .label{font-size:.76rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
-    .hud-box .value{font-size:1.1rem;font-weight:900;margin-top:6px}
-
-    .arena-card{
-      position:relative;padding:12px
-    }
+    .battle-wrap{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:320px 1fr 300px;gap:14px;align-items:start}
+    @media (max-width:1100px){.battle-wrap{grid-template-columns:1fr}}
+    .battle-side{display:flex;flex-direction:column;gap:12px}
+    .battle-card{padding:14px}
+    .battle-hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    @media (max-width:640px){.battle-hud{grid-template-columns:repeat(2,1fr)}}
+    .hud-box{padding:12px;border-radius:16px;background:linear-gradient(180deg,#162540,#102038);border:1px solid var(--line)}
+    .hud-box .label{font-size:.74rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+    .hud-box .value{font-size:1.08rem;font-weight:900;margin-top:6px}
+    .arena-card{padding:12px}
     .arena{
-      position:relative;
-      width:100%;
-      aspect-ratio: 9 / 16;
-      max-height: 82vh;
-      min-height: 560px;
-      border-radius:24px;
-      overflow:hidden;
+      position:relative;width:100%;aspect-ratio:9/16;max-height:84vh;min-height:580px;border-radius:24px;overflow:hidden;
       background:
-        radial-gradient(circle at 50% 48%, rgba(255,255,255,.1), transparent 14%),
-        linear-gradient(180deg,#7c2d12 0%, #a16207 12%, #3f6212 13%, #3f6212 48%, #60a5fa 49%, #1d4ed8 50%, #3f6212 52%, #365314 100%);
+        radial-gradient(circle at 50% 48%, rgba(255,255,255,.1), transparent 13%),
+        linear-gradient(180deg,#7d2b17 0%, #a15f12 12%, #3f6212 13%, #3f6212 48%, #5da5ff 49%, #1c4ad8 50%, #3f6212 52%, #375415 100%);
       border:1px solid rgba(255,255,255,.14);
       box-shadow: inset 0 0 0 2px rgba(255,255,255,.03), var(--shadow);
-      touch-action:none;
-      user-select:none;
+      user-select:none;touch-action:none
     }
-    @media (max-width: 1100px){
-      .arena{max-height:none}
-    }
-    .lane-line{
-      position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);
-      background:rgba(255,255,255,.08)
-    }
-    .river{
-      position:absolute;left:0;right:0;top:49%;height:2%;background:rgba(255,255,255,.15)
-    }
-    .midline{
-      position:absolute;left:0;right:0;top:50%;height:2px;background:rgba(255,255,255,.08)
-    }
-    .deploy-zone{
-      position:absolute;left:0;right:0;bottom:0;height:48%;
-      background:linear-gradient(180deg,transparent,rgba(96,165,250,.08))
-    }
-
+    .lane-line{position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:rgba(255,255,255,.08)}
+    .river{position:absolute;left:0;right:0;top:49%;height:2%;background:rgba(255,255,255,.14)}
+    .midline{position:absolute;left:0;right:0;top:50%;height:2px;background:rgba(255,255,255,.08)}
+    .deploy-zone{position:absolute;left:0;right:0;bottom:0;height:48%;background:linear-gradient(180deg,transparent,rgba(96,165,250,.08))}
+    .bridge{position:absolute;width:22%;height:4%;background:rgba(255,255,255,.14);border-radius:999px;border:1px solid rgba(255,255,255,.15)}
     .tower{
-      position:absolute;width:68px;height:68px;border-radius:18px;
-      display:flex;align-items:center;justify-content:center;flex-direction:column;
-      font-weight:900;border:2px solid rgba(255,255,255,.16);
-      box-shadow:0 10px 18px rgba(0,0,0,.25)
+      position:absolute;width:68px;height:68px;border-radius:18px;display:flex;align-items:center;justify-content:center;flex-direction:column;
+      font-weight:900;border:2px solid rgba(255,255,255,.16);box-shadow:0 10px 18px rgba(0,0,0,.25)
     }
     .tower.player{background:linear-gradient(180deg,#2254a8,#153b81)}
     .tower.enemy{background:linear-gradient(180deg,#b24343,#7f2f2f)}
     .tower.core{width:78px;height:78px;border-radius:22px}
-    .tower .hp{
-      margin-top:3px;font-size:.68rem;background:rgba(0,0,0,.25);padding:2px 5px;border-radius:999px
-    }
-
-    .bridge{
-      position:absolute;width:22%;height:4%;
-      background:rgba(255,255,255,.14);border-radius:999px;border:1px solid rgba(255,255,255,.15)
-    }
-
+    .tower .hp{margin-top:3px;font-size:.68rem;background:rgba(0,0,0,.25);padding:2px 5px;border-radius:999px}
     .unit{
-      position:absolute;width:38px;height:38px;border-radius:50%;
-      display:grid;place-items:center;font-size:1rem;font-weight:900;
-      transform:translate(-50%,-50%);
-      box-shadow:0 8px 14px rgba(0,0,0,.28);
-      border:2px solid rgba(255,255,255,.18)
+      position:absolute;border-radius:50%;display:grid;place-items:center;font-weight:900;transform:translate(-50%,-50%);
+      box-shadow:0 8px 14px rgba(0,0,0,.28);border:2px solid rgba(255,255,255,.18)
     }
     .unit.player{background:linear-gradient(180deg,#79c6ff,#3d8aff);color:#07101d}
     .unit.enemy{background:linear-gradient(180deg,#ff9e9e,#e95d5d);color:#260909}
-    .unit.hpbar{
-      position:absolute
-    }
-
     .unit-bar{
       position:absolute;left:50%;top:-9px;transform:translateX(-50%);
-      width:40px;height:5px;border-radius:999px;background:rgba(0,0,0,.35);overflow:hidden
+      width:42px;height:5px;border-radius:999px;background:rgba(0,0,0,.35);overflow:hidden
     }
     .unit-bar > span{display:block;height:100%;background:#5cff89;width:100%}
-
     .projectile{
-      position:absolute;width:10px;height:10px;border-radius:50%;
-      transform:translate(-50%,-50%);
+      position:absolute;width:10px;height:10px;border-radius:50%;transform:translate(-50%,-50%);
       box-shadow:0 0 14px rgba(255,255,255,.35)
     }
     .projectile.player{background:#9fd1ff}
     .projectile.enemy{background:#ffb4b4}
-
     .fx{
-      position:absolute;pointer-events:none;transform:translate(-50%,-50%);
-      font-size:.8rem;font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,.5)
+      position:absolute;pointer-events:none;transform:translate(-50%,-50%);font-size:.8rem;font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,.5)
     }
     .fx.hit{color:#ffd8d8}
     .fx.heal{color:#b6ffd1}
     .fx.notice{color:#fff1ae}
-
-    .hand{
-      display:grid;grid-template-columns:repeat(4,1fr);gap:10px
-    }
+    .hand{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
     .hand-card{
-      background:linear-gradient(180deg,#1a2c4b,#13243c);
-      border:1px solid var(--line);border-radius:18px;padding:10px;min-height:112px;
-      display:flex;flex-direction:column;gap:8px;position:relative
+      background:linear-gradient(180deg,#1a2c4b,#13243c);border:1px solid var(--line);border-radius:18px;padding:10px;min-height:116px;
+      display:flex;flex-direction:column;gap:8px;position:relative;touch-action:none
     }
     .hand-card.selected{outline:2px solid var(--gold)}
+    .hand-card.dragging{opacity:.72;transform:scale(1.03)}
     .hand-card.disabled{opacity:.45}
     .hand-card .name{font-weight:900;font-size:.92rem;line-height:1.08}
     .hand-card .mini{font-size:.72rem;color:var(--muted)}
-    .hand-card .cost-bubble{
-      position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;
-      display:grid;place-items:center;background:linear-gradient(180deg,#8ed1ff,#5199ff);color:#08111d;font-weight:900
+    .cost-bubble{
+      position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+      background:linear-gradient(180deg,#8ed1ff,#5199ff);color:#08111d;font-weight:900
     }
-    .selected-banner{
-      margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.07);
-      color:var(--muted);font-weight:700
+    .selected-banner{margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.07);color:var(--muted);font-weight:700}
+    .queue-screen,.result-overlay,.shop-overlay{
+      position:fixed;inset:0;background:rgba(8,14,25,.82);display:none;place-items:center;z-index:30;padding:20px
     }
-
-    .queue-screen{
-      position:fixed;inset:0;background:rgba(8,14,25,.8);display:none;place-items:center;z-index:20;padding:20px
-    }
-    .queue-screen.show{display:grid}
-    .queue-box{
-      width:min(520px,100%);padding:24px;border-radius:24px;
-      background:linear-gradient(180deg,#15243e,#0d1b31);border:1px solid var(--line);box-shadow:var(--shadow);
-      text-align:center
+    .queue-screen.show,.result-overlay.show,.shop-overlay.show{display:grid}
+    .queue-box,.result-box,.shop-box{
+      width:min(860px,100%);padding:24px;border-radius:24px;background:linear-gradient(180deg,#15243e,#0d1b31);border:1px solid var(--line);box-shadow:var(--shadow)
     }
     .spinner{
-      width:60px;height:60px;border-radius:50%;margin:0 auto 16px;
-      border:6px solid rgba(255,255,255,.12);border-top-color:#7fbaff;animation:spin 1s linear infinite
+      width:60px;height:60px;border-radius:50%;margin:0 auto 16px;border:6px solid rgba(255,255,255,.12);border-top-color:#7fbaff;animation:spin 1s linear infinite
     }
     @keyframes spin{to{transform:rotate(360deg)}}
-
-    .result-overlay{
-      position:fixed;inset:0;background:rgba(7,12,21,.82);display:none;place-items:center;z-index:25;padding:18px
-    }
-    .result-overlay.show{display:grid}
-    .result-box{
-      width:min(680px,100%);padding:24px;border-radius:24px;
-      background:linear-gradient(180deg,#152541,#0d1a30);border:1px solid var(--line);box-shadow:var(--shadow)
-    }
     .reward-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .reward{
-      padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.07);font-weight:800
+    .reward{padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.07);font-weight:800}
+    .footer-nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .drag-ghost{
+      position:fixed;pointer-events:none;z-index:50;transform:translate(-50%,-50%) scale(1.05);
+      width:92px;height:112px;background:linear-gradient(180deg,#1a2c4b,#13243c);border:1px solid var(--line);border-radius:18px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;box-shadow:var(--shadow)
     }
-
-    .notice{
-      margin-top:10px;padding:12px;border-radius:14px;background:rgba(255,255,255,.06);color:var(--muted)
-    }
-
-    .footer-nav{
-      display:flex;gap:10px;flex-wrap:wrap;margin-top:14px
-    }
-
-    .tiny{font-size:.78rem}
+    .upgrade-bar{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+    .upgrade-bar > span{display:block;height:100%;background:linear-gradient(90deg,#5cc2ff,#77f0a4)}
   </style>
 </head>
 <body>
 <div class="app">
-  <!-- HOME -->
   <section class="screen active" id="screen-home">
     <div class="wrap">
       <div class="topbar">
@@ -357,7 +222,7 @@
         </div>
         <div class="pill-row">
           <div class="pill">Level <span id="homeLevel">1</span></div>
-          <div class="pill xp">XP <span id="homeXp">0</span></div>
+          <div class="pill xp">XP <span id="homeXp">0 / 100</span></div>
           <div class="pill coins">Coins <span id="homeCoins">0</span></div>
         </div>
       </div>
@@ -365,16 +230,15 @@
       <div class="hero">
         <div class="card hero-left">
           <div>
-            <h1>Original lane battler<br>built for web</h1>
+            <h1>Phase 3 web battler</h1>
             <p>
-              Build an 8-card deck, enter the arena, defeat rivals, earn coins, level up,
-              and grow your collection. This version is Phase 2: menu, deck builder, collection,
-              progression, bot personalities, and saved data.
+              Drag cards into the arena, upgrade your collection, buy shop offers, tune your deck,
+              and climb through fast arena matches with stronger AI and mobile-friendly controls.
             </p>
           </div>
           <div class="footer-nav">
             <button class="menu-btn primary" id="btnPlay" style="flex:1;min-width:220px">
-              <span>Battle Now<small>Fast matchmaking • ranked-style ladder flow</small></span>
+              <span>Battle Now<small>Fast arena matchmaking</small></span>
               <span>▶</span>
             </button>
           </div>
@@ -382,20 +246,20 @@
 
         <div class="menu-grid">
           <button class="menu-btn" id="btnDeckBuilder">
-            <span>Deck Builder<small>Edit your 8-card battle deck</small></span>
+            <span>Deck Builder<small>Edit your 8-card deck</small></span>
             <span>🃏</span>
           </button>
           <button class="menu-btn" id="btnCollection">
-            <span>Collection<small>View all unlocked cards and stats</small></span>
+            <span>Collection<small>Upgrade cards and view stats</small></span>
             <span>📚</span>
           </button>
-          <button class="menu-btn" id="btnResetSave">
-            <span>Reset Save<small>Clear local progress and restart</small></span>
-            <span>↺</span>
+          <button class="menu-btn" id="btnShop">
+            <span>Shop<small>Spend coins on card offers</small></span>
+            <span>🛒</span>
           </button>
-          <button class="menu-btn" id="btnHowTo">
-            <span>How To Play<small>Tap a card, then tap your side of the arena</small></span>
-            <span>❓</span>
+          <button class="menu-btn" id="btnResetSave">
+            <span>Reset Save<small>Clear local progress</small></span>
+            <span>↺</span>
           </button>
         </div>
       </div>
@@ -404,14 +268,14 @@
         <div class="card section">
           <div class="title-row">
             <h2>Current Deck</h2>
-            <div class="muted small">8 cards • average cost <span id="avgCostHome">0.0</span></div>
+            <div class="muted small">Average cost <span id="avgCostHome">0.0</span></div>
           </div>
           <div class="deck-slots" id="homeDeckPreview"></div>
         </div>
 
         <div class="card section">
           <div class="title-row">
-            <h2>Player Profile</h2>
+            <h2>Profile</h2>
             <div class="tag">Saved locally</div>
           </div>
           <div class="notice">
@@ -420,16 +284,14 @@
             <div><strong>Best Win Streak:</strong> <span id="statBestStreak">0</span></div>
             <div><strong>Current Streak:</strong> <span id="statCurrentStreak">0</span></div>
           </div>
-          <div class="notice">
-            <strong>Tip:</strong> heavy frontliners plus ranged support tends to be strong.
-            Siege units are best when you already control the lane.
+          <div class="notice" style="margin-top:12px">
+            <strong>Tip:</strong> upgrade the cards you use most. Higher-level cards scale health and damage in battle.
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- DECK BUILDER -->
   <section class="screen" id="screen-deck">
     <div class="wrap">
       <div class="topbar">
@@ -447,7 +309,7 @@
         <div class="card section">
           <div class="title-row">
             <h2>Your Battle Deck</h2>
-            <div class="muted small">Tap a slot, then tap a card below to replace it</div>
+            <div class="muted small">Select a slot, then choose a card</div>
           </div>
           <div class="deck-slots" id="deckSlots"></div>
           <div class="selected-banner" id="deckSelectedBanner">Selected slot: none</div>
@@ -456,7 +318,7 @@
         <div class="card section">
           <div class="title-row">
             <h2>Collection</h2>
-            <div class="muted small">All cards in this build are unlocked</div>
+            <div class="muted small">24 cards in this build</div>
           </div>
           <div class="collection-grid" id="deckCollectionGrid"></div>
         </div>
@@ -464,17 +326,16 @@
     </div>
   </section>
 
-  <!-- COLLECTION -->
   <section class="screen" id="screen-collection">
     <div class="wrap">
       <div class="topbar">
         <div class="brand">
           <div class="brand-badge">📚</div>
-          <div>Collection</div>
+          <div>Collection & Upgrades</div>
         </div>
         <div class="pill-row">
           <button class="btn alt" data-back-home>← Home</button>
-          <div class="pill">Cards <span id="collectionCount">0</span></div>
+          <div class="pill coins">Coins <span id="collectionCoins">0</span></div>
         </div>
       </div>
       <div class="card section">
@@ -483,31 +344,27 @@
     </div>
   </section>
 
-  <!-- BATTLE -->
   <section class="screen" id="screen-battle">
     <div class="battle-wrap">
       <div class="battle-side">
         <div class="card battle-card">
           <div class="title-row">
             <h3>Your Hand</h3>
-            <div class="muted tiny">Tap a card, then tap your half of the arena</div>
+            <div class="muted tiny">Tap to select or drag onto your side</div>
           </div>
           <div class="hand" id="hand"></div>
           <div class="selected-banner" id="selectedCardBanner">Selected: none</div>
         </div>
 
         <div class="card battle-card">
-          <div class="title-row">
-            <h3>Match Tips</h3>
-          </div>
+          <div class="title-row"><h3>Tips</h3></div>
           <div class="notice tiny">
-            Left and right lanes matter. Ranged units should sit behind tanks. Structures anchor defense.
-            Spells hit instantly and do not remain on the field.
+            Drag a card into the lower half to deploy it. Spells can be dropped anywhere in your deployment half. Towers attack automatically.
           </div>
         </div>
       </div>
 
-      <div class="arena-shell">
+      <div>
         <div class="battle-hud">
           <div class="hud-box"><div class="label">Flux</div><div class="value" id="hudFlux">0 / 10</div></div>
           <div class="hud-box"><div class="label">Time</div><div class="value" id="hudTime">03:00</div></div>
@@ -515,7 +372,7 @@
           <div class="hud-box"><div class="label">Mode</div><div class="value">Arena Match</div></div>
         </div>
 
-        <div class="card arena-card">
+        <div class="card arena-card" style="margin-top:12px">
           <div class="arena" id="arena">
             <div class="lane-line"></div>
             <div class="river"></div>
@@ -525,7 +382,6 @@
             <div class="bridge" style="left:14%; top:48%;"></div>
             <div class="bridge" style="right:14%; top:48%;"></div>
 
-            <!-- Enemy towers -->
             <div class="tower enemy" id="enemyLeftTower" style="left:18%; top:16%;">
               🛡️<div class="hp" id="enemyLeftHp">1500</div>
             </div>
@@ -536,7 +392,6 @@
               🛡️<div class="hp" id="enemyRightHp">1500</div>
             </div>
 
-            <!-- Player towers -->
             <div class="tower player" id="playerLeftTower" style="left:18%; bottom:16%;">
               🛡️<div class="hp" id="playerLeftHp">1500</div>
             </div>
@@ -552,23 +407,19 @@
 
       <div class="battle-side">
         <div class="card battle-card">
-          <div class="title-row">
-            <h3>Battle Controls</h3>
-          </div>
+          <div class="title-row"><h3>Controls</h3></div>
           <div class="btn-row">
             <button class="btn alt" id="btnExitBattle">Exit</button>
-            <button class="btn" id="btnDeselect">Deselect Card</button>
+            <button class="btn" id="btnDeselect">Deselect</button>
           </div>
-          <div class="notice tiny">
-            Desktop: keys 1–4 select cards. Mobile: tap card. You can only deploy on your half.
+          <div class="notice tiny" style="margin-top:10px">
+            Desktop: 1–4 selects cards. Mobile: drag or tap.
           </div>
         </div>
 
         <div class="card battle-card">
-          <div class="title-row">
-            <h3>Battle Feed</h3>
-          </div>
-          <div id="battleFeed" class="notice tiny" style="min-height:180px;max-height:300px;overflow:auto;"></div>
+          <div class="title-row"><h3>Battle Feed</h3></div>
+          <div id="battleFeed" class="notice tiny" style="min-height:180px;max-height:320px;overflow:auto;"></div>
         </div>
       </div>
     </div>
@@ -576,7 +427,7 @@
 </div>
 
 <div class="queue-screen" id="queueScreen">
-  <div class="queue-box">
+  <div class="queue-box" style="text-align:center">
     <div class="spinner"></div>
     <h2 style="margin:0 0 10px;">Efficient matchmaking</h2>
     <div class="muted" id="queueText">Searching for arena match...</div>
@@ -598,117 +449,59 @@
   </div>
 </div>
 
+<div class="shop-overlay" id="shopOverlay">
+  <div class="shop-box">
+    <div class="title-row">
+      <h2 style="margin:0">Shop</h2>
+      <button class="btn alt" id="btnCloseShop">Close</button>
+    </div>
+    <div class="notice" style="margin-bottom:12px">
+      Daily-style offers generated locally. Buy copies to upgrade your cards.
+    </div>
+    <div class="collection-grid" id="shopGrid"></div>
+  </div>
+</div>
+
 <script>
 (() => {
-  const SAVE_KEY = "siege_cards_phase2_save_v1";
+  const SAVE_KEY = "siege_cards_phase3_save_v1";
 
   const CARD_LIBRARY = {
-    iron_guard: {
-      id:"iron_guard", name:"Iron Guard", type:"unit", cost:3, emoji:"🛡️", role:"Tank",
-      hp:240, damage:28, range:42, atkSpeed:1.05, move:38, radius:19, target:"any", color:"player",
-      desc:"Reliable frontliner that soaks damage well."
-    },
-    axe_runner: {
-      id:"axe_runner", name:"Axe Runner", type:"unit", cost:2, emoji:"🪓", role:"Melee DPS",
-      hp:145, damage:52, range:34, atkSpeed:0.95, move:58, radius:17, target:"any",
-      desc:"Fast melee attacker that pressures lanes quickly."
-    },
-    arc_archer: {
-      id:"arc_archer", name:"Arc Archer", type:"unit", cost:3, emoji:"🏹", role:"Ranged",
-      hp:116, damage:44, range:118, atkSpeed:1.15, move:34, radius:16, target:"any", projectile:true,
-      desc:"Ranged lane support with solid single-target damage."
-    },
-    ember_mage: {
-      id:"ember_mage", name:"Ember Mage", type:"unit", cost:4, emoji:"🔥", role:"Ranged",
-      hp:122, damage:68, range:112, atkSpeed:1.3, move:30, radius:16, target:"any", projectile:true,
-      splash:18,
-      desc:"Slow but heavy magical ranged damage."
-    },
-    siege_ram: {
-      id:"siege_ram", name:"Siege Ram", type:"unit", cost:4, emoji:"🐏", role:"Siege",
-      hp:260, damage:132, range:30, atkSpeed:1.45, move:54, radius:18, target:"buildings",
-      desc:"Ignores most units and goes straight for towers."
-    },
-    wolf_pack: {
-      id:"wolf_pack", name:"Wolf Pack", type:"unit", cost:3, emoji:"🐺", role:"Swarm",
-      hp:88, damage:22, range:26, atkSpeed:0.7, move:62, radius:13, target:"any", count:3,
-      desc:"Three fast weak attackers that surround targets."
-    },
-    stone_brute: {
-      id:"stone_brute", name:"Stone Brute", type:"unit", cost:5, emoji:"🪨", role:"Heavy Tank",
-      hp:430, damage:48, range:34, atkSpeed:1.25, move:26, radius:21, target:"any",
-      desc:"Very high health and steady pressure."
-    },
-    spark_bot: {
-      id:"spark_bot", name:"Spark Bot", type:"unit", cost:4, emoji:"⚙️", role:"Burst",
-      hp:126, damage:110, range:106, atkSpeed:1.8, move:28, radius:16, target:"any", projectile:true,
-      desc:"Powerful burst shooter with slow attack speed."
-    },
-    shield_node: {
-      id:"shield_node", name:"Shield Node", type:"structure", cost:3, emoji:"🔷", role:"Structure",
-      hp:340, damage:18, range:92, atkSpeed:1.2, move:0, radius:18, target:"any", structure:true, lifetime:30, projectile:true,
-      desc:"Defensive structure that chips attackers."
-    },
-    arrow_post: {
-      id:"arrow_post", name:"Arrow Post", type:"structure", cost:4, emoji:"🏰", role:"Structure",
-      hp:420, damage:28, range:108, atkSpeed:1.0, move:0, radius:20, target:"any", structure:true, lifetime:35, projectile:true,
-      desc:"Reliable defensive post with good range."
-    },
-    fire_burst: {
-      id:"fire_burst", name:"Fire Burst", type:"spell", cost:4, emoji:"💥", role:"Spell",
-      damage:132, spellRadius:56,
-      desc:"Instant area damage at target point."
-    },
-    frost_lock: {
-      id:"frost_lock", name:"Frost Lock", type:"spell", cost:3, emoji:"❄️", role:"Spell",
-      damage:42, spellRadius:62, slow:0.45, slowDuration:3.2,
-      desc:"Deals light damage and slows enemies in an area."
-    },
-    heal_wave: {
-      id:"heal_wave", name:"Heal Wave", type:"spell", cost:3, emoji:"💚", role:"Spell",
-      heal:90, spellRadius:60,
-      desc:"Heals allied units in an area."
-    },
-    dart_hunter: {
-      id:"dart_hunter", name:"Dart Hunter", type:"unit", cost:2, emoji:"🎯", role:"Ranged",
-      hp:96, damage:34, range:124, atkSpeed:0.9, move:36, radius:14, target:"any", projectile:true,
-      desc:"Cheap, fragile ranged support."
-    },
-    twin_blade: {
-      id:"twin_blade", name:"Twin Blade", type:"unit", cost:4, emoji:"⚔️", role:"Melee DPS",
-      hp:182, damage:42, range:28, atkSpeed:0.55, move:48, radius:17, target:"any",
-      desc:"Rapid dual strikes shred targets fast."
-    },
-    bomb_beetle: {
-      id:"bomb_beetle", name:"Bomb Beetle", type:"unit", cost:3, emoji:"🪲", role:"Splash",
-      hp:132, damage:72, range:30, atkSpeed:1.45, move:44, radius:16, target:"any", splash:22,
-      desc:"Close-range splash attacker for clumps."
-    }
+    iron_guard:{id:"iron_guard",name:"Iron Guard",type:"unit",cost:3,emoji:"🛡️",role:"Tank",hp:240,damage:28,range:42,atkSpeed:1.05,move:38,radius:19,target:"any",desc:"Reliable frontliner."},
+    axe_runner:{id:"axe_runner",name:"Axe Runner",type:"unit",cost:2,emoji:"🪓",role:"Melee DPS",hp:145,damage:52,range:34,atkSpeed:0.95,move:58,radius:17,target:"any",desc:"Fast pressure unit."},
+    arc_archer:{id:"arc_archer",name:"Arc Archer",type:"unit",cost:3,emoji:"🏹",role:"Ranged",hp:116,damage:44,range:118,atkSpeed:1.15,move:34,radius:16,target:"any",projectile:true,desc:"Ranged support."},
+    ember_mage:{id:"ember_mage",name:"Ember Mage",type:"unit",cost:4,emoji:"🔥",role:"Ranged",hp:122,damage:68,range:112,atkSpeed:1.3,move:30,radius:16,target:"any",projectile:true,splash:18,desc:"Heavy ranged splash."},
+    siege_ram:{id:"siege_ram",name:"Siege Ram",type:"unit",cost:4,emoji:"🐏",role:"Siege",hp:260,damage:132,range:30,atkSpeed:1.45,move:54,radius:18,target:"buildings",desc:"Goes straight for towers."},
+    wolf_pack:{id:"wolf_pack",name:"Wolf Pack",type:"unit",cost:3,emoji:"🐺",role:"Swarm",hp:88,damage:22,range:26,atkSpeed:0.7,move:62,radius:13,target:"any",count:3,desc:"Three fast attackers."},
+    stone_brute:{id:"stone_brute",name:"Stone Brute",type:"unit",cost:5,emoji:"🪨",role:"Heavy Tank",hp:430,damage:48,range:34,atkSpeed:1.25,move:26,radius:21,target:"any",desc:"Huge health pool."},
+    spark_bot:{id:"spark_bot",name:"Spark Bot",type:"unit",cost:4,emoji:"⚙️",role:"Burst",hp:126,damage:110,range:106,atkSpeed:1.8,move:28,radius:16,target:"any",projectile:true,desc:"Slow burst shooter."},
+    shield_node:{id:"shield_node",name:"Shield Node",type:"structure",cost:3,emoji:"🔷",role:"Structure",hp:340,damage:18,range:92,atkSpeed:1.2,move:0,radius:18,target:"any",structure:true,lifetime:30,projectile:true,desc:"Basic defensive node."},
+    arrow_post:{id:"arrow_post",name:"Arrow Post",type:"structure",cost:4,emoji:"🏰",role:"Structure",hp:420,damage:28,range:108,atkSpeed:1.0,move:0,radius:20,target:"any",structure:true,lifetime:35,projectile:true,desc:"Reliable defense."},
+    fire_burst:{id:"fire_burst",name:"Fire Burst",type:"spell",cost:4,emoji:"💥",role:"Spell",damage:132,spellRadius:56,desc:"Area damage."},
+    frost_lock:{id:"frost_lock",name:"Frost Lock",type:"spell",cost:3,emoji:"❄️",role:"Spell",damage:42,spellRadius:62,slow:0.45,slowDuration:3.2,desc:"Damage and slow."},
+    heal_wave:{id:"heal_wave",name:"Heal Wave",type:"spell",cost:3,emoji:"💚",role:"Spell",heal:90,spellRadius:60,desc:"Heals allies."},
+    dart_hunter:{id:"dart_hunter",name:"Dart Hunter",type:"unit",cost:2,emoji:"🎯",role:"Ranged",hp:96,damage:34,range:124,atkSpeed:0.9,move:36,radius:14,target:"any",projectile:true,desc:"Cheap ranged chip."},
+    twin_blade:{id:"twin_blade",name:"Twin Blade",type:"unit",cost:4,emoji:"⚔️",role:"Melee DPS",hp:182,damage:42,range:28,atkSpeed:0.55,move:48,radius:17,target:"any",desc:"Rapid slashes."},
+    bomb_beetle:{id:"bomb_beetle",name:"Bomb Beetle",type:"unit",cost:3,emoji:"🪲",role:"Splash",hp:132,damage:72,range:30,atkSpeed:1.45,move:44,radius:16,target:"any",splash:22,desc:"Melee splash damage."},
+    storm_lancer:{id:"storm_lancer",name:"Storm Lancer",type:"unit",cost:5,emoji:"⚡",role:"Charge",hp:210,damage:96,range:34,atkSpeed:1.05,move:60,radius:18,target:"any",desc:"Fast elite striker."},
+    crystal_cannon:{id:"crystal_cannon",name:"Crystal Cannon",type:"structure",cost:5,emoji:"🔮",role:"Structure",hp:350,damage:82,range:128,atkSpeed:1.7,move:0,radius:18,target:"any",structure:true,lifetime:26,projectile:true,desc:"High-damage glass defense."},
+    poison_mist:{id:"poison_mist",name:"Poison Mist",type:"spell",cost:4,emoji:"☠️",role:"Spell",damage:90,spellRadius:70,poison:true,poisonDuration:4,desc:"Area damage over time."},
+    guardian_angel:{id:"guardian_angel",name:"Guardian Angel",type:"unit",cost:5,emoji:"🪽",role:"Support",hp:180,damage:36,range:110,atkSpeed:1.15,move:34,radius:17,target:"any",projectile:true,healAura:10,desc:"Ranged support with passive healing."},
+    mech_hound:{id:"mech_hound",name:"Mech Hound",type:"unit",cost:3,emoji:"🤖",role:"Hunter",hp:160,damage:50,range:35,atkSpeed:0.95,move:56,radius:16,target:"any",desc:"Fast single-target attacker."},
+    void_orb:{id:"void_orb",name:"Void Orb",type:"spell",cost:5,emoji:"🟣",role:"Spell",damage:170,spellRadius:48,desc:"Heavy compact burst."},
+    ember_spears:{id:"ember_spears",name:"Ember Spears",type:"unit",cost:4,emoji:"🗡️",role:"Ranged",hp:150,damage:58,range:116,atkSpeed:1.2,move:32,radius:16,target:"any",projectile:true,desc:"Long-range pressure."},
+    wall_builder:{id:"wall_builder",name:"Wall Builder",type:"structure",cost:2,emoji:"🧱",role:"Structure",hp:520,damage:0,range:0,atkSpeed:10,move:0,radius:19,target:"any",structure:true,lifetime:22,desc:"Pure defensive wall."}
   };
 
-  const STARTER_DECK = [
-    "iron_guard","axe_runner","arc_archer","ember_mage",
-    "siege_ram","wolf_pack","shield_node","fire_burst"
-  ];
-
-  const BOT_NAMES = [
-    "Riven Knox","Arden Vale","Talon Dusk","Mira Sol","Orin Crest","Vale Mercer",
-    "Cass Ember","Niko Flint","Sable Thorn","Elio Hart","Vera Kestrel","Nova Pike"
-  ];
-
+  const STARTER_DECK = ["iron_guard","axe_runner","arc_archer","ember_mage","siege_ram","wolf_pack","shield_node","fire_burst"];
+  const ALL_IDS = Object.keys(CARD_LIBRARY);
+  const BOT_NAMES = ["Riven Knox","Arden Vale","Talon Dusk","Mira Sol","Orin Crest","Vale Mercer","Cass Ember","Niko Flint","Sable Thorn","Elio Hart","Vera Kestrel","Nova Pike"];
   const BOT_PERSONALITIES = [
-    { id:"balanced", name:"Balanced", bias:["iron_guard","arc_archer","axe_runner","shield_node"] },
-    { id:"aggressive", name:"Aggressive", bias:["axe_runner","wolf_pack","twin_blade","fire_burst"] },
-    { id:"siege", name:"Siege", bias:["stone_brute","siege_ram","arrow_post","spark_bot"] },
-    { id:"control", name:"Control", bias:["shield_node","arrow_post","frost_lock","heal_wave"] }
+    { id:"balanced", name:"Balanced", bias:["iron_guard","arc_archer","axe_runner","shield_node","fire_burst"] },
+    { id:"aggressive", name:"Aggressive", bias:["axe_runner","wolf_pack","twin_blade","fire_burst","storm_lancer","mech_hound"] },
+    { id:"siege", name:"Siege", bias:["stone_brute","siege_ram","arrow_post","spark_bot","crystal_cannon"] },
+    { id:"control", name:"Control", bias:["shield_node","arrow_post","frost_lock","heal_wave","poison_mist","wall_builder"] }
   ];
-
-  const XP_PER_LEVEL = lvl => 100 + (lvl - 1) * 40;
-
-  let save = loadSave();
-
-  let battle = null;
-  let deckBuilderSelectedSlot = null;
 
   const el = id => document.getElementById(id);
   const screens = {
@@ -718,37 +511,57 @@
     battle: el("screen-battle")
   };
 
+  let save = loadSave();
+  let battle = null;
+  let deckBuilderSelectedSlot = null;
+  let dragState = null;
+  let audioCtx = null;
+
   function loadSave(){
     try{
       const raw = localStorage.getItem(SAVE_KEY);
       if(raw){
         const data = JSON.parse(raw);
-        if(data && Array.isArray(data.deck) && data.deck.length === 8) return data;
+        if(data && Array.isArray(data.deck) && data.deck.length === 8) return hydrateSave(data);
       }
     }catch(e){}
-    return {
-      coins: 120,
-      xp: 0,
-      level: 1,
-      wins: 0,
-      losses: 0,
-      currentStreak: 0,
-      bestStreak: 0,
-      deck: [...STARTER_DECK],
-      unlocked: Object.keys(CARD_LIBRARY)
-    };
+    return hydrateSave({
+      coins: 180, xp: 0, level: 1, wins: 0, losses: 0, currentStreak: 0, bestStreak: 0,
+      deck:[...STARTER_DECK],
+      unlocked:[...ALL_IDS],
+      cardLevels:Object.fromEntries(ALL_IDS.map(id=>[id,1])),
+      cardCopies:Object.fromEntries(ALL_IDS.map(id=>[id,id==="iron_guard"||id==="axe_runner"||id==="arc_archer"||id==="ember_mage"||id==="siege_ram"||id==="wolf_pack"||id==="shield_node"||id==="fire_burst"?8:2])),
+      shopOffers:[]
+    });
+  }
+
+  function hydrateSave(data){
+    if(!data.cardLevels) data.cardLevels = {};
+    if(!data.cardCopies) data.cardCopies = {};
+    ALL_IDS.forEach(id=>{
+      if(!data.cardLevels[id]) data.cardLevels[id] = 1;
+      if(data.cardCopies[id] == null) data.cardCopies[id] = 0;
+    });
+    if(!data.unlocked) data.unlocked = [...ALL_IDS];
+    if(!data.shopOffers || !data.shopOffers.length) data.shopOffers = generateShopOffers();
+    return data;
   }
 
   function saveData(){
     localStorage.setItem(SAVE_KEY, JSON.stringify(save));
   }
 
+  function XP_PER_LEVEL(lvl){ return 100 + (lvl - 1) * 45; }
+  function upgradeNeed(level){ return 2 + level * 2; }
+  function upgradeCost(level){ return 20 + level * 25; }
+  function avgDeckCost(deckIds){ return (deckIds.reduce((a,id)=>a+(CARD_LIBRARY[id]?.cost||0),0)/deckIds.length).toFixed(1); }
+
   function showScreen(name){
-    Object.values(screens).forEach(s => s.classList.remove("active"));
+    Object.values(screens).forEach(s=>s.classList.remove("active"));
     screens[name].classList.add("active");
-    if(name === "home") renderHome();
-    if(name === "deck") renderDeckBuilder();
-    if(name === "collection") renderCollection();
+    if(name==="home") renderHome();
+    if(name==="deck") renderDeckBuilder();
+    if(name==="collection") renderCollection();
   }
 
   function gainXp(amount){
@@ -759,40 +572,32 @@
     }
   }
 
-  function avgDeckCost(deckIds){
-    const total = deckIds.reduce((sum,id)=> sum + (CARD_LIBRARY[id]?.cost || 0), 0);
-    return (total / deckIds.length).toFixed(1);
+  function cardStatsForBattle(id, side){
+    const base = CARD_LIBRARY[id];
+    const level = side === "player" ? (save.cardLevels[id] || 1) : botLevelForPlayerLevel();
+    const mult = 1 + (level - 1) * 0.10;
+    const obj = {...base};
+    if(obj.hp) obj.hp = Math.round(obj.hp * mult);
+    if(obj.damage) obj.damage = Math.round(obj.damage * mult);
+    if(obj.heal) obj.heal = Math.round(obj.heal * mult);
+    return obj;
   }
 
-  function cardHtml(id, showButton = false){
-    const c = CARD_LIBRARY[id];
-    const stats = [];
-    if(c.type !== "spell"){
-      if(c.hp) stats.push(`<span>HP ${c.hp}</span>`);
-      if(c.damage) stats.push(`<span>DMG ${c.damage}</span>`);
-      if(c.range) stats.push(`<span>RNG ${c.range}</span>`);
-      if(c.structure) stats.push(`<span>Structure</span>`);
-      if(c.count) stats.push(`<span>x${c.count}</span>`);
-      if(c.target === "buildings") stats.push(`<span>Siege</span>`);
-    }else{
-      if(c.damage) stats.push(`<span>DMG ${c.damage}</span>`);
-      if(c.heal) stats.push(`<span>HEAL ${c.heal}</span>`);
-      if(c.spellRadius) stats.push(`<span>AREA</span>`);
-      if(c.slow) stats.push(`<span>SLOW</span>`);
-    }
-    return `
-      <div class="ccard" data-card-id="${c.id}">
-        <div class="ccard-header">
-          <div class="tag">${c.role}</div>
-          <div class="cost">${c.cost}</div>
-        </div>
-        <div class="card-art">${c.emoji}</div>
-        <strong>${c.name}</strong>
-        <div class="stats">${stats.join("")}</div>
-        <div class="muted tiny">${c.desc}</div>
-        ${showButton ? `<div class="btn-row"><button class="btn small-btn" data-choose-card="${c.id}">Use</button></div>` : ``}
-      </div>
-    `;
+  function botLevelForPlayerLevel(){
+    return Math.max(1, Math.min(8, Math.floor((save.level + 1) / 2)));
+  }
+
+  function getShopPrice(cardId, copies){
+    return 16 + CARD_LIBRARY[cardId].cost * 7 + copies * 3;
+  }
+
+  function generateShopOffers(){
+    const ids = [...ALL_IDS].sort(()=>Math.random()-.5).slice(0,6);
+    return ids.map(id=>({
+      cardId:id,
+      copies: 2 + Math.floor(Math.random()*4),
+      price: getShopPrice(id, 2 + Math.floor(Math.random()*2))
+    }));
   }
 
   function renderHome(){
@@ -804,15 +609,15 @@
     el("statBestStreak").textContent = save.bestStreak;
     el("statCurrentStreak").textContent = save.currentStreak;
     el("avgCostHome").textContent = avgDeckCost(save.deck);
-
     el("homeDeckPreview").innerHTML = save.deck.map((id,idx)=>{
       const c = CARD_LIBRARY[id];
+      const lvl = save.cardLevels[id];
       return `
         <div class="slot filled">
           <div class="tag">Slot ${idx+1}</div>
           <div style="font-size:1.6rem;margin:8px 0 6px">${c.emoji}</div>
           <div style="font-weight:900">${c.name}</div>
-          <div class="muted tiny">Cost ${c.cost} • ${c.role}</div>
+          <div class="muted tiny">Cost ${c.cost} • ${c.role} • Lvl ${lvl}</div>
         </div>
       `;
     }).join("");
@@ -820,27 +625,25 @@
 
   function renderDeckBuilder(){
     el("deckAvgCost").textContent = avgDeckCost(save.deck);
-    el("deckSelectedBanner").textContent = deckBuilderSelectedSlot === null
-      ? "Selected slot: none"
-      : `Selected slot: ${deckBuilderSelectedSlot + 1}`;
+    el("deckSelectedBanner").textContent = deckBuilderSelectedSlot === null ? "Selected slot: none" : `Selected slot: ${deckBuilderSelectedSlot+1}`;
 
     el("deckSlots").innerHTML = save.deck.map((id,idx)=>{
       const c = CARD_LIBRARY[id];
       return `
-        <button class="slot filled ${deckBuilderSelectedSlot === idx ? 'sel':''}" data-deck-slot="${idx}" style="${deckBuilderSelectedSlot === idx ? 'outline:2px solid var(--gold)' : ''}">
+        <button class="slot filled" data-deck-slot="${idx}" style="${deckBuilderSelectedSlot===idx?'outline:2px solid var(--gold)':''}">
           <div class="tag">Slot ${idx+1}</div>
           <div style="font-size:1.6rem;margin:8px 0 6px">${c.emoji}</div>
           <div style="font-weight:900">${c.name}</div>
-          <div class="muted tiny">Cost ${c.cost} • ${c.role}</div>
+          <div class="muted tiny">Cost ${c.cost} • Lvl ${save.cardLevels[id]}</div>
         </button>
       `;
     }).join("");
 
-    el("deckCollectionGrid").innerHTML = Object.keys(CARD_LIBRARY).map(id=>{
+    el("deckCollectionGrid").innerHTML = ALL_IDS.map(id=>{
       const c = CARD_LIBRARY[id];
-      const alreadyInDeck = save.deck.includes(id);
+      const inDeck = save.deck.includes(id);
       return `
-        <div class="ccard" data-card-id="${id}">
+        <div class="ccard">
           <div class="ccard-header">
             <div class="tag">${c.role}</div>
             <div class="cost">${c.cost}</div>
@@ -848,15 +651,13 @@
           <div class="card-art">${c.emoji}</div>
           <strong>${c.name}</strong>
           <div class="stats">
-            ${c.type === 'spell'
-              ? `${c.damage ? `<span>DMG ${c.damage}</span>` : ''}${c.heal ? `<span>HEAL ${c.heal}</span>` : ''}`
-              : `${c.hp ? `<span>HP ${c.hp}</span>` : ''}${c.damage ? `<span>DMG ${c.damage}</span>` : ''}${c.range ? `<span>RNG ${c.range}</span>` : ''}`
-            }
+            <span>Lvl ${save.cardLevels[id]}</span>
+            <span>Copies ${save.cardCopies[id]}</span>
           </div>
           <div class="muted tiny">${c.desc}</div>
           <div class="btn-row">
-            <button class="btn ${alreadyInDeck ? 'alt' : ''}" data-replace-with="${id}">
-              ${alreadyInDeck ? 'Already In Deck' : 'Place In Selected Slot'}
+            <button class="btn ${inDeck?'alt':''}" data-replace-with="${id}">
+              ${inDeck ? 'Already In Deck' : 'Place In Selected Slot'}
             </button>
           </div>
         </div>
@@ -873,15 +674,9 @@
     document.querySelectorAll("[data-replace-with]").forEach(btn=>{
       btn.onclick = () => {
         const id = btn.dataset.replaceWith;
-        if(deckBuilderSelectedSlot === null){
-          alert("Select a deck slot first.");
-          return;
-        }
-        const existingIndex = save.deck.indexOf(id);
-        if(existingIndex !== -1 && existingIndex !== deckBuilderSelectedSlot){
-          alert("That card is already in your deck.");
-          return;
-        }
+        if(deckBuilderSelectedSlot === null){ alert("Select a deck slot first."); return; }
+        const existing = save.deck.indexOf(id);
+        if(existing !== -1 && existing !== deckBuilderSelectedSlot){ alert("That card is already in your deck."); return; }
         save.deck[deckBuilderSelectedSlot] = id;
         saveData();
         renderDeckBuilder();
@@ -890,11 +685,110 @@
   }
 
   function renderCollection(){
-    el("collectionCount").textContent = Object.keys(CARD_LIBRARY).length;
-    el("collectionGrid").innerHTML = Object.keys(CARD_LIBRARY).map(id => cardHtml(id, false)).join("");
+    el("collectionCoins").textContent = save.coins;
+    el("collectionGrid").innerHTML = ALL_IDS.map(id=>{
+      const c = CARD_LIBRARY[id];
+      const level = save.cardLevels[id];
+      const copies = save.cardCopies[id];
+      const need = upgradeNeed(level);
+      const price = upgradeCost(level);
+      const canUpgrade = level < 12 && copies >= need && save.coins >= price;
+
+      const stats = [];
+      if(c.hp) stats.push(`HP ${scaledStat(c.hp, level)}`);
+      if(c.damage) stats.push(`DMG ${scaledStat(c.damage, level)}`);
+      if(c.heal) stats.push(`HEAL ${scaledStat(c.heal, level)}`);
+
+      return `
+        <div class="ccard">
+          <div class="ccard-header">
+            <div class="tag">${c.role}</div>
+            <div class="cost">${c.cost}</div>
+          </div>
+          <div class="card-art">${c.emoji}</div>
+          <strong>${c.name}</strong>
+          <div class="stats">
+            <span>Lvl ${level}</span>
+            <span>Copies ${copies}</span>
+            ${stats.map(s=>`<span>${s}</span>`).join("")}
+          </div>
+          <div class="upgrade-bar"><span style="width:${Math.min(100, copies/need*100)}%"></span></div>
+          <div class="muted tiny">Need ${need} copies and ${price} coins for next level.</div>
+          <div class="btn-row">
+            <button class="btn ${canUpgrade?'good':'alt'}" data-upgrade-card="${id}" ${canUpgrade?'':'disabled'}>
+              Upgrade
+            </button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    document.querySelectorAll("[data-upgrade-card]").forEach(btn=>{
+      btn.onclick = () => {
+        const id = btn.dataset.upgradeCard;
+        const level = save.cardLevels[id];
+        const need = upgradeNeed(level);
+        const price = upgradeCost(level);
+        if(save.cardCopies[id] < need || save.coins < price || level >= 12) return;
+        save.cardCopies[id] -= need;
+        save.coins -= price;
+        save.cardLevels[id] += 1;
+        saveData();
+        beep("upgrade");
+        renderCollection();
+      };
+    });
   }
 
-  function setQueue(show, text = "Searching for arena match..."){
+  function renderShop(){
+    el("shopGrid").innerHTML = save.shopOffers.map((offer, idx)=>{
+      const c = CARD_LIBRARY[offer.cardId];
+      return `
+        <div class="ccard">
+          <div class="ccard-header">
+            <div class="tag">Offer</div>
+            <div class="cost">${c.cost}</div>
+          </div>
+          <div class="card-art">${c.emoji}</div>
+          <strong>${c.name}</strong>
+          <div class="stats">
+            <span>+${offer.copies} Copies</span>
+            <span>${offer.price} Coins</span>
+            <span>Lvl ${save.cardLevels[offer.cardId]}</span>
+          </div>
+          <div class="muted tiny">${c.desc}</div>
+          <div class="btn-row">
+            <button class="btn gold" data-buy-offer="${idx}" ${save.coins >= offer.price ? "" : "disabled"}>Buy</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    document.querySelectorAll("[data-buy-offer]").forEach(btn=>{
+      btn.onclick = () => {
+        const idx = Number(btn.dataset.buyOffer);
+        const offer = save.shopOffers[idx];
+        if(!offer || save.coins < offer.price) return;
+        save.coins -= offer.price;
+        save.cardCopies[offer.cardId] += offer.copies;
+        save.shopOffers.splice(idx, 1, {
+          cardId: ALL_IDS[Math.floor(Math.random()*ALL_IDS.length)],
+          copies: 2 + Math.floor(Math.random()*4),
+          price: 18 + Math.floor(Math.random()*30)
+        });
+        saveData();
+        beep("buy");
+        renderShop();
+        renderHome();
+      };
+    });
+  }
+
+  function scaledStat(base, level){
+    return Math.round(base * (1 + (level-1)*0.10));
+  }
+
+  function setQueue(show, text="Searching for arena match..."){
     el("queueScreen").classList.toggle("show", show);
     el("queueText").textContent = text;
   }
@@ -908,34 +802,24 @@
   }
 
   function chooseBotProfile(){
-    const personality = BOT_PERSONALITIES[Math.floor(Math.random() * BOT_PERSONALITIES.length)];
-    const botDeck = buildBotDeck(personality);
-    return {
-      name: BOT_NAMES[Math.floor(Math.random() * BOT_NAMES.length)],
-      personality,
-      deck: botDeck
-    };
-  }
-
-  function buildBotDeck(personality){
-    const all = Object.keys(CARD_LIBRARY);
+    const personality = BOT_PERSONALITIES[Math.floor(Math.random()*BOT_PERSONALITIES.length)];
     const deck = [];
-    personality.bias.forEach(id=>{
-      if(CARD_LIBRARY[id] && !deck.includes(id) && deck.length < 8) deck.push(id);
-    });
+    personality.bias.forEach(id=>{ if(CARD_LIBRARY[id] && !deck.includes(id) && deck.length<8) deck.push(id); });
     while(deck.length < 8){
-      const id = all[Math.floor(Math.random()*all.length)];
+      const id = ALL_IDS[Math.floor(Math.random()*ALL_IDS.length)];
       if(!deck.includes(id)) deck.push(id);
     }
-    return deck;
+    return {
+      name: BOT_NAMES[Math.floor(Math.random()*BOT_NAMES.length)],
+      personality,
+      deck
+    };
   }
 
   function startBattleFlow(){
     setQueue(true, "Searching for arena match...");
-    setTimeout(() => {
-      setQueue(true, "Preparing arena...");
-    }, 900);
-    setTimeout(() => {
+    setTimeout(()=>setQueue(true, "Preparing arena..."), 900);
+    setTimeout(()=>{
       setQueue(false);
       showScreen("battle");
       beginBattle();
@@ -949,56 +833,37 @@
     el("battleFeed").innerHTML = "";
     feed(`Match found against ${bot.name}.`);
     feed(`Opponent style: ${bot.personality.name}.`);
-    bindArena();
+    clearArenaEntities();
+    renderAllTowers();
+    initHands();
     renderHand();
     renderBattleHud();
-    renderAllTowers();
-    clearArenaEntities();
-    battleLoopStart();
+    bindArena();
+    battle.lastTs = performance.now();
+    cancelAnimationFrame(battle.loopId);
+    battle.loopId = requestAnimationFrame(loop);
   }
 
-  function createBattleState(playerDeckIds, bot){
-    const towerRefs = {
-      playerLeft: { key:"playerLeft", name:"Left Guard", team:"player", lane:"left", x:18, y:84, maxHp:1500, hp:1500, range:17, damage:34, atkSpeed:1.0, cooldown:0 },
-      playerCore: { key:"playerCore", name:"Core", team:"player", lane:"center", x:50, y:90, maxHp:2400, hp:2400, range:18, damage:38, atkSpeed:1.0, cooldown:0 },
-      playerRight:{ key:"playerRight", name:"Right Guard", team:"player", lane:"right", x:82, y:84, maxHp:1500, hp:1500, range:17, damage:34, atkSpeed:1.0, cooldown:0 },
-
-      enemyLeft:  { key:"enemyLeft", name:"Left Guard", team:"enemy", lane:"left", x:18, y:16, maxHp:1500, hp:1500, range:17, damage:34, atkSpeed:1.0, cooldown:0 },
-      enemyCore:  { key:"enemyCore", name:"Core", team:"enemy", lane:"center", x:50, y:10, maxHp:2400, hp:2400, range:18, damage:38, atkSpeed:1.0, cooldown:0 },
-      enemyRight: { key:"enemyRight", name:"Right Guard", team:"enemy", lane:"right", x:82, y:16, maxHp:1500, hp:1500, range:17, damage:34, atkSpeed:1.0, cooldown:0 }
-    };
-
+  function createBattleState(playerDeck, bot){
     return {
-      matchTime: 180,
+      matchTime:180,
       ended:false,
-      result:null,
       selectedHandIndex:null,
-
-      player:{
-        flux:0, fluxMax:10, fluxTimer:0,
-        deck:[...playerDeckIds],
-        drawQueue: [...playerDeckIds],
-        hand: [],
-        towersDestroyed:0
+      player:{flux:0,fluxMax:10,fluxTimer:0,deck:[...playerDeck],drawQueue:[...playerDeck],hand:[],towersDestroyed:0},
+      enemy:{flux:0,fluxMax:10,fluxTimer:0,deck:[...bot.deck],drawQueue:[...bot.deck],hand:[],towersDestroyed:0,thinkTimer:0.85,name:bot.name,personality:bot.personality},
+      towers:{
+        playerLeft:{key:"playerLeft",name:"Left Guard",team:"player",x:18,y:84,maxHp:1500,hp:1500,range:17,damage:34,atkSpeed:1,cooldown:0},
+        playerCore:{key:"playerCore",name:"Core",team:"player",x:50,y:90,maxHp:2400,hp:2400,range:18,damage:38,atkSpeed:1,cooldown:0},
+        playerRight:{key:"playerRight",name:"Right Guard",team:"player",x:82,y:84,maxHp:1500,hp:1500,range:17,damage:34,atkSpeed:1,cooldown:0},
+        enemyLeft:{key:"enemyLeft",name:"Left Guard",team:"enemy",x:18,y:16,maxHp:1500,hp:1500,range:17,damage:34,atkSpeed:1,cooldown:0},
+        enemyCore:{key:"enemyCore",name:"Core",team:"enemy",x:50,y:10,maxHp:2400,hp:2400,range:18,damage:38,atkSpeed:1,cooldown:0},
+        enemyRight:{key:"enemyRight",name:"Right Guard",team:"enemy",x:82,y:16,maxHp:1500,hp:1500,range:17,damage:34,atkSpeed:1,cooldown:0}
       },
-      enemy:{
-        flux:0, fluxMax:10, fluxTimer:0,
-        deck:[...bot.deck],
-        drawQueue:[...bot.deck],
-        hand: [],
-        towersDestroyed:0,
-        thinkTimer:0.9,
-        name: bot.name,
-        personality: bot.personality
-      },
-
-      towers:towerRefs,
       units:[],
       projectiles:[],
-      fx:[],
       idSeq:1,
-      loopId:null,
-      lastTs:0
+      lastTs:0,
+      loopId:null
     };
   }
 
@@ -1011,43 +876,47 @@
 
   function drawNext(side){
     const s = battle[side];
-    if(s.drawQueue.length === 0) return;
+    if(!s.drawQueue.length) return;
     s.hand.push(s.drawQueue.shift());
   }
 
   function playHandCard(side, handIndex){
     const s = battle[side];
-    const cardId = s.hand[handIndex];
-    if(!cardId) return null;
+    const id = s.hand[handIndex];
+    if(!id) return null;
     s.hand.splice(handIndex,1);
-    s.drawQueue.push(cardId);
+    s.drawQueue.push(id);
     drawNext(side);
-    return cardId;
+    return id;
   }
 
-  function getCard(id){ return CARD_LIBRARY[id]; }
+  function clearArenaEntities(){
+    document.querySelectorAll(".unit,.projectile,.fx,.drag-ghost").forEach(n=>n.remove());
+  }
 
   function bindArena(){
     const arena = el("arena");
     arena.onclick = (ev) => {
-      if(!battle || battle.ended) return;
-      if(battle.selectedHandIndex === null) return;
-      const rect = arena.getBoundingClientRect();
-      const xPct = ((ev.clientX - rect.left) / rect.width) * 100;
-      const yPct = ((ev.clientY - rect.top) / rect.height) * 100;
-      if(yPct < 52){
-        feed("You can only deploy on your half.");
-        return;
-      }
-      tryPlayerDeployAt(xPct, yPct);
+      if(!battle || battle.ended || battle.selectedHandIndex === null) return;
+      const pt = getArenaPoint(ev.clientX, ev.clientY);
+      if(!pt) return;
+      deploySelectedAt(pt.x, pt.y);
     };
 
     window.onkeydown = (e) => {
       if(!battle || battle.ended) return;
       if(["1","2","3","4"].includes(e.key)){
-        const idx = Number(e.key) - 1;
-        selectHandIndex(idx);
+        selectHandIndex(Number(e.key)-1);
       }
+    };
+  }
+
+  function getArenaPoint(clientX, clientY){
+    const rect = el("arena").getBoundingClientRect();
+    if(clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) return null;
+    return {
+      x: ((clientX - rect.left)/rect.width)*100,
+      y: ((clientY - rect.top)/rect.height)*100
     };
   }
 
@@ -1058,31 +927,34 @@
     renderHand();
   }
 
-  function clearArenaEntities(){
-    document.querySelectorAll(".unit,.projectile,.fx").forEach(n => n.remove());
+  function deploySelectedAt(xPct, yPct){
+    const index = battle.selectedHandIndex;
+    if(index === null) return;
+    tryPlayCardAt(index, xPct, yPct);
   }
 
-  function tryPlayerDeployAt(xPct, yPct){
-    const index = battle.selectedHandIndex;
-    const cardId = battle.player.hand[index];
-    if(!cardId) return;
-    const card = getCard(cardId);
+  function tryPlayCardAt(handIndex, xPct, yPct){
+    const id = battle.player.hand[handIndex];
+    if(!id) return;
+    const card = cardStatsForBattle(id, "player");
+    if(yPct < 52){
+      feed("You can only deploy on your half.");
+      return;
+    }
     if(battle.player.flux < card.cost){
       feed("Not enough Flux.");
       return;
     }
+
     if(card.type === "spell"){
       battle.player.flux -= card.cost;
       castSpell("player", card, xPct, yPct);
-      playHandCard("player", index);
-      battle.selectedHandIndex = null;
-      renderHand();
-      renderBattleHud();
-      return;
+    } else {
+      battle.player.flux -= card.cost;
+      summonCard("player", card, xPct, yPct);
     }
-    battle.player.flux -= card.cost;
-    summonCard("player", card, xPct, yPct);
-    playHandCard("player", index);
+
+    playHandCard("player", handIndex);
     battle.selectedHandIndex = null;
     renderHand();
     renderBattleHud();
@@ -1093,54 +965,47 @@
     for(let i=0;i<count;i++){
       const spreadX = count > 1 ? (i - (count-1)/2) * 3.2 : 0;
       const spreadY = count > 1 ? (i % 2 === 0 ? 1.2 : -1.2) : 0;
-      const unit = {
-        uid: "u" + (battle.idSeq++),
-        side,
-        cardId: card.id,
-        x: clamp(xPct + spreadX, 6, 94),
-        y: clamp(yPct + spreadY, 6, 94),
-        hp: card.hp,
-        maxHp: card.hp,
-        damage: card.damage || 0,
-        range: card.range || 0,
-        atkSpeed: card.atkSpeed || 1,
-        cooldown: Math.random() * 0.25,
-        speed: card.move || 0,
-        radius: card.radius || 16,
-        targetMode: card.target || "any",
-        type: card.type,
-        structure: !!card.structure,
-        lifetime: card.lifetime || null,
-        projectile: !!card.projectile,
-        splash: card.splash || 0,
-        emoji: card.emoji,
-        slowFactor: 1,
-        slowTimer: 0,
-        element: null
+      const u = {
+        uid:"u"+(battle.idSeq++),
+        side, cardId:card.id,
+        x:clamp(xPct+spreadX,6,94),
+        y:clamp(yPct+spreadY,6,94),
+        hp:card.hp || 1, maxHp:card.hp || 1,
+        damage:card.damage || 0, range:card.range || 0, atkSpeed:card.atkSpeed || 1,
+        cooldown:Math.random()*.25, speed:card.move || 0, radius:card.radius || 16,
+        targetMode:card.target || "any", structure:!!card.structure, lifetime:card.lifetime ?? null,
+        projectile:!!card.projectile, splash:card.splash || 0, emoji:card.emoji,
+        slowFactor:1, slowTimer:0, poisonTimer:0, poisonTick:0, healAura:card.healAura || 0, element:null
       };
-      battle.units.push(unit);
-      spawnUnitDom(unit);
+      battle.units.push(u);
+      spawnUnitDom(u);
     }
+    beep("play");
     feed(`${side === "player" ? "You played" : "Opponent played"} ${card.name}.`);
   }
 
   function castSpell(side, card, xPct, yPct){
-    createFx(xPct, yPct, card.emoji, "notice");
+    createFx(xPct,yPct,card.emoji,"notice");
     if(card.damage){
       const enemySide = side === "player" ? "enemy" : "player";
       battle.units.forEach(u=>{
         if(u.side !== enemySide) return;
-        if(distPct(xPct, yPct, u.x, u.y) <= (card.spellRadius/10)){
+        if(distPct(xPct,yPct,u.x,u.y) <= (card.spellRadius/10)){
           applyDamageToUnit(u, card.damage);
+          createFx(u.x,u.y-2,"-"+card.damage,"hit");
           if(card.slow){
             u.slowFactor = 1 - card.slow;
             u.slowTimer = card.slowDuration;
+          }
+          if(card.poison){
+            u.poisonTimer = card.poisonDuration;
+            u.poisonTick = 0.9;
           }
         }
       });
       Object.values(battle.towers).forEach(t=>{
         if(t.team !== enemySide) return;
-        if(distPct(xPct, yPct, t.x, t.y) <= (card.spellRadius/10)){
+        if(distPct(xPct,yPct,t.x,t.y) <= (card.spellRadius/10)){
           damageTower(t, Math.floor(card.damage * 0.65));
         }
       });
@@ -1148,13 +1013,14 @@
     if(card.heal){
       battle.units.forEach(u=>{
         if(u.side !== side) return;
-        if(distPct(xPct, yPct, u.x, u.y) <= (card.spellRadius/10)){
+        if(distPct(xPct,yPct,u.x,u.y) <= (card.spellRadius/10)){
           u.hp = Math.min(u.maxHp, u.hp + card.heal);
-          createFx(u.x, u.y - 2, "+" + card.heal, "heal");
+          createFx(u.x,u.y-2,"+"+card.heal,"heal");
           updateUnitDom(u);
         }
       });
     }
+    beep("spell");
     feed(`${side === "player" ? "You cast" : "Opponent cast"} ${card.name}.`);
   }
 
@@ -1163,10 +1029,7 @@
     const div = document.createElement("div");
     div.className = `unit ${unit.side}`;
     div.id = unit.uid;
-    div.innerHTML = `
-      <div class="unit-bar"><span></span></div>
-      <div>${unit.emoji}</div>
-    `;
+    div.innerHTML = `<div class="unit-bar"><span></span></div><div>${unit.emoji}</div>`;
     arena.appendChild(div);
     unit.element = div;
     updateUnitDom(unit);
@@ -1179,28 +1042,22 @@
     unit.element.style.width = (unit.radius * 2.2) + "px";
     unit.element.style.height = (unit.radius * 2.2) + "px";
     const fill = unit.element.querySelector(".unit-bar span");
-    if(fill) fill.style.width = `${Math.max(0,(unit.hp / unit.maxHp) * 100)}%`;
+    if(fill) fill.style.width = `${Math.max(0,(unit.hp / unit.maxHp)*100)}%`;
   }
 
   function removeUnitDom(unit){
     if(unit.element && unit.element.parentNode) unit.element.parentNode.removeChild(unit.element);
   }
 
-  function createProjectile(fromX, fromY, toX, toY, side, damage, splash = 0){
+  function createProjectile(fromX, fromY, toX, toY, side, damage, splash=0){
     const arena = el("arena");
-    const p = {
-      uid: "p" + (battle.idSeq++),
-      x: fromX, y: fromY, tx: toX, ty: toY,
-      side, damage, splash, speed: 95,
-      element:null
-    };
+    const p = {uid:"p"+(battle.idSeq++),x:fromX,y:fromY,tx:toX,ty:toY,side,damage,splash,speed:95,element:null};
     const div = document.createElement("div");
     div.className = `projectile ${side}`;
     div.id = p.uid;
-    div.style.left = p.x + "%";
-    div.style.top = p.y + "%";
     arena.appendChild(div);
     p.element = div;
+    updateProjectileDom(p);
     battle.projectiles.push(p);
   }
 
@@ -1224,24 +1081,13 @@
     arena.appendChild(fx);
     const start = performance.now();
     function tick(ts){
-      const t = (ts - start) / 650;
-      if(t >= 1){
-        fx.remove();
-        return;
-      }
+      const t = (ts-start)/650;
+      if(t >= 1){ fx.remove(); return; }
       fx.style.opacity = String(1 - t);
-      fx.style.top = (y - t * 4) + "%";
+      fx.style.top = (y - t*4) + "%";
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
-  }
-
-  function battleLoopStart(){
-    initHands();
-    renderHand();
-    battle.lastTs = performance.now();
-    cancelAnimationFrame(battle.loopId);
-    battle.loopId = requestAnimationFrame(loop);
   }
 
   function loop(ts){
@@ -1258,9 +1104,7 @@
     renderBattleHud();
     checkBattleEnd();
 
-    if(!battle.ended){
-      battle.loopId = requestAnimationFrame(loop);
-    }
+    if(!battle.ended) battle.loopId = requestAnimationFrame(loop);
   }
 
   function updateFlux(dt){
@@ -1280,206 +1124,190 @@
   }
 
   function updateBot(dt){
-    const enemy = battle.enemy;
-    enemy.thinkTimer -= dt;
-    if(enemy.thinkTimer > 0) return;
+    const e = battle.enemy;
+    e.thinkTimer -= dt;
+    if(e.thinkTimer > 0) return;
 
-    const personalityId = enemy.personality.id;
-    enemy.thinkTimer = personalityId === "aggressive" ? 0.85 : personalityId === "control" ? 1.2 : 1.0;
+    e.thinkTimer = e.personality.id === "aggressive" ? 0.8 : e.personality.id === "control" ? 1.2 : 1.0;
 
-    const playable = enemy.hand
-      .map((id,index)=>({id,index,card:getCard(id)}))
-      .filter(x=>x.card && x.card.cost <= enemy.flux);
-
+    const playable = e.hand.map((id,index)=>({id,index,card:cardStatsForBattle(id,"enemy")})).filter(x=>x.card.cost <= e.flux);
     if(!playable.length) return;
 
     playable.sort((a,b)=>{
-      const aBias = enemy.personality.bias.includes(a.id) ? 1 : 0;
-      const bBias = enemy.personality.bias.includes(b.id) ? 1 : 0;
-      if(aBias !== bBias) return bBias - aBias;
-      return Math.random() - 0.5;
+      const ab = e.personality.bias.includes(a.id) ? 1 : 0;
+      const bb = e.personality.bias.includes(b.id) ? 1 : 0;
+      if(ab !== bb) return bb - ab;
+
+      const aScore = botCardScore(a.card);
+      const bScore = botCardScore(b.card);
+      return bScore - aScore;
     });
 
     const pick = playable[0];
-    const lane = decideBotLane();
-    let xPct = lane === "left" ? rand(18,32) : rand(68,82);
-    let yPct = rand(14,36);
+    let lane = decideBotLane();
+    let x = lane === "left" ? rand(18,32) : rand(68,82);
+    let y = rand(14,36);
 
     if(pick.card.type === "spell"){
-      const target = chooseSpellTarget(pick.card);
-      if(!target) return;
-      xPct = target.x;
-      yPct = target.y;
+      const target = chooseBotSpellTarget(pick.card);
+      if(target){ x = target.x; y = target.y; }
     }
 
-    enemy.flux -= pick.card.cost;
-    if(pick.card.type === "spell"){
-      castSpell("enemy", pick.card, xPct, yPct);
-    }else{
-      summonCard("enemy", pick.card, xPct, yPct);
-    }
+    e.flux -= pick.card.cost;
+    if(pick.card.type === "spell") castSpell("enemy", pick.card, x, y);
+    else summonCard("enemy", pick.card, x, y);
     playHandCard("enemy", pick.index);
     renderHand();
   }
 
+  function botCardScore(card){
+    let s = card.cost;
+    if(card.target === "buildings") s += 2;
+    if(card.structure) s += 1.5;
+    if(card.type === "spell") s += 1;
+    return s + Math.random();
+  }
+
   function decideBotLane(){
-    const leftPressure = battle.units.filter(u=>u.side==="player" && u.x < 50).length;
-    const rightPressure = battle.units.filter(u=>u.side==="player" && u.x >= 50).length;
-    if(Math.abs(leftPressure - rightPressure) > 1){
-      return leftPressure > rightPressure ? "left" : "right";
-    }
+    const left = battle.units.filter(u=>u.side==="player" && u.x < 50).length;
+    const right = battle.units.filter(u=>u.side==="player" && u.x >= 50).length;
+    if(Math.abs(left-right) > 1) return left > right ? "left" : "right";
     return Math.random() < 0.5 ? "left" : "right";
   }
 
-  function chooseSpellTarget(card){
-    const candidates = [];
+  function chooseBotSpellTarget(card){
+    const targets = [];
     battle.units.forEach(u=>{
-      if(u.side === "player"){
-        candidates.push({x:u.x,y:u.y,score:1});
-      }
+      if(u.side === "player") targets.push({x:u.x,y:u.y,score:1});
     });
     Object.values(battle.towers).forEach(t=>{
-      if(t.team === "player"){
-        candidates.push({x:t.x,y:t.y,score:2});
-      }
+      if(t.team === "player") targets.push({x:t.x,y:t.y,score:2});
     });
-    if(!candidates.length) return null;
-    return candidates[Math.floor(Math.random()*candidates.length)];
+    if(!targets.length) return null;
+    return targets[Math.floor(Math.random()*targets.length)];
   }
 
   function updateUnits(dt){
-    for(let i = battle.units.length - 1; i >= 0; i--){
+    for(let i=battle.units.length-1;i>=0;i--){
       const u = battle.units[i];
-      const card = getCard(u.cardId);
 
       if(u.lifetime !== null){
         u.lifetime -= dt;
-        if(u.lifetime <= 0){
-          removeUnit(u);
-          continue;
-        }
+        if(u.lifetime <= 0){ removeUnit(u); continue; }
       }
 
       if(u.slowTimer > 0){
         u.slowTimer -= dt;
-        if(u.slowTimer <= 0){
-          u.slowFactor = 1;
-          u.slowTimer = 0;
+        if(u.slowTimer <= 0){ u.slowFactor = 1; u.slowTimer = 0; }
+      }
+
+      if(u.poisonTimer > 0){
+        u.poisonTimer -= dt;
+        u.poisonTick -= dt;
+        if(u.poisonTick <= 0){
+          u.poisonTick = 0.9;
+          applyDamageToUnit(u, 16);
+          createFx(u.x,u.y-2,"-16","hit");
         }
+      }
+
+      if(u.healAura > 0){
+        battle.units.forEach(other=>{
+          if(other.side !== u.side || other.uid === u.uid) return;
+          if(distPct(u.x,u.y,other.x,other.y) <= 5.5){
+            other.hp = Math.min(other.maxHp, other.hp + u.healAura * dt);
+            updateUnitDom(other);
+          }
+        });
       }
 
       const target = findTargetForUnit(u);
       u.cooldown -= dt;
 
       if(target){
-        const tx = target.x;
-        const ty = target.y;
-        const distance = distPct(u.x,u.y,tx,ty);
-
+        const d = distPct(u.x,u.y,target.x,target.y);
         const attackRangePct = (u.range || 30) / 10;
-        if(distance <= attackRangePct){
+        if(d <= attackRangePct){
           if(u.cooldown <= 0){
             if(u.projectile){
-              createProjectile(u.x,u.y,tx,ty,u.side,u.damage,u.splash || 0);
-            }else{
-              applyHitToTarget(target, u.damage, u.splash || 0, u.x, u.y, u.side);
+              createProjectile(u.x,u.y,target.x,target.y,u.side,u.damage,u.splash||0);
+            } else {
+              applyHitToTarget(target,u.damage,u.splash||0,u.side);
             }
             u.cooldown = u.atkSpeed;
+            beep("hit");
           }
-        }else{
-          if(!u.structure){
-            const speedPct = ((u.speed || 0) / 100) * u.slowFactor;
-            moveToward(u, tx, ty, speedPct * dt * 6.2);
-          }
+        } else if(!u.structure){
+          moveToward(u,target.x,target.y,((u.speed||0)/100)*u.slowFactor*dt*6.2);
         }
-      }else{
-        if(!u.structure){
-          advanceByLane(u, dt);
-        }
+      } else if(!u.structure){
+        advanceByLane(u,dt);
       }
 
       updateUnitDom(u);
     }
   }
 
-  function advanceByLane(u, dt){
-    const goal = u.side === "player" ? {x:u.x < 50 ? 18 : 82, y:10} : {x:u.x < 50 ? 18 : 82, y:90};
-
-    let desiredX = goal.x;
-    if(u.y < 54 && u.y > 46){
-      desiredX = u.x < 50 ? 25 : 75;
-    }
-
-    const speedPct = ((u.speed || 0) / 100) * u.slowFactor;
-    moveToward(u, desiredX, goal.y, speedPct * dt * 5.2);
+  function advanceByLane(u,dt){
+    const goal = u.side === "player" ? {x:u.x<50?18:82,y:10} : {x:u.x<50?18:82,y:90};
+    let dx = goal.x;
+    if(u.y < 54 && u.y > 46) dx = u.x<50 ? 25 : 75;
+    moveToward(u,dx,goal.y,((u.speed||0)/100)*u.slowFactor*dt*5.2);
   }
 
-  function moveToward(u, tx, ty, amt){
-    const dx = tx - u.x;
-    const dy = ty - u.y;
+  function moveToward(u,tx,ty,amt){
+    const dx = tx-u.x, dy = ty-u.y;
     const len = Math.hypot(dx,dy) || 1;
     u.x += (dx/len) * amt;
     u.y += (dy/len) * amt;
-    u.x = clamp(u.x, 5, 95);
-    u.y = clamp(u.y, 5, 95);
+    u.x = clamp(u.x,5,95);
+    u.y = clamp(u.y,5,95);
   }
 
   function findTargetForUnit(u){
     const enemySide = u.side === "player" ? "enemy" : "player";
-    let best = null;
-    let bestDist = Infinity;
+    let best = null, bestDist = Infinity;
 
     battle.units.forEach(other=>{
       if(other.side !== enemySide) return;
       if(u.targetMode === "buildings") return;
       const d = distPct(u.x,u.y,other.x,other.y);
-      if(d < bestDist){
-        bestDist = d;
-        best = {kind:"unit", ref:other, x:other.x, y:other.y};
-      }
+      if(d < bestDist){ bestDist = d; best = {kind:"unit",ref:other,x:other.x,y:other.y}; }
     });
 
     Object.values(battle.towers).forEach(t=>{
-      if(t.team !== enemySide) return;
+      if(t.team !== enemySide || t.hp <= 0) return;
       const d = distPct(u.x,u.y,t.x,t.y);
-      if(u.targetMode === "buildings"){
-        if(d < bestDist){
-          bestDist = d;
-          best = {kind:"tower", ref:t, x:t.x, y:t.y};
-        }
-      }else{
-        if(d < bestDist){
-          bestDist = d;
-          best = {kind:"tower", ref:t, x:t.x, y:t.y};
-        }
-      }
+      if(d < bestDist){ bestDist = d; best = {kind:"tower",ref:t,x:t.x,y:t.y}; }
     });
 
     return best;
   }
 
-  function applyHitToTarget(target, damage, splash, x, y, side){
+  function applyHitToTarget(target,damage,splash,side){
     if(target.kind === "unit"){
       applyDamageToUnit(target.ref, damage);
-      createFx(target.ref.x, target.ref.y - 2, "-" + damage, "hit");
+      createFx(target.ref.x,target.ref.y-2,"-"+damage,"hit");
       if(splash){
         battle.units.forEach(u=>{
           if(u.side !== target.ref.side || u.uid === target.ref.uid) return;
           if(distPct(target.ref.x,target.ref.y,u.x,u.y) <= splash/10){
-            applyDamageToUnit(u, Math.floor(damage * 0.55));
-            createFx(u.x,u.y - 2, "-" + Math.floor(damage * 0.55), "hit");
+            const sd = Math.floor(damage * 0.55);
+            applyDamageToUnit(u, sd);
+            createFx(u.x,u.y-2,"-"+sd,"hit");
           }
         });
       }
-    }else{
+    } else {
       damageTower(target.ref, damage);
-      createFx(target.ref.x, target.ref.y - 3, "-" + damage, "hit");
+      createFx(target.ref.x,target.ref.y-3,"-"+damage,"hit");
       if(splash){
         battle.units.forEach(u=>{
           if(u.side === side) return;
           if(distPct(target.ref.x,target.ref.y,u.x,u.y) <= splash/10){
-            applyDamageToUnit(u, Math.floor(damage * 0.5));
-            createFx(u.x,u.y - 2, "-" + Math.floor(damage * 0.5), "hit");
+            const sd = Math.floor(damage * 0.5);
+            applyDamageToUnit(u, sd);
+            createFx(u.x,u.y-2,"-"+sd,"hit");
           }
         });
       }
@@ -1490,7 +1318,7 @@
     u.hp -= amount;
     if(u.hp <= 0){
       removeUnit(u);
-    }else{
+    } else {
       updateUnitDom(u);
     }
   }
@@ -1500,46 +1328,46 @@
     if(idx !== -1){
       removeUnitDom(u);
       battle.units.splice(idx,1);
+      beep("death");
     }
   }
 
   function updateProjectiles(dt){
-    for(let i = battle.projectiles.length - 1; i >= 0; i--){
+    for(let i=battle.projectiles.length-1;i>=0;i--){
       const p = battle.projectiles[i];
-      const dx = p.tx - p.x;
-      const dy = p.ty - p.y;
+      const dx = p.tx-p.x, dy = p.ty-p.y;
       const len = Math.hypot(dx,dy) || 1;
       const move = p.speed * dt / 10;
 
       if(len <= move){
-        p.x = p.tx;
-        p.y = p.ty;
+        p.x = p.tx; p.y = p.ty;
         updateProjectileDom(p);
 
-        const nearbyUnit = findNearestImpactUnit(p.x,p.y,p.side);
-        if(nearbyUnit){
-          applyDamageToUnit(nearbyUnit, p.damage);
-          createFx(nearbyUnit.x, nearbyUnit.y - 2, "-" + p.damage, "hit");
+        const unit = findNearestImpactUnit(p.x,p.y,p.side);
+        if(unit){
+          applyDamageToUnit(unit, p.damage);
+          createFx(unit.x,unit.y-2,"-"+p.damage,"hit");
           if(p.splash){
             battle.units.forEach(u=>{
-              if(u.side !== nearbyUnit.side || u.uid === nearbyUnit.uid) return;
-              if(distPct(nearbyUnit.x, nearbyUnit.y, u.x, u.y) <= p.splash / 10){
-                applyDamageToUnit(u, Math.floor(p.damage * 0.55));
-                createFx(u.x, u.y - 2, "-" + Math.floor(p.damage * 0.55), "hit");
+              if(u.side !== unit.side || u.uid === unit.uid) return;
+              if(distPct(unit.x,unit.y,u.x,u.y) <= p.splash/10){
+                const sd = Math.floor(p.damage * 0.55);
+                applyDamageToUnit(u, sd);
+                createFx(u.x,u.y-2,"-"+sd,"hit");
               }
             });
           }
-        }else{
+        } else {
           const tower = findNearestImpactTower(p.x,p.y,p.side);
           if(tower){
             damageTower(tower, p.damage);
-            createFx(tower.x, tower.y - 3, "-" + p.damage, "hit");
+            createFx(tower.x,tower.y-3,"-"+p.damage,"hit");
           }
         }
 
         removeProjectileDom(p);
         battle.projectiles.splice(i,1);
-      }else{
+      } else {
         p.x += (dx/len) * move;
         p.y += (dy/len) * move;
         updateProjectileDom(p);
@@ -1549,97 +1377,74 @@
 
   function findNearestImpactUnit(x,y,side){
     const enemySide = side === "player" ? "enemy" : "player";
-    let best = null;
-    let bestD = Infinity;
+    let best = null, bestD = Infinity;
     battle.units.forEach(u=>{
       if(u.side !== enemySide) return;
       const d = distPct(x,y,u.x,u.y);
-      if(d < 3 && d < bestD){
-        bestD = d;
-        best = u;
-      }
+      if(d < 3 && d < bestD){ bestD = d; best = u; }
     });
     return best;
   }
 
   function findNearestImpactTower(x,y,side){
-    const enemyTeam = side === "player" ? "enemy" : "player";
-    let best = null;
-    let bestD = Infinity;
+    const team = side === "player" ? "enemy" : "player";
+    let best = null, bestD = Infinity;
     Object.values(battle.towers).forEach(t=>{
-      if(t.team !== enemyTeam) return;
+      if(t.team !== team || t.hp <= 0) return;
       const d = distPct(x,y,t.x,t.y);
-      if(d < 4 && d < bestD){
-        bestD = d;
-        best = t;
-      }
+      if(d < 4 && d < bestD){ bestD = d; best = t; }
     });
     return best;
   }
 
   function updateTowers(dt){
     Object.values(battle.towers).forEach(t=>{
-      t.cooldown -= dt;
       if(t.hp <= 0) return;
-
+      t.cooldown -= dt;
       const enemySide = t.team === "player" ? "enemy" : "player";
-      let target = null;
-      let bestD = Infinity;
+      let target = null, best = Infinity;
 
       battle.units.forEach(u=>{
         if(u.side !== enemySide) return;
         const d = distPct(t.x,t.y,u.x,u.y);
-        if(d <= t.range/10 && d < bestD){
-          bestD = d;
-          target = u;
-        }
+        if(d <= t.range/10 && d < best){ best = d; target = u; }
       });
 
       if(target && t.cooldown <= 0){
         createProjectile(t.x,t.y,target.x,target.y,t.team,t.damage,0);
         t.cooldown = t.atkSpeed;
+        beep("tower");
       }
     });
   }
 
-  function damageTower(tower, amount){
-    if(tower.hp <= 0) return;
-    tower.hp -= amount;
-    if(tower.hp < 0) tower.hp = 0;
-
-    if(tower.hp === 0){
-      if(tower.team === "enemy"){
-        battle.player.towersDestroyed++;
-        feed(`Enemy ${tower.name} was destroyed.`);
-      }else{
-        battle.enemy.towersDestroyed++;
-        feed(`Your ${tower.name} was destroyed.`);
-      }
-    }
+  function damageTower(t, amount){
+    if(t.hp <= 0) return;
+    t.hp -= amount;
+    if(t.hp < 0) t.hp = 0;
     renderAllTowers();
+
+    if(t.hp === 0){
+      if(t.team === "enemy"){ battle.player.towersDestroyed++; feed(`Enemy ${t.name} was destroyed.`); }
+      else { battle.enemy.towersDestroyed++; feed(`Your ${t.name} was destroyed.`); }
+      beep("death");
+    }
   }
 
   function renderAllTowers(){
     const map = [
-      ["enemyLeft","enemyLeftHp"],
-      ["enemyCore","enemyCoreHp"],
-      ["enemyRight","enemyRightHp"],
-      ["playerLeft","playerLeftHp"],
-      ["playerCore","playerCoreHp"],
-      ["playerRight","playerRightHp"]
+      ["enemyLeft","enemyLeftHp","enemyLeftTower"],
+      ["enemyCore","enemyCoreHp","enemyCoreTower"],
+      ["enemyRight","enemyRightHp","enemyRightTower"],
+      ["playerLeft","playerLeftHp","playerLeftTower"],
+      ["playerCore","playerCoreHp","playerCoreTower"],
+      ["playerRight","playerRightHp","playerRightTower"]
     ];
-    map.forEach(([key,hpId])=>{
-      const t = battle?.towers?.[key];
-      if(!t) return;
+    map.forEach(([key,hpId,nodeId])=>{
+      if(!battle) return;
+      const t = battle.towers[key];
       el(hpId).textContent = Math.max(0, Math.floor(t.hp));
-      const node =
-        key === "enemyLeft" ? el("enemyLeftTower") :
-        key === "enemyCore" ? el("enemyCoreTower") :
-        key === "enemyRight" ? el("enemyRightTower") :
-        key === "playerLeft" ? el("playerLeftTower") :
-        key === "playerCore" ? el("playerCoreTower") :
-        el("playerRightTower");
-      node.style.opacity = t.hp <= 0 ? ".35" : "1";
+      el(nodeId).style.opacity = t.hp <= 0 ? ".35" : "1";
     });
   }
 
@@ -1653,56 +1458,107 @@
     if(!battle) return;
     const handEl = el("hand");
     handEl.innerHTML = battle.player.hand.map((id, idx)=>{
-      const c = getCard(id);
+      const c = CARD_LIBRARY[id];
       const affordable = battle.player.flux >= c.cost;
       const selected = battle.selectedHandIndex === idx;
       return `
-        <button class="hand-card ${selected ? 'selected' : ''} ${affordable ? '' : 'disabled'}" data-hand-index="${idx}">
+        <div class="hand-card ${selected?'selected':''} ${affordable?'':'disabled'}" data-hand-index="${idx}">
           <div class="cost-bubble">${c.cost}</div>
           <div style="font-size:1.4rem">${c.emoji}</div>
           <div class="name">${c.name}</div>
-          <div class="mini">${c.role}</div>
+          <div class="mini">Lvl ${save.cardLevels[id]} • ${c.role}</div>
           <div class="mini">${c.type === 'spell' ? 'Spell' : c.structure ? 'Structure' : 'Unit'}</div>
-        </button>
+        </div>
       `;
     }).join("");
 
-    handEl.querySelectorAll("[data-hand-index]").forEach(btn=>{
-      btn.onclick = () => {
-        selectHandIndex(Number(btn.dataset.handIndex));
-      };
+    handEl.querySelectorAll("[data-hand-index]").forEach(card=>{
+      const idx = Number(card.dataset.handIndex);
+      card.onclick = () => selectHandIndex(idx);
+      attachDrag(card, idx);
     });
 
-    if(battle.selectedHandIndex === null){
-      el("selectedCardBanner").textContent = "Selected: none";
-    }else{
-      const c = getCard(battle.player.hand[battle.selectedHandIndex]);
+    if(battle.selectedHandIndex === null) el("selectedCardBanner").textContent = "Selected: none";
+    else {
+      const c = CARD_LIBRARY[battle.player.hand[battle.selectedHandIndex]];
       el("selectedCardBanner").textContent = `Selected: ${c.name} • Cost ${c.cost}`;
     }
   }
 
+  function attachDrag(node, handIndex){
+    const start = (clientX, clientY) => {
+      if(!battle || battle.ended) return;
+      const id = battle.player.hand[handIndex];
+      if(!id) return;
+      const card = CARD_LIBRARY[id];
+      if(battle.player.flux < card.cost) return;
+
+      dragState = { handIndex, cardId:id, ghost:createGhost(card, clientX, clientY) };
+      node.classList.add("dragging");
+    };
+
+    const move = (clientX, clientY) => {
+      if(!dragState) return;
+      dragState.ghost.style.left = clientX + "px";
+      dragState.ghost.style.top = clientY + "px";
+    };
+
+    const end = (clientX, clientY) => {
+      node.classList.remove("dragging");
+      if(!dragState) return;
+      const pt = getArenaPoint(clientX, clientY);
+      if(pt) tryPlayCardAt(dragState.handIndex, pt.x, pt.y);
+      dragState.ghost.remove();
+      dragState = null;
+    };
+
+    node.onpointerdown = (e) => { e.preventDefault(); start(e.clientX, e.clientY); };
+    node.onpointermove = (e) => move(e.clientX, e.clientY);
+    node.onpointerup = (e) => end(e.clientX, e.clientY);
+    node.onpointercancel = (e) => end(e.clientX, e.clientY);
+
+    node.ondragstart = () => false;
+  }
+
+  window.addEventListener("pointermove", (e)=>{
+    if(dragState && dragState.ghost){
+      dragState.ghost.style.left = e.clientX + "px";
+      dragState.ghost.style.top = e.clientY + "px";
+    }
+  });
+  window.addEventListener("pointerup", (e)=>{
+    if(dragState && dragState.ghost){
+      const pt = getArenaPoint(e.clientX, e.clientY);
+      if(pt) tryPlayCardAt(dragState.handIndex, pt.x, pt.y);
+      dragState.ghost.remove();
+      dragState = null;
+      document.querySelectorAll(".hand-card.dragging").forEach(n=>n.classList.remove("dragging"));
+    }
+  });
+
+  function createGhost(card, x, y){
+    const d = document.createElement("div");
+    d.className = "drag-ghost";
+    d.innerHTML = `<div style="font-size:1.4rem">${card.emoji}</div><div style="font-weight:900;font-size:.9rem">${card.name}</div><div class="tiny muted">Cost ${card.cost}</div>`;
+    d.style.left = x + "px";
+    d.style.top = y + "px";
+    document.body.appendChild(d);
+    return d;
+  }
+
   function checkBattleEnd(){
     if(battle.ended) return;
-
-    if(battle.towers.enemyCore.hp <= 0){
-      endBattle("victory");
-      return;
-    }
-    if(battle.towers.playerCore.hp <= 0){
-      endBattle("defeat");
-      return;
-    }
+    if(battle.towers.enemyCore.hp <= 0){ endBattle("victory"); return; }
+    if(battle.towers.playerCore.hp <= 0){ endBattle("defeat"); return; }
 
     if(battle.matchTime <= 0){
       const p = battle.player.towersDestroyed;
       const e = battle.enemy.towersDestroyed;
       if(p > e) endBattle("victory");
       else if(e > p) endBattle("defeat");
-      else {
-        if(battle.towers.enemyCore.hp < battle.towers.playerCore.hp) endBattle("victory");
-        else if(battle.towers.playerCore.hp < battle.towers.enemyCore.hp) endBattle("defeat");
-        else endBattle("draw");
-      }
+      else if(battle.towers.enemyCore.hp < battle.towers.playerCore.hp) endBattle("victory");
+      else if(battle.towers.playerCore.hp < battle.towers.enemyCore.hp) endBattle("defeat");
+      else endBattle("draw");
     }
   }
 
@@ -1710,71 +1566,111 @@
     battle.ended = true;
     cancelAnimationFrame(battle.loopId);
 
-    let coins = 0;
-    let xp = 0;
-    let summary = "";
-
+    let coins = 0, xp = 0, extraCopies = [];
     if(result === "victory"){
-      coins = 38 + Math.floor(Math.random() * 18);
-      xp = 28 + Math.floor(Math.random() * 12);
+      coins = 40 + Math.floor(Math.random()*18);
+      xp = 30 + Math.floor(Math.random()*12);
       save.wins++;
       save.currentStreak++;
       if(save.currentStreak > save.bestStreak) save.bestStreak = save.currentStreak;
-      summary = "You broke through the enemy defenses and claimed the arena.";
-    }else if(result === "defeat"){
-      coins = 14 + Math.floor(Math.random() * 10);
-      xp = 12 + Math.floor(Math.random() * 8);
+      extraCopies = rewardCopies(2);
+    } else if(result === "defeat"){
+      coins = 16 + Math.floor(Math.random()*10);
+      xp = 14 + Math.floor(Math.random()*8);
       save.losses++;
       save.currentStreak = 0;
-      summary = "You were pushed back this round, but still earned progress.";
-    }else{
-      coins = 22;
-      xp = 18;
-      save.currentStreak = 0;
-      summary = "The battle ended even. You still earned some progress.";
+      extraCopies = rewardCopies(1);
+    } else {
+      coins = 24; xp = 18; save.currentStreak = 0; extraCopies = rewardCopies(1);
     }
 
     save.coins += coins;
     gainXp(xp);
+    extraCopies.forEach(({id,count})=> save.cardCopies[id] += count);
     saveData();
 
-    const overlay = el("resultOverlay");
     el("resultTitle").textContent = result === "victory" ? "Victory" : result === "defeat" ? "Defeat" : "Draw";
     el("resultTag").textContent = result === "victory" ? "Arena Cleared" : result === "defeat" ? "Match Complete" : "Even Match";
     el("resultSummary").innerHTML = `
       <div><strong>Opponent:</strong> ${battle.enemy.name} • ${battle.enemy.personality.name}</div>
-      <div><strong>Result:</strong> ${summary}</div>
       <div><strong>Towers Destroyed:</strong> You ${battle.player.towersDestroyed} • Opponent ${battle.enemy.towersDestroyed}</div>
+      <div><strong>Core Health:</strong> You ${Math.floor(battle.towers.playerCore.hp)} • Opponent ${Math.floor(battle.towers.enemyCore.hp)}</div>
     `;
     el("rewardRow").innerHTML = `
       <div class="reward">+${coins} Coins</div>
       <div class="reward">+${xp} XP</div>
       <div class="reward">Level ${save.level}</div>
-      <div class="reward">Streak ${save.currentStreak}</div>
+      ${extraCopies.map(r=>`<div class="reward">+${r.count} ${CARD_LIBRARY[r.id].name}</div>`).join("")}
     `;
-    overlay.classList.add("show");
+    el("resultOverlay").classList.add("show");
+    beep(result === "victory" ? "victory" : "defeat");
+  }
+
+  function rewardCopies(num){
+    const picks = [];
+    for(let i=0;i<num;i++){
+      const id = ALL_IDS[Math.floor(Math.random()*ALL_IDS.length)];
+      picks.push({id,count:1 + Math.floor(Math.random()*2)});
+    }
+    return picks;
   }
 
   function formatTime(sec){
     const s = Math.max(0, Math.floor(sec));
-    const m = Math.floor(s / 60);
-    const r = s % 60;
+    const m = Math.floor(s/60), r = s%60;
     return `${String(m).padStart(2,"0")}:${String(r).padStart(2,"0")}`;
   }
 
-  function rand(a,b){ return a + Math.random() * (b-a); }
-  function clamp(n,a,b){ return Math.max(a, Math.min(b,n)); }
+  function rand(a,b){ return a + Math.random()*(b-a); }
+  function clamp(n,a,b){ return Math.max(a,Math.min(b,n)); }
   function distPct(x1,y1,x2,y2){ return Math.hypot(x2-x1, y2-y1); }
 
-  // UI BINDINGS
+  function beep(type){
+    try{
+      if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+
+      let freq = 400, dur = 0.08, vol = 0.03;
+      if(type==="play"){ freq = 620; dur = 0.06; }
+      if(type==="spell"){ freq = 780; dur = 0.09; }
+      if(type==="hit"){ freq = 240; dur = 0.04; }
+      if(type==="death"){ freq = 140; dur = 0.1; }
+      if(type==="tower"){ freq = 320; dur = 0.05; }
+      if(type==="buy"){ freq = 560; dur = 0.08; }
+      if(type==="upgrade"){ freq = 760; dur = 0.12; }
+      if(type==="victory"){ freq = 900; dur = 0.18; vol = 0.045; }
+      if(type==="defeat"){ freq = 180; dur = 0.16; vol = 0.04; }
+
+      o.frequency.setValueAtTime(freq, now);
+      o.type = type === "victory" ? "triangle" : "square";
+      g.gain.setValueAtTime(vol, now);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+      o.start(now);
+      o.stop(now + dur);
+    } catch(e){}
+  }
+
   el("btnPlay").onclick = startBattleFlow;
   el("btnDeckBuilder").onclick = () => showScreen("deck");
   el("btnCollection").onclick = () => showScreen("collection");
+  el("btnShop").onclick = () => { renderShop(); el("shopOverlay").classList.add("show"); };
+  el("btnCloseShop").onclick = () => { el("shopOverlay").classList.remove("show"); renderHome(); };
+  el("btnResetSave").onclick = () => {
+    if(!confirm("Reset all local progress?")) return;
+    localStorage.removeItem(SAVE_KEY);
+    save = loadSave();
+    deckBuilderSelectedSlot = null;
+    battle = null;
+    clearArenaEntities();
+    showScreen("home");
+  };
+  document.querySelectorAll("[data-back-home]").forEach(btn=>btn.onclick = ()=>showScreen("home"));
+
   el("btnExitBattle").onclick = () => {
-    if(battle && !battle.ended){
-      const yes = confirm("Exit the current battle?");
-      if(!yes) return;
-    }
+    if(battle && !battle.ended && !confirm("Exit the current battle?")) return;
     cancelAnimationFrame(battle?.loopId);
     battle = null;
     clearArenaEntities();
@@ -1785,23 +1681,6 @@
     battle.selectedHandIndex = null;
     renderHand();
   };
-  el("btnHowTo").onclick = () => {
-    alert("How to play:\n\n1. Build an 8-card deck.\n2. Start a battle.\n3. Tap a card in hand.\n4. Tap your half of the arena to deploy it.\n5. Destroy the enemy core tower to win.\n6. If time runs out, tower destruction and core health decide the result.");
-  };
-  el("btnResetSave").onclick = () => {
-    const yes = confirm("Reset all local progress?");
-    if(!yes) return;
-    localStorage.removeItem(SAVE_KEY);
-    save = loadSave();
-    deckBuilderSelectedSlot = null;
-    battle = null;
-    showScreen("home");
-  };
-
-  document.querySelectorAll("[data-back-home]").forEach(btn=>{
-    btn.onclick = () => showScreen("home");
-  });
-
   el("btnResultHome").onclick = () => {
     el("resultOverlay").classList.remove("show");
     battle = null;
@@ -1815,7 +1694,6 @@
     startBattleFlow();
   };
 
-  // INITIAL
   renderHome();
 })();
 </script>
