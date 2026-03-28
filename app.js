@@ -9,7 +9,7 @@
   storageBucket: "clash-app-31ad2.firebasestorage.app",
   messagingSenderId: "1043745907914",
   appId: "1:1043745907914:web:f158b76896b36f8b8a8033",
-  
+    }
   };
 
   const LOCAL_SAVE_KEY = "siege_cards_phase6_local_save_v1";
