@@ -1,185 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Siege Cards</title>
-
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Siege Cards: Arena Rivals</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-<div class="app">
+  <div class="app">
+    <!-- HOME -->
+    <section class="screen active" id="screen-home">
+      <div class="wrap">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-badge">⚔️</div>
+            <div>Siege Cards: Arena Rivals</div>
+          </div>
 
-  <!-- HOME -->
-  <section class="screen active" id="screen-home">
-    <div class="wrap">
-
-      <div class="topbar">
-        <div class="brand">
-          <div class="brand-badge">⚔️</div>
-          <div>Siege Cards</div>
+          <div class="pill-row">
+            <div class="pill">Level <span id="homeLevel">1</span></div>
+            <div class="pill coins">Coins <span id="homeCoins">0</span></div>
+            <div class="pill trophies">🏆 <span id="homeTrophies">0</span></div>
+            <div class="pill" id="authStatusPill">Guest</div>
+            <button class="btn alt" id="btnOpenAuth">Account</button>
+            <button class="btn alt hidden" id="btnLogout">Logout</button>
+          </div>
         </div>
 
-        <div class="pill-row">
-          <div class="pill">Lvl <span id="homeLevel">1</span></div>
-          <div class="pill">Coins <span id="homeCoins">0</span></div>
-          <div class="pill">🏆 <span id="homeTrophies">0</span></div>
-          <div class="pill" id="authStatus">Guest</div>
+        <div class="hero">
+          <div class="card hero-left">
+            <div>
+              <h1>Phase 6 arena battler</h1>
+              <p>
+                Email/password auth with unique usernames, deck builder, collection,
+                trophies, shop, history, settings, and a lightweight arena battle system.
+              </p>
+            </div>
 
-          <button class="btn alt" id="btnAccount">Account</button>
-          <button class="btn alt hidden" id="btnLogout">Logout</button>
+            <div class="footer-nav">
+              <button class="menu-btn primary" id="btnPlay" style="flex:1;min-width:220px;">
+                <span>Battle Now<small>Fast arena matchmaking</small></span>
+                <span>▶</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="menu-grid">
+            <button class="menu-btn" id="btnDeck">
+              <span>Deck Builder<small>Edit your 8-card deck</small></span>
+              <span>🃏</span>
+            </button>
+
+            <button class="menu-btn" id="btnCollection">
+              <span>Collection<small>Upgrade cards and view stats</small></span>
+              <span>📚</span>
+            </button>
+
+            <button class="menu-btn" id="btnShop">
+              <span>Shop<small>Buy offers and rotate inventory</small></span>
+              <span>🛒</span>
+            </button>
+
+            <button class="menu-btn" id="btnHistory">
+              <span>Match History<small>See previous matches</small></span>
+              <span>📝</span>
+            </button>
+
+            <button class="menu-btn" id="btnSettings">
+              <span>Settings<small>Sound and battle feed</small></span>
+              <span>⚙️</span>
+            </button>
+
+            <button class="menu-btn" id="btnRefreshShop">
+              <span>Refresh Shop<small>Re-roll shop offers</small></span>
+              <span>🔄</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="triple-grid">
+          <div class="card section">
+            <div class="title-row">
+              <h2>League</h2>
+              <div class="league-badge" id="leagueBadge">Bronze I</div>
+            </div>
+            <div class="notice">
+              <div><strong>Current Trophies:</strong> <span id="leagueTrophies">0</span></div>
+              <div><strong>Next League:</strong> <span id="nextLeagueName">Bronze II</span></div>
+            </div>
+            <div style="margin-top:12px;" class="progress-bar">
+              <span id="leagueProgress" style="width:0%"></span>
+            </div>
+            <div class="muted tiny" style="margin-top:8px;" id="leagueProgressText">0 / 200</div>
+          </div>
+
+          <div class="card section">
+            <div class="title-row">
+              <h2>Current Deck</h2>
+              <div class="muted small">Average cost <span id="avgCostHome">0.0</span></div>
+            </div>
+            <div class="deck-slots" id="homeDeckPreview"></div>
+          </div>
+
+          <div class="card section">
+            <div class="title-row">
+              <h2>Profile</h2>
+              <div class="tag">Account</div>
+            </div>
+            <div class="notice">
+              <div><strong>Username:</strong> <span id="profileUsername">Guest</span></div>
+              <div><strong>Email:</strong> <span id="profileEmail">Not signed in</span></div>
+              <div><strong>Wins:</strong> <span id="statWins">0</span></div>
+              <div><strong>Losses:</strong> <span id="statLosses">0</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DECK -->
+    <section class="screen" id="screen-deck">
+      <div class="wrap">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-badge">🛠️</div>
+            <div>Deck Builder</div>
+          </div>
+          <div class="pill-row">
+            <button class="btn alt" data-home>← Home</button>
+            <div class="pill">Average Cost <span id="deckAvgCost">0.0</span></div>
+          </div>
+        </div>
+
+        <div class="subgrid">
+          <div class="card section">
+            <div class="title-row">
+              <h2>Your Deck</h2>
+              <div class="muted small">Select a slot, then choose a card</div>
+            </div>
+
+            <div class="deck-slots" id="deckSlots"></div>
+            <div class="selected-banner" id="deckSelectedBanner">Selected slot: none</div>
+          </div>
+
+          <div class="card section">
+            <div class="title-row">
+              <h2>Available Cards</h2>
+              <div class="muted small">Tap a card to place it in the selected slot</div>
+            </div>
+
+            <div class="collection-grid" id="deckCardPool"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLECTION -->
+    <section class="screen" id="screen-collection">
+      <div class="wrap">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-badge">📚</div>
+            <div>Collection</div>
+          </div>
+          <div class="pill-row">
+            <button class="btn alt" data-home>← Home</button>
+            <div class="pill coins">Coins <span id="collectionCoins">0</span></div>
+          </div>
+        </div>
+
+        <div class="card section">
+          <div class="collection-grid" id="collectionGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BATTLE -->
+    <section class="screen" id="screen-battle">
+      <div class="wrap">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-badge">🏟️</div>
+            <div>Arena Match</div>
+          </div>
+          <div class="pill-row">
+            <button class="btn alt" id="btnExitBattle">Exit</button>
+            <div class="pill">Time <span id="battleTime">60</span>s</div>
+            <div class="pill">Flux <span id="battleFlux">0</span>/10</div>
+          </div>
+        </div>
+
+        <div class="subgrid">
+          <div class="card section">
+            <div class="title-row">
+              <h2>Battle</h2>
+              <div class="tag" id="battleStatusTag">Live</div>
+            </div>
+
+            <div class="notice" style="margin-bottom:12px;">
+              <div><strong>You:</strong> <span id="battlePlayerName">Guest</span></div>
+              <div><strong>Opponent:</strong> <span id="battleOpponentName">Unknown</span></div>
+            </div>
+
+            <div class="title-row" style="margin-bottom:6px;">
+              <h3 style="font-size:1rem;">Opponent HP</h3>
+              <div id="battleEnemyHpText">100</div>
+            </div>
+            <div class="progress-bar" style="margin-bottom:14px;">
+              <span id="battleEnemyBar" style="width:100%;"></span>
+            </div>
+
+            <div class="title-row" style="margin-bottom:6px;">
+              <h3 style="font-size:1rem;">Your HP</h3>
+              <div id="battlePlayerHpText">100</div>
+            </div>
+            <div class="progress-bar">
+              <span id="battlePlayerBar" style="width:100%;"></span>
+            </div>
+          </div>
+
+          <div class="card section">
+            <div class="title-row">
+              <h2>Your Hand</h2>
+              <div class="muted small">Tap a card to play it</div>
+            </div>
+
+            <div class="hand" id="hand"></div>
+
+            <div class="title-row" style="margin-top:18px;">
+              <h2>Battle Log</h2>
+            </div>
+            <div class="notice" id="battleLogLines" style="min-height:180px;max-height:300px;overflow:auto;">
+              No actions yet.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- AUTH -->
+  <div class="auth-overlay" id="authModal">
+    <div class="auth-box">
+      <div class="title-row">
+        <h2 style="margin:0;">Account</h2>
+        <button class="btn alt" id="btnCloseAuth">Close</button>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="btn" id="tabLogin">Login</button>
+        <button class="btn alt" id="tabSignup">Sign Up</button>
+      </div>
+
+      <div class="notice" id="authMessage" style="margin-bottom:12px;">
+        Sign in or create an account.
+      </div>
+
+      <div class="form-stack">
+        <div>
+          <label class="tiny muted">Email</label>
+          <input type="email" id="authEmail" placeholder="you@example.com" />
+        </div>
+
+        <div>
+          <label class="tiny muted">Password</label>
+          <input type="password" id="authPassword" placeholder="Minimum 6 characters" />
+        </div>
+
+        <div id="usernameWrap">
+          <label class="tiny muted">Username</label>
+          <input
+            type="text"
+            id="authUsername"
+            placeholder="3–16 chars, start with a letter, letters/numbers/underscore only"
+            maxlength="16"
+          />
+          <div class="form-help">
+            Each username must be unique. It is used for matchups and player references.
+          </div>
         </div>
       </div>
 
-      <div class="hero">
-        <div class="card hero-left">
-          <h1>Battle Arena</h1>
-          <p>Build your deck, enter matches, climb trophies.</p>
+      <div class="btn-row" style="margin-top:14px;">
+        <button class="btn good" id="btnLogin">Login</button>
+        <button class="btn purple hidden" id="btnSignup">Create Account</button>
+        <button class="btn alt" id="btnGuest">Continue as Guest</button>
+      </div>
+    </div>
+  </div>
 
-          <button class="menu-btn primary" id="btnPlay">
-            <span>Play</span>
-            <span>▶</span>
-          </button>
+  <!-- SHOP -->
+  <div class="shop-overlay" id="shopModal">
+    <div class="shop-box">
+      <div class="title-row">
+        <h2 style="margin:0;">Shop</h2>
+        <button class="btn alt" id="closeShop">Close</button>
+      </div>
+      <div class="collection-grid" id="shopGrid"></div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="history-overlay" id="historyModal">
+    <div class="history-box">
+      <div class="title-row">
+        <h2 style="margin:0;">Match History</h2>
+        <button class="btn alt" id="closeHistory">Close</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="settings-overlay" id="settingsModal">
+    <div class="settings-box">
+      <div class="title-row">
+        <h2 style="margin:0;">Settings</h2>
+        <button class="btn alt" id="closeSettings">Close</button>
+      </div>
+
+      <div class="two-col">
+        <div class="switch">
+          <div>
+            <strong>Sound</strong>
+            <div class="muted tiny">Toggle sound effects</div>
+          </div>
+          <button class="btn" id="toggleSound">Sound: On</button>
         </div>
 
-        <div class="menu-grid">
-          <button class="menu-btn" id="btnDeck">Deck</button>
-          <button class="menu-btn" id="btnCollection">Collection</button>
-          <button class="menu-btn" id="btnShop">Shop</button>
-          <button class="menu-btn" id="btnHistory">History</button>
-          <button class="menu-btn" id="btnSettings">Settings</button>
+        <div class="switch">
+          <div>
+            <strong>Battle Feed Limit</strong>
+            <div class="muted tiny">How many lines to keep</div>
+          </div>
+          <select id="feedLimitSelect">
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="60">60</option>
+          </select>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="card section">
-        <h3>Profile</h3>
-        <div class="notice">
-          <div>Username: <span id="profileUsername">Guest</span></div>
-          <div>Wins: <span id="statWins">0</span></div>
-          <div>Losses: <span id="statLosses">0</span></div>
-        </div>
+  <!-- MATCHMAKING -->
+  <div class="queue-screen" id="queueScreen">
+    <div class="queue-box" style="text-align:center;">
+      <div class="spinner"></div>
+      <h2 style="margin:0 0 8px;">Efficient matchmaking</h2>
+      <div class="muted" id="queueText">Finding a match...</div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-overlay" id="resultModal">
+    <div class="result-box">
+      <div class="title-row">
+        <h2 id="resultText" style="margin:0;">Victory</h2>
+        <div class="tag" id="resultTag">Match Complete</div>
       </div>
 
-    </div>
-  </section>
+      <div id="resultRewards" class="notice"></div>
 
-  <!-- DECK -->
-  <section class="screen" id="screen-deck">
-    <div class="wrap">
-      <div class="topbar">
-        <button class="btn alt" data-home>← Home</button>
-        <h2>Deck Builder</h2>
+      <div class="footer-nav">
+        <button class="btn" id="playAgain">Play Again</button>
+        <button class="btn alt" id="backHome">Home</button>
       </div>
-
-      <div class="deck-slots" id="deckSlots"></div>
-      <div class="collection-grid" id="deckCards"></div>
     </div>
-  </section>
-
-  <!-- COLLECTION -->
-  <section class="screen" id="screen-collection">
-    <div class="wrap">
-      <div class="topbar">
-        <button class="btn alt" data-home>← Home</button>
-        <h2>Collection</h2>
-      </div>
-
-      <div class="collection-grid" id="collectionGrid"></div>
-    </div>
-  </section>
-
-  <!-- BATTLE -->
-  <section class="screen" id="screen-battle">
-    <div class="wrap">
-      <div class="topbar">
-        <button class="btn alt" id="btnExitBattle">Exit</button>
-        <div>Match</div>
-      </div>
-
-      <div class="hand" id="hand"></div>
-    </div>
-  </section>
-
-</div>
-
-<!-- ACCOUNT MODAL -->
-<div class="auth-overlay" id="authModal">
-  <div class="auth-box">
-
-    <h2>Account</h2>
-
-    <div class="form-stack">
-      <input id="authEmail" placeholder="Email">
-      <input id="authPassword" type="password" placeholder="Password">
-
-      <input id="authUsername"
-        placeholder="Username (3–16 chars, unique)"
-      >
-    </div>
-
-    <div class="form-help" id="authMessage">
-      Sign in or create account
-    </div>
-
-    <div class="btn-row">
-      <button class="btn good" id="btnLogin">Login</button>
-      <button class="btn" id="btnSignup">Sign Up</button>
-      <button class="btn alt" id="btnGuest">Guest</button>
-    </div>
-
-    <button class="btn alt" id="btnCloseAuth">Close</button>
   </div>
-</div>
 
-<!-- SHOP -->
-<div class="shop-overlay" id="shopModal">
-  <div class="shop-box">
-    <h2>Shop</h2>
-    <div id="shopGrid"></div>
-    <button class="btn alt" id="closeShop">Close</button>
-  </div>
-</div>
-
-<!-- HISTORY -->
-<div class="history-overlay" id="historyModal">
-  <div class="history-box">
-    <h2>History</h2>
-    <div id="historyList"></div>
-    <button class="btn alt" id="closeHistory">Close</button>
-  </div>
-</div>
-
-<!-- SETTINGS -->
-<div class="settings-overlay" id="settingsModal">
-  <div class="settings-box">
-    <h2>Settings</h2>
-
-    <button class="btn" id="toggleSound">Toggle Sound</button>
-
-    <button class="btn alt" id="closeSettings">Close</button>
-  </div>
-</div>
-
-<!-- MATCHMAKING -->
-<div class="queue-screen" id="queueScreen">
-  <div class="queue-box">
-    <div class="spinner"></div>
-    <div>Finding Match...</div>
-  </div>
-</div>
-
-<!-- RESULT -->
-<div class="result-overlay" id="resultModal">
-  <div class="result-box">
-    <h2 id="resultText">Victory</h2>
-    <div id="resultRewards"></div>
-
-    <button class="btn" id="playAgain">Play Again</button>
-    <button class="btn alt" id="backHome">Home</button>
-  </div>
-</div>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
