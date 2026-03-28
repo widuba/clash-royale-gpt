@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siege Cards</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section class="screen active" id="screen-home">
+    <div class="wrap">
+
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-badge">⚔️</div>
+          <div>Siege Cards</div>
+        </div>
+
+        <div class="pill-row">
+          <div class="pill">Lvl <span id="homeLevel">1</span></div>
+          <div class="pill">Coins <span id="homeCoins">0</span></div>
+          <div class="pill">🏆 <span id="homeTrophies">0</span></div>
+          <div class="pill" id="authStatus">Guest</div>
+
+          <button class="btn alt" id="btnAccount">Account</button>
+          <button class="btn alt hidden" id="btnLogout">Logout</button>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="card hero-left">
+          <h1>Battle Arena</h1>
+          <p>Build your deck, enter matches, climb trophies.</p>
+
+          <button class="menu-btn primary" id="btnPlay">
+            <span>Play</span>
+            <span>▶</span>
+          </button>
+        </div>
+
+        <div class="menu-grid">
+          <button class="menu-btn" id="btnDeck">Deck</button>
+          <button class="menu-btn" id="btnCollection">Collection</button>
+          <button class="menu-btn" id="btnShop">Shop</button>
+          <button class="menu-btn" id="btnHistory">History</button>
+          <button class="menu-btn" id="btnSettings">Settings</button>
+        </div>
+      </div>
+
+      <div class="card section">
+        <h3>Profile</h3>
+        <div class="notice">
+          <div>Username: <span id="profileUsername">Guest</span></div>
+          <div>Wins: <span id="statWins">0</span></div>
+          <div>Losses: <span id="statLosses">0</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DECK -->
+  <section class="screen" id="screen-deck">
+    <div class="wrap">
+      <div class="topbar">
+        <button class="btn alt" data-home>← Home</button>
+        <h2>Deck Builder</h2>
+      </div>
+
+      <div class="deck-slots" id="deckSlots"></div>
+      <div class="collection-grid" id="deckCards"></div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section class="screen" id="screen-collection">
+    <div class="wrap">
+      <div class="topbar">
+        <button class="btn alt" data-home>← Home</button>
+        <h2>Collection</h2>
+      </div>
+
+      <div class="collection-grid" id="collectionGrid"></div>
+    </div>
+  </section>
+
+  <!-- BATTLE -->
+  <section class="screen" id="screen-battle">
+    <div class="wrap">
+      <div class="topbar">
+        <button class="btn alt" id="btnExitBattle">Exit</button>
+        <div>Match</div>
+      </div>
+
+      <div class="hand" id="hand"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ACCOUNT MODAL -->
+<div class="auth-overlay" id="authModal">
+  <div class="auth-box">
+
+    <h2>Account</h2>
+
+    <div class="form-stack">
+      <input id="authEmail" placeholder="Email">
+      <input id="authPassword" type="password" placeholder="Password">
+
+      <input id="authUsername"
+        placeholder="Username (3–16 chars, unique)"
+      >
+    </div>
+
+    <div class="form-help" id="authMessage">
+      Sign in or create account
+    </div>
+
+    <div class="btn-row">
+      <button class="btn good" id="btnLogin">Login</button>
+      <button class="btn" id="btnSignup">Sign Up</button>
+      <button class="btn alt" id="btnGuest">Guest</button>
+    </div>
+
+    <button class="btn alt" id="btnCloseAuth">Close</button>
+  </div>
+</div>
+
+<!-- SHOP -->
+<div class="shop-overlay" id="shopModal">
+  <div class="shop-box">
+    <h2>Shop</h2>
+    <div id="shopGrid"></div>
+    <button class="btn alt" id="closeShop">Close</button>
+  </div>
+</div>
+
+<!-- HISTORY -->
+<div class="history-overlay" id="historyModal">
+  <div class="history-box">
+    <h2>History</h2>
+    <div id="historyList"></div>
+    <button class="btn alt" id="closeHistory">Close</button>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="settings-overlay" id="settingsModal">
+  <div class="settings-box">
+    <h2>Settings</h2>
+
+    <button class="btn" id="toggleSound">Toggle Sound</button>
+
+    <button class="btn alt" id="closeSettings">Close</button>
+  </div>
+</div>
+
+<!-- MATCHMAKING -->
+<div class="queue-screen" id="queueScreen">
+  <div class="queue-box">
+    <div class="spinner"></div>
+    <div>Finding Match...</div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="result-overlay" id="resultModal">
+  <div class="result-box">
+    <h2 id="resultText">Victory</h2>
+    <div id="resultRewards"></div>
+
+    <button class="btn" id="playAgain">Play Again</button>
+    <button class="btn alt" id="backHome">Home</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
