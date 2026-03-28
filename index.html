@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Siege Cards: Arena Rivals — Phase 3</title>
+  <title>Siege Cards: Arena Rivals — Phase 5</title>
   <style>
     :root{
       --bg:#09101c;
@@ -27,10 +27,19 @@
     html,body{margin:0;height:100%;background:linear-gradient(180deg,#08101b,#0c1423);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
     button,input,select{font:inherit}
     button{cursor:pointer;border:none}
+    input,select{
+      width:100%;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color:var(--text);
+      border-radius:12px;
+      padding:12px 14px;
+      outline:none;
+    }
     .app{min-height:100%}
     .screen{display:none;min-height:100vh;padding:calc(16px + var(--safe-top)) 16px calc(16px + var(--safe-bottom))}
     .screen.active{display:block}
-    .wrap{max-width:1250px;margin:0 auto}
+    .wrap{max-width:1320px;margin:0 auto}
     .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
     .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.15rem}
     .brand-badge{
@@ -43,6 +52,7 @@
     }
     .pill.coins{color:var(--gold)}
     .pill.xp{color:var(--green)}
+    .pill.trophies{color:#9fd1ff}
     .card{
       background:linear-gradient(180deg,var(--panel),var(--panel2));
       border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)
@@ -51,9 +61,7 @@
     .hero{display:grid;grid-template-columns:1.15fr .95fr;gap:16px}
     @media (max-width:950px){.hero{grid-template-columns:1fr}}
     .hero-left{
-      padding:18px;
-      min-height:260px;
-      display:flex;flex-direction:column;justify-content:space-between;
+      padding:18px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;
       background:
         radial-gradient(circle at 18% 20%, rgba(107,182,255,.18), transparent 30%),
         radial-gradient(circle at 78% 20%, rgba(154,136,255,.15), transparent 28%),
@@ -71,6 +79,11 @@
     .menu-btn small{display:block;margin-top:6px;color:var(--muted);font-weight:700}
     .menu-btn.primary{background:linear-gradient(180deg,#2550a4,#17397b)}
     .subgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+    .triple-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}
+    .quad-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+    @media (max-width:1100px){
+      .triple-grid,.quad-grid{grid-template-columns:1fr}
+    }
     @media (max-width:950px){.subgrid{grid-template-columns:1fr}}
     .title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
     .title-row h2,.title-row h3{margin:0}
@@ -87,6 +100,7 @@
     .btn.good{background:linear-gradient(180deg,#1f9359,#156f43)}
     .btn.warn{background:linear-gradient(180deg,#a04541,#7b302d)}
     .btn.gold{background:linear-gradient(180deg,#d8a93a,#b9851c);color:#1b1200}
+    .btn.purple{background:linear-gradient(180deg,#7b5cff,#5a3ff0)}
     .btn:disabled{opacity:.45;cursor:not-allowed}
     .notice{padding:12px;border-radius:14px;background:rgba(255,255,255,.06);color:var(--muted)}
     .deck-slots{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -103,7 +117,6 @@
       background:linear-gradient(180deg,#1a2b4a,#14233d);
       border:1px solid var(--line);border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:182px
     }
-    .ccard.sel{outline:2px solid var(--blue)}
     .ccard-header{display:flex;justify-content:space-between;gap:8px;align-items:center}
     .cost{
       min-width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
@@ -188,13 +201,14 @@
       background:linear-gradient(180deg,#8ed1ff,#5199ff);color:#08111d;font-weight:900
     }
     .selected-banner{margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.07);color:var(--muted);font-weight:700}
-    .queue-screen,.result-overlay,.shop-overlay{
+    .queue-screen,.result-overlay,.shop-overlay,.history-overlay,.settings-overlay,.auth-overlay,.daily-overlay,.pass-overlay,.challenge-overlay,.tutorial-overlay{
       position:fixed;inset:0;background:rgba(8,14,25,.82);display:none;place-items:center;z-index:30;padding:20px
     }
-    .queue-screen.show,.result-overlay.show,.shop-overlay.show{display:grid}
-    .queue-box,.result-box,.shop-box{
-      width:min(860px,100%);padding:24px;border-radius:24px;background:linear-gradient(180deg,#15243e,#0d1b31);border:1px solid var(--line);box-shadow:var(--shadow)
+    .queue-screen.show,.result-overlay.show,.shop-overlay.show,.history-overlay.show,.settings-overlay.show,.auth-overlay.show,.daily-overlay.show,.pass-overlay.show,.challenge-overlay.show,.tutorial-overlay.show{display:grid}
+    .queue-box,.result-box,.shop-box,.history-box,.settings-box,.auth-box,.daily-box,.pass-box,.challenge-box,.tutorial-box{
+      width:min(980px,100%);max-height:90vh;overflow:auto;padding:24px;border-radius:24px;background:linear-gradient(180deg,#15243e,#0d1b31);border:1px solid var(--line);box-shadow:var(--shadow)
     }
+    .auth-box{max-width:520px}
     .spinner{
       width:60px;height:60px;border-radius:50%;margin:0 auto 16px;border:6px solid rgba(255,255,255,.12);border-top-color:#7fbaff;animation:spin 1s linear infinite
     }
@@ -209,6 +223,37 @@
     }
     .upgrade-bar{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
     .upgrade-bar > span{display:block;height:100%;background:linear-gradient(90deg,#5cc2ff,#77f0a4)}
+    .progress-bar{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+    .progress-bar > span{display:block;height:100%;background:linear-gradient(90deg,#69b7ff,#9f8cff)}
+    .quest-list,.achievement-list,.history-list,.preset-list,.mastery-list,.reward-list{display:grid;gap:10px}
+    .mini-card{
+      padding:12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--line)
+    }
+    .league-badge{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;font-weight:900;
+      background:linear-gradient(180deg,#1d335a,#172847);border:1px solid var(--line)
+    }
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:780px){.two-col{grid-template-columns:1fr}}
+    .switch{
+      display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:14px;background:rgba(255,255,255,.06)
+    }
+    .replay-log{max-height:420px;overflow:auto;display:grid;gap:8px}
+    .log-line{
+      padding:10px;border-radius:12px;background:rgba(255,255,255,.05);font-size:.9rem
+    }
+    .battle-pass-track{
+      display:grid;grid-template-columns:repeat(10, minmax(120px,1fr));gap:10px;overflow:auto;padding-bottom:4px
+    }
+    .pass-node{
+      min-width:120px;padding:12px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid var(--line)
+    }
+    .challenge-banner{
+      padding:16px;border-radius:18px;background:linear-gradient(180deg,#2b1f58,#1a1538);border:1px solid rgba(255,255,255,.1)
+    }
+    .auth-tabs{display:flex;gap:10px;margin-bottom:12px}
+    .auth-tabs button{flex:1}
+    .hidden{display:none !important}
   </style>
 </head>
 <body>
@@ -224,16 +269,20 @@
           <div class="pill">Level <span id="homeLevel">1</span></div>
           <div class="pill xp">XP <span id="homeXp">0 / 100</span></div>
           <div class="pill coins">Coins <span id="homeCoins">0</span></div>
+          <div class="pill trophies">🏆 <span id="homeTrophies">0</span></div>
+          <div class="pill" id="authStatusPill">Guest</div>
+          <button class="btn alt" id="btnOpenAuth">Account</button>
+          <button class="btn alt hidden" id="btnLogout">Logout</button>
         </div>
       </div>
 
       <div class="hero">
         <div class="card hero-left">
           <div>
-            <h1>Phase 3 web battler</h1>
+            <h1>Phase 5 live-progression shell</h1>
             <p>
-              Drag cards into the arena, upgrade your collection, buy shop offers, tune your deck,
-              and climb through fast arena matches with stronger AI and mobile-friendly controls.
+              Firebase auth and cloud save are wired in. This build now includes daily rewards, battle pass,
+              challenge events, card mastery, tutorial flow, leagues, quests, achievements, presets, shop, and history.
             </p>
           </div>
           <div class="footer-nav">
@@ -246,7 +295,7 @@
 
         <div class="menu-grid">
           <button class="menu-btn" id="btnDeckBuilder">
-            <span>Deck Builder<small>Edit your 8-card deck</small></span>
+            <span>Deck Builder<small>Edit your 8-card deck and presets</small></span>
             <span>🃏</span>
           </button>
           <button class="menu-btn" id="btnCollection">
@@ -257,14 +306,45 @@
             <span>Shop<small>Spend coins on card offers</small></span>
             <span>🛒</span>
           </button>
-          <button class="menu-btn" id="btnResetSave">
-            <span>Reset Save<small>Clear local progress</small></span>
-            <span>↺</span>
+          <button class="menu-btn" id="btnHistory">
+            <span>Match History<small>See previous matches and logs</small></span>
+            <span>📝</span>
+          </button>
+          <button class="menu-btn" id="btnDailyRewards">
+            <span>Daily Rewards<small>Claim your daily login reward</small></span>
+            <span>🎁</span>
+          </button>
+          <button class="menu-btn" id="btnBattlePass">
+            <span>Battle Pass<small>Earn pass XP and claim milestones</small></span>
+            <span>🚀</span>
+          </button>
+          <button class="menu-btn" id="btnChallenges">
+            <span>Challenge Events<small>Play rotating event goals</small></span>
+            <span>🏁</span>
+          </button>
+          <button class="menu-btn" id="btnSettings">
+            <span>Settings<small>Audio and display options</small></span>
+            <span>⚙️</span>
           </button>
         </div>
       </div>
 
-      <div class="subgrid">
+      <div class="triple-grid">
+        <div class="card section">
+          <div class="title-row">
+            <h2>League</h2>
+            <div class="league-badge" id="leagueBadge">Bronze I</div>
+          </div>
+          <div class="notice">
+            <div><strong>Current Trophies:</strong> <span id="leagueTrophies">0</span></div>
+            <div><strong>Next League:</strong> <span id="nextLeagueName">Bronze II</span></div>
+          </div>
+          <div style="margin-top:12px" class="progress-bar">
+            <span id="leagueProgress" style="width:0%"></span>
+          </div>
+          <div class="muted tiny" style="margin-top:8px" id="leagueProgressText">0 / 200</div>
+        </div>
+
         <div class="card section">
           <div class="title-row">
             <h2>Current Deck</h2>
@@ -276,7 +356,7 @@
         <div class="card section">
           <div class="title-row">
             <h2>Profile</h2>
-            <div class="tag">Saved locally</div>
+            <div class="tag">Progress</div>
           </div>
           <div class="notice">
             <div><strong>Wins:</strong> <span id="statWins">0</span></div>
@@ -284,9 +364,46 @@
             <div><strong>Best Win Streak:</strong> <span id="statBestStreak">0</span></div>
             <div><strong>Current Streak:</strong> <span id="statCurrentStreak">0</span></div>
           </div>
-          <div class="notice" style="margin-top:12px">
-            <strong>Tip:</strong> upgrade the cards you use most. Higher-level cards scale health and damage in battle.
+        </div>
+      </div>
+
+      <div class="quad-grid">
+        <div class="card section">
+          <div class="title-row">
+            <h2>Quests</h2>
+            <div class="tag" id="questSummary">0 / 3 complete</div>
           </div>
+          <div class="quest-list" id="homeQuestList"></div>
+        </div>
+
+        <div class="card section">
+          <div class="title-row">
+            <h2>Achievements</h2>
+            <div class="tag" id="achievementSummary">0 unlocked</div>
+          </div>
+          <div class="achievement-list" id="homeAchievementList"></div>
+        </div>
+
+        <div class="card section">
+          <div class="title-row">
+            <h2>Card Mastery</h2>
+            <div class="tag" id="masterySummary">0 claimed</div>
+          </div>
+          <div class="mastery-list" id="homeMasteryList"></div>
+        </div>
+
+        <div class="card section">
+          <div class="title-row">
+            <h2>Tutorial</h2>
+            <button class="btn alt" id="btnTutorial">Open</button>
+          </div>
+          <div class="notice">
+            Learn deployment, flux, lane control, siege timing, and defensive structure placement.
+          </div>
+          <div class="title-row" style="margin-top:12px">
+            <h3>Challenge Event</h3>
+          </div>
+          <div class="challenge-banner" id="homeChallengeBanner"></div>
         </div>
       </div>
     </div>
@@ -313,6 +430,12 @@
           </div>
           <div class="deck-slots" id="deckSlots"></div>
           <div class="selected-banner" id="deckSelectedBanner">Selected slot: none</div>
+
+          <div class="title-row" style="margin-top:16px">
+            <h3>Deck Presets</h3>
+            <button class="btn" id="btnSavePreset">Save Current To Selected Preset</button>
+          </div>
+          <div class="preset-list" id="presetList"></div>
         </div>
 
         <div class="card section">
@@ -359,7 +482,7 @@
         <div class="card battle-card">
           <div class="title-row"><h3>Tips</h3></div>
           <div class="notice tiny">
-            Drag a card into the lower half to deploy it. Spells can be dropped anywhere in your deployment half. Towers attack automatically.
+            Drag a card into the lower half to deploy it. Wins grow trophies, battle pass XP, mastery, quests, and event progress.
           </div>
         </div>
       </div>
@@ -369,7 +492,7 @@
           <div class="hud-box"><div class="label">Flux</div><div class="value" id="hudFlux">0 / 10</div></div>
           <div class="hud-box"><div class="label">Time</div><div class="value" id="hudTime">03:00</div></div>
           <div class="hud-box"><div class="label">Opponent</div><div class="value" id="hudOpponent">—</div></div>
-          <div class="hud-box"><div class="label">Mode</div><div class="value">Arena Match</div></div>
+          <div class="hud-box"><div class="label">Trophies</div><div class="value" id="hudTrophies">0</div></div>
         </div>
 
         <div class="card arena-card" style="margin-top:12px">
@@ -462,9 +585,192 @@
   </div>
 </div>
 
-<script>
-(() => {
-  const SAVE_KEY = "siege_cards_phase3_save_v1";
+<div class="history-overlay" id="historyOverlay">
+  <div class="history-box">
+    <div class="title-row">
+      <h2 style="margin:0">Match History</h2>
+      <button class="btn alt" id="btnCloseHistory">Close</button>
+    </div>
+    <div class="history-list" id="historyList"></div>
+    <div class="title-row" style="margin-top:18px">
+      <h3>Replay Log Viewer</h3>
+      <div class="muted small">Select a past match to view its battle events</div>
+    </div>
+    <div class="replay-log" id="replayLog"></div>
+  </div>
+</div>
+
+<div class="settings-overlay" id="settingsOverlay">
+  <div class="settings-box">
+    <div class="title-row">
+      <h2 style="margin:0">Settings</h2>
+      <button class="btn alt" id="btnCloseSettings">Close</button>
+    </div>
+
+    <div class="two-col">
+      <div class="switch">
+        <div>
+          <strong>Sound Effects</strong>
+          <div class="muted tiny">Toggle gameplay sound</div>
+        </div>
+        <button class="btn" id="btnToggleMute">On</button>
+      </div>
+
+      <div class="switch">
+        <div>
+          <strong>Battle Feed Limit</strong>
+          <div class="muted tiny">How many lines to keep visible</div>
+        </div>
+        <select id="feedLimitSelect" class="btn alt" style="appearance:none">
+          <option value="20">20</option>
+          <option value="40">40</option>
+          <option value="60">60</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:14px">
+      Settings are stored in your save data.
+    </div>
+  </div>
+</div>
+
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-box">
+    <div class="title-row">
+      <h2 style="margin:0">Account</h2>
+      <button class="btn alt" id="btnCloseAuth">Close</button>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="btn" id="tabLogin">Login</button>
+      <button class="btn alt" id="tabSignup">Sign Up</button>
+    </div>
+
+    <div id="authMessage" class="notice" style="margin-bottom:12px">
+      Sign in to save progress to Firebase.
+    </div>
+
+    <div class="two-col" style="margin-bottom:12px">
+      <div>
+        <label class="tiny muted">Email</label>
+        <input type="email" id="authEmail" placeholder="you@example.com" />
+      </div>
+      <div>
+        <label class="tiny muted">Password</label>
+        <input type="password" id="authPassword" placeholder="Minimum 6 characters" />
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn good" id="btnLoginSubmit">Login</button>
+      <button class="btn purple hidden" id="btnSignupSubmit">Create Account</button>
+      <button class="btn alt" id="btnUseGuest">Continue as Guest</button>
+    </div>
+
+    <div class="notice" style="margin-top:14px">
+      Firebase config below is fake. Replace it with your own project values.
+    </div>
+  </div>
+</div>
+
+<div class="daily-overlay" id="dailyOverlay">
+  <div class="daily-box">
+    <div class="title-row">
+      <h2 style="margin:0">Daily Rewards</h2>
+      <button class="btn alt" id="btnCloseDaily">Close</button>
+    </div>
+    <div class="reward-list" id="dailyRewardList"></div>
+  </div>
+</div>
+
+<div class="pass-overlay" id="passOverlay">
+  <div class="pass-box">
+    <div class="title-row">
+      <h2 style="margin:0">Battle Pass</h2>
+      <button class="btn alt" id="btnClosePass">Close</button>
+    </div>
+    <div class="notice" style="margin-bottom:12px">
+      Earn pass XP from battles and claim milestone rewards.
+    </div>
+    <div class="title-row">
+      <div><strong>Pass Level:</strong> <span id="passLevelLabel">1</span></div>
+      <div><strong>Pass XP:</strong> <span id="passXpLabel">0 / 100</span></div>
+    </div>
+    <div class="progress-bar" style="margin-bottom:12px"><span id="passProgressBar" style="width:0%"></span></div>
+    <div class="battle-pass-track" id="passTrack"></div>
+  </div>
+</div>
+
+<div class="challenge-overlay" id="challengeOverlay">
+  <div class="challenge-box">
+    <div class="title-row">
+      <h2 style="margin:0">Challenge Event</h2>
+      <button class="btn alt" id="btnCloseChallenge">Close</button>
+    </div>
+    <div class="challenge-banner" id="challengeDetails"></div>
+    <div class="title-row" style="margin-top:16px">
+      <h3>Rewards</h3>
+    </div>
+    <div class="reward-row" id="challengeRewards"></div>
+  </div>
+</div>
+
+<div class="tutorial-overlay" id="tutorialOverlay">
+  <div class="tutorial-box">
+    <div class="title-row">
+      <h2 style="margin:0">Tutorial</h2>
+      <button class="btn alt" id="btnCloseTutorial">Close</button>
+    </div>
+    <div id="tutorialContent" class="notice"></div>
+    <div class="footer-nav">
+      <button class="btn alt" id="btnTutorialPrev">Previous</button>
+      <button class="btn" id="btnTutorialNext">Next</button>
+      <button class="btn good" id="btnTutorialFinish">Finish</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+  import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+  const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDm-S4Aq-BkXUdJsJA-UO_XpRO_gipPGP8",
+  authDomain: "clash-app-31ad2.firebaseapp.com",
+  projectId: "clash-app-31ad2",
+  storageBucket: "clash-app-31ad2.firebasestorage.app",
+  messagingSenderId: "1043745907914",
+  appId: "1:1043745907914:web:f158b76896b36f8b8a8033",
+  measurementId: "G-4XL0NQW0CN"
+  };
+
+  let firebaseReady = true;
+  let app, auth, db;
+
+  try{
+    app = initializeApp(FIREBASE_CONFIG);
+    auth = getAuth(app);
+    db = getFirestore(app);
+  }catch(err){
+    firebaseReady = false;
+    console.warn("Firebase init failed. Replace config values.", err);
+  }
+
+  const SAVE_KEY = "siege_cards_phase5_local_save_v1";
 
   const CARD_LIBRARY = {
     iron_guard:{id:"iron_guard",name:"Iron Guard",type:"unit",cost:3,emoji:"🛡️",role:"Tank",hp:240,damage:28,range:42,atkSpeed:1.05,move:38,radius:19,target:"any",desc:"Reliable frontliner."},
@@ -495,6 +801,7 @@
 
   const STARTER_DECK = ["iron_guard","axe_runner","arc_archer","ember_mage","siege_ram","wolf_pack","shield_node","fire_burst"];
   const ALL_IDS = Object.keys(CARD_LIBRARY);
+
   const BOT_NAMES = ["Riven Knox","Arden Vale","Talon Dusk","Mira Sol","Orin Crest","Vale Mercer","Cass Ember","Niko Flint","Sable Thorn","Elio Hart","Vera Kestrel","Nova Pike"];
   const BOT_PERSONALITIES = [
     { id:"balanced", name:"Balanced", bias:["iron_guard","arc_archer","axe_runner","shield_node","fire_burst"] },
@@ -502,6 +809,95 @@
     { id:"siege", name:"Siege", bias:["stone_brute","siege_ram","arrow_post","spark_bot","crystal_cannon"] },
     { id:"control", name:"Control", bias:["shield_node","arrow_post","frost_lock","heal_wave","poison_mist","wall_builder"] }
   ];
+
+  const LEAGUES = [
+    { name:"Bronze I", min:0, max:199 },
+    { name:"Bronze II", min:200, max:399 },
+    { name:"Silver I", min:400, max:699 },
+    { name:"Silver II", min:700, max:999 },
+    { name:"Gold I", min:1000, max:1399 },
+    { name:"Gold II", min:1400, max:1799 },
+    { name:"Crystal I", min:1800, max:2299 },
+    { name:"Crystal II", min:2300, max:2799 },
+    { name:"Master", min:2800, max:999999 }
+  ];
+
+  const ACHIEVEMENTS = [
+    { id:"first_win", name:"First Victory", desc:"Win 1 match", check:s=>s.wins >= 1, reward:50 },
+    { id:"ten_wins", name:"Arena Veteran", desc:"Win 10 matches", check:s=>s.wins >= 10, reward:120 },
+    { id:"streak_3", name:"Hot Streak", desc:"Reach a 3-win streak", check:s=>s.bestStreak >= 3, reward:80 },
+    { id:"trophy_500", name:"Silver Gate", desc:"Reach 500 trophies", check:s=>s.trophies >= 500, reward:100 },
+    { id:"level_5", name:"Rising Commander", desc:"Reach level 5", check:s=>s.level >= 5, reward:140 }
+  ];
+
+  const TUTORIAL_STEPS = [
+    "Welcome to Siege Cards. Your goal is to destroy the enemy Core Tower before yours falls.",
+    "You build an 8-card deck, but only 4 cards appear in your hand at once. Playing a card cycles it to the back.",
+    "Flux is your battle energy. It regenerates automatically during the match. More expensive cards are stronger, but timing matters.",
+    "You may only deploy on your half of the arena. Drag or tap a card, then place it on your side.",
+    "Tanks go in front, ranged units behind, and siege cards are best when the lane is already protected.",
+    "Structures help you defend and delay pushes. Spells provide burst, healing, or control.",
+    "Winning grants coins, XP, trophies, battle pass XP, mastery progress, and event progress."
+  ];
+
+  const PASS_LEVELS = [
+    { level:1, passXp:0, reward:{ coins:40 } },
+    { level:2, passXp:60, reward:{ copies:{ id:"iron_guard", count:2 } } },
+    { level:3, passXp:140, reward:{ coins:70 } },
+    { level:4, passXp:240, reward:{ copies:{ id:"fire_burst", count:2 } } },
+    { level:5, passXp:360, reward:{ coins:100 } },
+    { level:6, passXp:500, reward:{ copies:{ id:"storm_lancer", count:2 } } },
+    { level:7, passXp:660, reward:{ coins:130 } },
+    { level:8, passXp:840, reward:{ copies:{ id:"crystal_cannon", count:2 } } },
+    { level:9, passXp:1040, reward:{ coins:170 } },
+    { level:10, passXp:1260, reward:{ copies:{ id:"void_orb", count:3 } } }
+  ];
+
+  function createChallenge(){
+    const variants = [
+      {
+        id:"tower_breaker",
+        name:"Tower Breaker",
+        desc:"Destroy 6 total towers across matches.",
+        goal:6,
+        type:"towers",
+        reward:{ coins:140, xp:40 }
+      },
+      {
+        id:"win_chain",
+        name:"Win Chain",
+        desc:"Win 3 matches.",
+        goal:3,
+        type:"wins",
+        reward:{ coins:180, xp:50 }
+      },
+      {
+        id:"flux_spender",
+        name:"Flux Storm",
+        desc:"Spend 50 total Flux.",
+        goal:50,
+        type:"flux",
+        reward:{ coins:130, xp:35 }
+      }
+    ];
+    const chosen = variants[Math.floor(Math.random()*variants.length)];
+    return { ...chosen, progress:0, claimed:false };
+  }
+
+  function DEFAULT_QUESTS(){
+    return [
+      { id:"play_3", name:"Battle Ready", desc:"Play 3 matches", goal:3, progress:0, rewardCoins:60, rewardXp:20, type:"matches" },
+      { id:"win_2", name:"Secure Wins", desc:"Win 2 matches", goal:2, progress:0, rewardCoins:90, rewardXp:30, type:"wins" },
+      { id:"destroy_5", name:"Breaker", desc:"Destroy 5 towers", goal:5, progress:0, rewardCoins:80, rewardXp:25, type:"towers" }
+    ];
+  }
+
+  function DEFAULT_MASTERY(){
+    return Object.fromEntries(ALL_IDS.map(id=>[
+      id,
+      { progress:0, claimedTier1:false, claimedTier2:false }
+    ]));
+  }
 
   const el = id => document.getElementById(id);
   const screens = {
@@ -511,13 +907,18 @@
     battle: el("screen-battle")
   };
 
-  let save = loadSave();
+  let save = loadLocalSave();
+  let currentUser = null;
   let battle = null;
   let deckBuilderSelectedSlot = null;
+  let selectedPresetIndex = 0;
   let dragState = null;
   let audioCtx = null;
+  let tutorialIndex = 0;
+  let authMode = "login";
+  let isSyncing = false;
 
-  function loadSave(){
+  function loadLocalSave(){
     try{
       const raw = localStorage.getItem(SAVE_KEY);
       if(raw){
@@ -525,14 +926,44 @@
         if(data && Array.isArray(data.deck) && data.deck.length === 8) return hydrateSave(data);
       }
     }catch(e){}
-    return hydrateSave({
-      coins: 180, xp: 0, level: 1, wins: 0, losses: 0, currentStreak: 0, bestStreak: 0,
+    return hydrateSave(createDefaultSave());
+  }
+
+  function createDefaultSave(){
+    return {
+      coins:180,
+      xp:0,
+      level:1,
+      wins:0,
+      losses:0,
+      currentStreak:0,
+      bestStreak:0,
+      trophies:0,
       deck:[...STARTER_DECK],
       unlocked:[...ALL_IDS],
       cardLevels:Object.fromEntries(ALL_IDS.map(id=>[id,1])),
-      cardCopies:Object.fromEntries(ALL_IDS.map(id=>[id,id==="iron_guard"||id==="axe_runner"||id==="arc_archer"||id==="ember_mage"||id==="siege_ram"||id==="wolf_pack"||id==="shield_node"||id==="fire_burst"?8:2])),
-      shopOffers:[]
-    });
+      cardCopies:Object.fromEntries(ALL_IDS.map(id=>[id, id==="iron_guard"||id==="axe_runner"||id==="arc_archer"||id==="ember_mage"||id==="siege_ram"||id==="wolf_pack"||id==="shield_node"||id==="fire_burst" ? 8 : 2])),
+      shopOffers:[],
+      settings:{ muted:false, feedLimit:40 },
+      history:[],
+      presets:[
+        { name:"Preset 1", deck:[...STARTER_DECK] },
+        { name:"Preset 2", deck:["stone_brute","arc_archer","shield_node","arrow_post","fire_burst","frost_lock","spark_bot","siege_ram"] },
+        { name:"Preset 3", deck:["wolf_pack","axe_runner","mech_hound","twin_blade","fire_burst","heal_wave","dart_hunter","storm_lancer"] }
+      ],
+      quests:DEFAULT_QUESTS(),
+      achievementsClaimed:{},
+      passXp:0,
+      passClaimed:{},
+      mastery:DEFAULT_MASTERY(),
+      daily:{
+        streak:0,
+        lastClaimDate:"",
+        claimable:true
+      },
+      challenge:createChallenge(),
+      tutorialCompleted:false
+    };
   }
 
   function hydrateSave(data){
@@ -544,11 +975,70 @@
     });
     if(!data.unlocked) data.unlocked = [...ALL_IDS];
     if(!data.shopOffers || !data.shopOffers.length) data.shopOffers = generateShopOffers();
+    if(!data.settings) data.settings = { muted:false, feedLimit:40 };
+    if(!data.history) data.history = [];
+    if(!data.presets || data.presets.length < 3){
+      data.presets = [
+        { name:"Preset 1", deck:[...data.deck] },
+        { name:"Preset 2", deck:["stone_brute","arc_archer","shield_node","arrow_post","fire_burst","frost_lock","spark_bot","siege_ram"] },
+        { name:"Preset 3", deck:["wolf_pack","axe_runner","mech_hound","twin_blade","fire_burst","heal_wave","dart_hunter","storm_lancer"] }
+      ];
+    }
+    if(!data.quests || !data.quests.length) data.quests = DEFAULT_QUESTS();
+    if(!data.achievementsClaimed) data.achievementsClaimed = {};
+    if(data.trophies == null) data.trophies = 0;
+    if(data.passXp == null) data.passXp = 0;
+    if(!data.passClaimed) data.passClaimed = {};
+    if(!data.mastery) data.mastery = DEFAULT_MASTERY();
+    if(!data.daily) data.daily = { streak:0, lastClaimDate:"", claimable:true };
+    if(!data.challenge) data.challenge = createChallenge();
+    if(data.tutorialCompleted == null) data.tutorialCompleted = false;
+    refreshDailyClaimable(data);
     return data;
   }
 
-  function saveData(){
+  function saveLocal(){
     localStorage.setItem(SAVE_KEY, JSON.stringify(save));
+  }
+
+  async function saveCloud(){
+    if(!firebaseReady || !currentUser || isSyncing) return;
+    try{
+      isSyncing = true;
+      await setDoc(doc(db, "gameSaves", currentUser.uid), {
+        data: save,
+        email: currentUser.email || "",
+        updatedAt: serverTimestamp()
+      }, { merge:true });
+    }catch(err){
+      console.warn("Cloud save failed", err);
+    }finally{
+      isSyncing = false;
+    }
+  }
+
+  async function loadCloud(uid){
+    if(!firebaseReady) return null;
+    try{
+      const snap = await getDoc(doc(db, "gameSaves", uid));
+      if(snap.exists()){
+        const data = snap.data()?.data;
+        if(data) return hydrateSave(data);
+      }
+    }catch(err){
+      console.warn("Cloud load failed", err);
+    }
+    return null;
+  }
+
+  async function persistAll(){
+    saveLocal();
+    await saveCloud();
+  }
+
+  function refreshDailyClaimable(target = save){
+    const today = new Date().toISOString().slice(0,10);
+    target.daily.claimable = target.daily.lastClaimDate !== today;
   }
 
   function XP_PER_LEVEL(lvl){ return 100 + (lvl - 1) * 45; }
@@ -564,12 +1054,121 @@
     if(name==="collection") renderCollection();
   }
 
+  function setAuthMessage(text){
+    el("authMessage").textContent = text;
+  }
+
+  function setAuthMode(mode){
+    authMode = mode;
+    el("tabLogin").className = mode === "login" ? "btn" : "btn alt";
+    el("tabSignup").className = mode === "signup" ? "btn" : "btn alt";
+    el("btnLoginSubmit").classList.toggle("hidden", mode !== "login");
+    el("btnSignupSubmit").classList.toggle("hidden", mode !== "signup");
+  }
+
+  function updateAuthUI(){
+    el("authStatusPill").textContent = currentUser ? (currentUser.email || "Signed in") : "Guest";
+    el("btnLogout").classList.toggle("hidden", !currentUser);
+    if(currentUser){
+      setAuthMessage("Signed in. Progress will save to Firebase.");
+    }else if(!firebaseReady){
+      setAuthMessage("Firebase is not ready. Replace the fake config first.");
+    }else{
+      setAuthMessage("Sign in to save progress to Firebase.");
+    }
+  }
+
+  async function handleLogin(){
+    if(!firebaseReady){
+      setAuthMessage("Replace the fake Firebase config first.");
+      return;
+    }
+    const email = el("authEmail").value.trim();
+    const password = el("authPassword").value.trim();
+    if(!email || !password){
+      setAuthMessage("Enter both email and password.");
+      return;
+    }
+    try{
+      setAuthMessage("Logging in...");
+      await signInWithEmailAndPassword(auth, email, password);
+      el("authOverlay").classList.remove("show");
+    }catch(err){
+      setAuthMessage(err.message);
+    }
+  }
+
+  async function handleSignup(){
+    if(!firebaseReady){
+      setAuthMessage("Replace the fake Firebase config first.");
+      return;
+    }
+    const email = el("authEmail").value.trim();
+    const password = el("authPassword").value.trim();
+    if(!email || !password){
+      setAuthMessage("Enter both email and password.");
+      return;
+    }
+    try{
+      setAuthMessage("Creating account...");
+      await createUserWithEmailAndPassword(auth, email, password);
+      el("authOverlay").classList.remove("show");
+    }catch(err){
+      setAuthMessage(err.message);
+    }
+  }
+
+  async function handleLogout(){
+    if(!firebaseReady || !currentUser) return;
+    await persistAll();
+    await signOut(auth);
+  }
+
   function gainXp(amount){
     save.xp += amount;
     while(save.xp >= XP_PER_LEVEL(save.level)){
       save.xp -= XP_PER_LEVEL(save.level);
       save.level += 1;
     }
+  }
+
+  function gainPassXp(amount){
+    save.passXp += amount;
+  }
+
+  function getPassLevel(){
+    let level = 1;
+    for(const node of PASS_LEVELS){
+      if(save.passXp >= node.passXp) level = node.level;
+    }
+    return level;
+  }
+
+  function claimPassReward(level){
+    const node = PASS_LEVELS.find(x=>x.level === level);
+    if(!node || save.passClaimed[level]) return;
+    if(save.passXp < node.passXp) return;
+
+    if(node.reward.coins){
+      save.coins += node.reward.coins;
+    }
+    if(node.reward.copies){
+      save.cardCopies[node.reward.copies.id] += node.reward.copies.count;
+    }
+    save.passClaimed[level] = true;
+    beep("buy");
+    persistAll();
+    renderBattlePass();
+    renderHome();
+  }
+
+  function getLeagueInfo(trophies){
+    const current = LEAGUES.find(l => trophies >= l.min && trophies <= l.max) || LEAGUES[LEAGUES.length-1];
+    const currentIndex = LEAGUES.findIndex(l => l.name === current.name);
+    const next = LEAGUES[Math.min(currentIndex + 1, LEAGUES.length - 1)];
+    const range = Math.max(1, current.max - current.min + 1);
+    const progress = currentIndex === LEAGUES.length - 1 ? 100 : ((trophies - current.min) / range) * 100;
+    return { current, next, progress:Math.max(0, Math.min(100, progress)) };
   }
 
   function cardStatsForBattle(id, side){
@@ -595,20 +1194,30 @@
     const ids = [...ALL_IDS].sort(()=>Math.random()-.5).slice(0,6);
     return ids.map(id=>({
       cardId:id,
-      copies: 2 + Math.floor(Math.random()*4),
-      price: getShopPrice(id, 2 + Math.floor(Math.random()*2))
+      copies:2 + Math.floor(Math.random()*4),
+      price:getShopPrice(id, 2 + Math.floor(Math.random()*2))
     }));
   }
 
   function renderHome(){
+    const league = getLeagueInfo(save.trophies);
     el("homeLevel").textContent = save.level;
     el("homeXp").textContent = `${save.xp} / ${XP_PER_LEVEL(save.level)}`;
     el("homeCoins").textContent = save.coins;
+    el("homeTrophies").textContent = save.trophies;
     el("statWins").textContent = save.wins;
     el("statLosses").textContent = save.losses;
     el("statBestStreak").textContent = save.bestStreak;
     el("statCurrentStreak").textContent = save.currentStreak;
     el("avgCostHome").textContent = avgDeckCost(save.deck);
+    el("leagueBadge").textContent = league.current.name;
+    el("leagueTrophies").textContent = save.trophies;
+    el("nextLeagueName").textContent = league.next.name;
+    el("leagueProgress").style.width = league.progress + "%";
+    el("leagueProgressText").textContent = league.current.name === league.next.name
+      ? `${save.trophies} trophies`
+      : `${save.trophies - league.current.min} / ${league.current.max - league.current.min + 1}`;
+
     el("homeDeckPreview").innerHTML = save.deck.map((id,idx)=>{
       const c = CARD_LIBRARY[id];
       const lvl = save.cardLevels[id];
@@ -621,6 +1230,158 @@
         </div>
       `;
     }).join("");
+
+    renderQuestsHome();
+    renderAchievementsHome();
+    renderMasteryHome();
+    renderHomeChallengeBanner();
+    updateAuthUI();
+    saveLocal();
+  }
+
+  function renderHomeChallengeBanner(){
+    const c = save.challenge;
+    const pct = Math.min(100, (c.progress / c.goal) * 100);
+    el("homeChallengeBanner").innerHTML = `
+      <div class="title-row" style="margin-bottom:8px">
+        <strong>${c.name}</strong>
+        <div class="tag">${c.claimed ? "Claimed" : `${c.progress}/${c.goal}`}</div>
+      </div>
+      <div class="muted tiny">${c.desc}</div>
+      <div class="progress-bar" style="margin-top:8px"><span style="width:${pct}%"></span></div>
+      <div class="muted tiny" style="margin-top:8px">Reward: ${c.reward.coins} Coins + ${c.reward.xp} XP</div>
+    `;
+  }
+
+  function renderQuestsHome(){
+    const done = save.quests.filter(q=>q.progress >= q.goal).length;
+    el("questSummary").textContent = `${done} / ${save.quests.length} complete`;
+    el("homeQuestList").innerHTML = save.quests.map((q, idx)=>{
+      const pct = Math.min(100, (q.progress / q.goal) * 100);
+      const complete = q.progress >= q.goal;
+      return `
+        <div class="mini-card">
+          <div class="title-row" style="margin-bottom:8px">
+            <strong>${q.name}</strong>
+            <div class="tag">${complete ? "Complete" : `${q.progress}/${q.goal}`}</div>
+          </div>
+          <div class="muted tiny">${q.desc}</div>
+          <div style="margin-top:8px" class="progress-bar"><span style="width:${pct}%"></span></div>
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn ${complete ? "good" : "alt"}" data-claim-quest="${idx}" ${complete ? "" : "disabled"}>
+              Claim ${q.rewardCoins} Coins + ${q.rewardXp} XP
+            </button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    document.querySelectorAll("[data-claim-quest]").forEach(btn=>{
+      btn.onclick = async () => {
+        const idx = Number(btn.dataset.claimQuest);
+        const q = save.quests[idx];
+        if(!q || q.progress < q.goal) return;
+        save.coins += q.rewardCoins;
+        gainXp(q.rewardXp);
+        save.quests.splice(idx, 1);
+        save.quests.push(generateSingleQuest());
+        beep("buy");
+        await persistAll();
+        renderHome();
+      };
+    });
+  }
+
+  function generateSingleQuest(){
+    const pool = [
+      { id:"matches", name:"Battle Ready", desc:"Play 3 matches", goal:3, rewardCoins:60, rewardXp:20, type:"matches" },
+      { id:"wins", name:"Secure Wins", desc:"Win 2 matches", goal:2, rewardCoins:90, rewardXp:30, type:"wins" },
+      { id:"towers", name:"Breaker", desc:"Destroy 5 towers", goal:5, rewardCoins:80, rewardXp:25, type:"towers" },
+      { id:"spend", name:"Big Spender", desc:"Spend 30 total Flux", goal:30, rewardCoins:70, rewardXp:20, type:"flux" }
+    ];
+    const picked = pool[Math.floor(Math.random()*pool.length)];
+    return {...picked, progress:0};
+  }
+
+  function renderAchievementsHome(){
+    const unlocked = ACHIEVEMENTS.filter(a=>save.achievementsClaimed[a.id]).length;
+    el("achievementSummary").textContent = `${unlocked} unlocked`;
+    el("homeAchievementList").innerHTML = ACHIEVEMENTS.map(a=>{
+      const done = a.check(save);
+      const claimed = !!save.achievementsClaimed[a.id];
+      return `
+        <div class="mini-card">
+          <div class="title-row" style="margin-bottom:8px">
+            <strong>${a.name}</strong>
+            <div class="tag">${claimed ? "Claimed" : done ? "Ready" : "Locked"}</div>
+          </div>
+          <div class="muted tiny">${a.desc}</div>
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn ${done && !claimed ? "good" : "alt"}" data-claim-achievement="${a.id}" ${done && !claimed ? "" : "disabled"}>
+              Claim ${a.reward} Coins
+            </button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    document.querySelectorAll("[data-claim-achievement]").forEach(btn=>{
+      btn.onclick = async () => {
+        const id = btn.dataset.claimAchievement;
+        const a = ACHIEVEMENTS.find(x=>x.id === id);
+        if(!a || !a.check(save) || save.achievementsClaimed[id]) return;
+        save.achievementsClaimed[id] = true;
+        save.coins += a.reward;
+        beep("upgrade");
+        await persistAll();
+        renderHome();
+      };
+    });
+  }
+
+  function renderMasteryHome(){
+    let claimedCount = 0;
+    const items = ALL_IDS.slice(0, 5).map(id=>{
+      const m = save.mastery[id];
+      const c = CARD_LIBRARY[id];
+      const tier1Ready = m.progress >= 10 && !m.claimedTier1;
+      const tier2Ready = m.progress >= 25 && !m.claimedTier2;
+      if(m.claimedTier1) claimedCount++;
+      if(m.claimedTier2) claimedCount++;
+      return `
+        <div class="mini-card">
+          <div class="title-row" style="margin-bottom:8px">
+            <strong>${c.emoji} ${c.name}</strong>
+            <div class="tag">${m.progress} plays</div>
+          </div>
+          <div class="progress-bar"><span style="width:${Math.min(100, (m.progress / 25) * 100)}%"></span></div>
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn ${tier1Ready ? "good" : "alt"}" data-claim-mastery="${id}:1" ${tier1Ready ? "" : "disabled"}>Tier 1 • 25 Coins</button>
+            <button class="btn ${tier2Ready ? "good" : "alt"}" data-claim-mastery="${id}:2" ${tier2Ready ? "" : "disabled"}>Tier 2 • 50 Coins</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+    el("masterySummary").textContent = `${claimedCount} claimed`;
+    el("homeMasteryList").innerHTML = items;
+
+    document.querySelectorAll("[data-claim-mastery]").forEach(btn=>{
+      btn.onclick = async () => {
+        const [id, tier] = btn.dataset.claimMastery.split(":");
+        const m = save.mastery[id];
+        if(tier === "1" && m.progress >= 10 && !m.claimedTier1){
+          m.claimedTier1 = true;
+          save.coins += 25;
+        }
+        if(tier === "2" && m.progress >= 25 && !m.claimedTier2){
+          m.claimedTier2 = true;
+          save.coins += 50;
+        }
+        beep("buy");
+        await persistAll();
+        renderHome();
+      };
+    });
   }
 
   function renderDeckBuilder(){
@@ -672,13 +1433,48 @@
     });
 
     document.querySelectorAll("[data-replace-with]").forEach(btn=>{
-      btn.onclick = () => {
+      btn.onclick = async () => {
         const id = btn.dataset.replaceWith;
         if(deckBuilderSelectedSlot === null){ alert("Select a deck slot first."); return; }
         const existing = save.deck.indexOf(id);
         if(existing !== -1 && existing !== deckBuilderSelectedSlot){ alert("That card is already in your deck."); return; }
         save.deck[deckBuilderSelectedSlot] = id;
-        saveData();
+        await persistAll();
+        renderDeckBuilder();
+      };
+    });
+
+    renderPresets();
+  }
+
+  function renderPresets(){
+    el("presetList").innerHTML = save.presets.map((p, idx)=>{
+      return `
+        <div class="mini-card" style="${selectedPresetIndex===idx?'outline:2px solid var(--blue)':''}">
+          <div class="title-row" style="margin-bottom:8px">
+            <strong>${p.name}</strong>
+            <div class="tag">Avg ${avgDeckCost(p.deck)}</div>
+          </div>
+          <div class="stats">${p.deck.map(id=>`<span>${CARD_LIBRARY[id].emoji}</span>`).join("")}</div>
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn ${selectedPresetIndex===idx?'good':''}" data-select-preset="${idx}">Select</button>
+            <button class="btn alt" data-load-preset="${idx}">Load Into Current Deck</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    document.querySelectorAll("[data-select-preset]").forEach(btn=>{
+      btn.onclick = () => {
+        selectedPresetIndex = Number(btn.dataset.selectPreset);
+        renderPresets();
+      };
+    });
+    document.querySelectorAll("[data-load-preset]").forEach(btn=>{
+      btn.onclick = async () => {
+        const idx = Number(btn.dataset.loadPreset);
+        save.deck = [...save.presets[idx].deck];
+        await persistAll();
         renderDeckBuilder();
       };
     });
@@ -724,7 +1520,7 @@
     }).join("");
 
     document.querySelectorAll("[data-upgrade-card]").forEach(btn=>{
-      btn.onclick = () => {
+      btn.onclick = async () => {
         const id = btn.dataset.upgradeCard;
         const level = save.cardLevels[id];
         const need = upgradeNeed(level);
@@ -733,8 +1529,8 @@
         save.cardCopies[id] -= need;
         save.coins -= price;
         save.cardLevels[id] += 1;
-        saveData();
         beep("upgrade");
+        await persistAll();
         renderCollection();
       };
     });
@@ -765,7 +1561,7 @@
     }).join("");
 
     document.querySelectorAll("[data-buy-offer]").forEach(btn=>{
-      btn.onclick = () => {
+      btn.onclick = async () => {
         const idx = Number(btn.dataset.buyOffer);
         const offer = save.shopOffers[idx];
         if(!offer || save.coins < offer.price) return;
@@ -773,15 +1569,181 @@
         save.cardCopies[offer.cardId] += offer.copies;
         save.shopOffers.splice(idx, 1, {
           cardId: ALL_IDS[Math.floor(Math.random()*ALL_IDS.length)],
-          copies: 2 + Math.floor(Math.random()*4),
-          price: 18 + Math.floor(Math.random()*30)
+          copies:2 + Math.floor(Math.random()*4),
+          price:18 + Math.floor(Math.random()*30)
         });
-        saveData();
         beep("buy");
+        await persistAll();
         renderShop();
         renderHome();
       };
     });
+  }
+
+  function renderHistory(){
+    const history = save.history;
+    el("historyList").innerHTML = history.length ? history.map((m, idx)=>{
+      return `
+        <div class="mini-card">
+          <div class="title-row" style="margin-bottom:8px">
+            <strong>${m.result.toUpperCase()} vs ${m.opponent}</strong>
+            <div class="tag">${m.timeLabel}</div>
+          </div>
+          <div class="muted tiny">League: ${m.league} • Trophies ${m.trophiesBefore} → ${m.trophiesAfter}</div>
+          <div class="muted tiny">Towers: You ${m.playerTowers} • Opponent ${m.enemyTowers}</div>
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn" data-view-history="${idx}">View Replay Log</button>
+          </div>
+        </div>
+      `;
+    }).join("") : `<div class="notice">No matches recorded yet.</div>`;
+
+    document.querySelectorAll("[data-view-history]").forEach(btn=>{
+      btn.onclick = () => {
+        const idx = Number(btn.dataset.viewHistory);
+        const match = save.history[idx];
+        renderReplayLog(match);
+      };
+    });
+
+    el("replayLog").innerHTML = history.length ? `<div class="notice">Select a match above to view its replay-style battle log.</div>` : "";
+  }
+
+  function renderReplayLog(match){
+    el("replayLog").innerHTML = match.log.map(line => `<div class="log-line">${line}</div>`).join("");
+  }
+
+  function renderSettings(){
+    el("btnToggleMute").textContent = save.settings.muted ? "Off" : "On";
+    el("feedLimitSelect").value = String(save.settings.feedLimit || 40);
+  }
+
+  function renderDailyRewards(){
+    refreshDailyClaimable();
+    const rewards = [
+      { day:1, coins:30, copies:{ id:"iron_guard", count:1 } },
+      { day:2, coins:40, copies:{ id:"axe_runner", count:1 } },
+      { day:3, coins:50, copies:{ id:"fire_burst", count:1 } },
+      { day:4, coins:65, copies:{ id:"arc_archer", count:2 } },
+      { day:5, coins:80, copies:{ id:"storm_lancer", count:1 } },
+      { day:6, coins:100, copies:{ id:"void_orb", count:1 } },
+      { day:7, coins:140, copies:{ id:"crystal_cannon", count:2 } }
+    ];
+    const currentDay = Math.min(7, Math.max(1, (save.daily.streak % 7) + 1));
+    el("dailyRewardList").innerHTML = rewards.map(r=>{
+      const canClaim = r.day === currentDay && save.daily.claimable;
+      const done = r.day < currentDay && !save.daily.claimable;
+      return `
+        <div class="mini-card">
+          <div class="title-row" style="margin-bottom:8px">
+            <strong>Day ${r.day}</strong>
+            <div class="tag">${canClaim ? "Claimable" : done ? "Passed" : "Locked"}</div>
+          </div>
+          <div class="muted tiny">Reward: ${r.coins} Coins + ${r.copies.count} ${CARD_LIBRARY[r.copies.id].name}</div>
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn ${canClaim ? "good" : "alt"}" data-claim-daily="${r.day}" ${canClaim ? "" : "disabled"}>Claim</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    document.querySelectorAll("[data-claim-daily]").forEach(btn=>{
+      btn.onclick = async () => {
+        const day = Number(btn.dataset.claimDaily);
+        if(day !== currentDay || !save.daily.claimable) return;
+        const reward = rewards.find(r=>r.day === day);
+        save.coins += reward.coins;
+        save.cardCopies[reward.copies.id] += reward.copies.count;
+        save.daily.streak += 1;
+        save.daily.lastClaimDate = new Date().toISOString().slice(0,10);
+        refreshDailyClaimable();
+        beep("buy");
+        await persistAll();
+        renderDailyRewards();
+        renderHome();
+      };
+    });
+  }
+
+  function renderBattlePass(){
+    const level = getPassLevel();
+    el("passLevelLabel").textContent = level;
+    const nextNode = PASS_LEVELS.find(n => n.passXp > save.passXp) || PASS_LEVELS[PASS_LEVELS.length - 1];
+    const prevNode = [...PASS_LEVELS].reverse().find(n => n.passXp <= save.passXp) || PASS_LEVELS[0];
+    const span = Math.max(1, nextNode.passXp - prevNode.passXp);
+    const pct = nextNode === prevNode ? 100 : ((save.passXp - prevNode.passXp) / span) * 100;
+    el("passXpLabel").textContent = `${save.passXp} / ${nextNode.passXp}`;
+    el("passProgressBar").style.width = `${Math.max(0, Math.min(100, pct))}%`;
+
+    el("passTrack").innerHTML = PASS_LEVELS.map(node=>{
+      const unlocked = save.passXp >= node.passXp;
+      const claimed = !!save.passClaimed[node.level];
+      const rewardLabel = node.reward.coins
+        ? `${node.reward.coins} Coins`
+        : `${node.reward.copies.count} ${CARD_LIBRARY[node.reward.copies.id].name}`;
+      return `
+        <div class="pass-node">
+          <div class="title-row" style="margin-bottom:8px">
+            <strong>Level ${node.level}</strong>
+            <div class="tag">${claimed ? "Claimed" : unlocked ? "Ready" : `XP ${node.passXp}`}</div>
+          </div>
+          <div class="muted tiny">${rewardLabel}</div>
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn ${unlocked && !claimed ? "good" : "alt"}" data-claim-pass="${node.level}" ${unlocked && !claimed ? "" : "disabled"}>Claim</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    document.querySelectorAll("[data-claim-pass]").forEach(btn=>{
+      btn.onclick = () => claimPassReward(Number(btn.dataset.claimPass));
+    });
+  }
+
+  function renderChallenge(){
+    const c = save.challenge;
+    const pct = Math.min(100, (c.progress / c.goal) * 100);
+    el("challengeDetails").innerHTML = `
+      <div class="title-row" style="margin-bottom:8px">
+        <strong>${c.name}</strong>
+        <div class="tag">${c.claimed ? "Claimed" : `${c.progress}/${c.goal}`}</div>
+      </div>
+      <div class="muted tiny">${c.desc}</div>
+      <div class="progress-bar" style="margin-top:10px"><span style="width:${pct}%"></span></div>
+      <div class="muted tiny" style="margin-top:10px">Complete the goal to unlock the event reward.</div>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn ${c.progress >= c.goal && !c.claimed ? "good" : "alt"}" id="btnClaimChallengeReward" ${c.progress >= c.goal && !c.claimed ? "" : "disabled"}>Claim Event Reward</button>
+        <button class="btn alt" id="btnRerollChallenge">New Challenge</button>
+      </div>
+    `;
+    el("challengeRewards").innerHTML = `
+      <div class="reward">+${c.reward.coins} Coins</div>
+      <div class="reward">+${c.reward.xp} XP</div>
+    `;
+
+    el("btnClaimChallengeReward").onclick = async () => {
+      if(c.progress < c.goal || c.claimed) return;
+      save.coins += c.reward.coins;
+      gainXp(c.reward.xp);
+      save.challenge.claimed = true;
+      beep("buy");
+      await persistAll();
+      renderChallenge();
+      renderHome();
+    };
+
+    el("btnRerollChallenge").onclick = async () => {
+      save.challenge = createChallenge();
+      await persistAll();
+      renderChallenge();
+      renderHome();
+    };
+  }
+
+  function renderTutorial(){
+    el("tutorialContent").textContent = TUTORIAL_STEPS[tutorialIndex];
+    el("btnTutorialPrev").disabled = tutorialIndex === 0;
+    el("btnTutorialNext").disabled = tutorialIndex === TUTORIAL_STEPS.length - 1;
   }
 
   function scaledStat(base, level){
@@ -793,12 +1755,16 @@
     el("queueText").textContent = text;
   }
 
-  function feed(text){
+  function battleLog(text){
+    if(!battle) return;
+    battle.eventLog.push(text);
     const box = el("battleFeed");
     const div = document.createElement("div");
     div.style.marginBottom = "8px";
     div.textContent = "• " + text;
     box.prepend(div);
+    const limit = save.settings.feedLimit || 40;
+    while(box.children.length > limit) box.removeChild(box.lastChild);
   }
 
   function chooseBotProfile(){
@@ -830,9 +1796,10 @@
     const bot = chooseBotProfile();
     battle = createBattleState(save.deck, bot);
     el("hudOpponent").textContent = `${bot.name} • ${bot.personality.name}`;
+    el("hudTrophies").textContent = save.trophies;
     el("battleFeed").innerHTML = "";
-    feed(`Match found against ${bot.name}.`);
-    feed(`Opponent style: ${bot.personality.name}.`);
+    battleLog(`Match found against ${bot.name}.`);
+    battleLog(`Opponent style: ${bot.personality.name}.`);
     clearArenaEntities();
     renderAllTowers();
     initHands();
@@ -849,6 +1816,9 @@
       matchTime:180,
       ended:false,
       selectedHandIndex:null,
+      eventLog:[],
+      stats:{ matches:1, wins:0, towers:0, flux:0, cardsPlayed:{} },
+      trophiesBefore: save.trophies,
       player:{flux:0,fluxMax:10,fluxTimer:0,deck:[...playerDeck],drawQueue:[...playerDeck],hand:[],towersDestroyed:0},
       enemy:{flux:0,fluxMax:10,fluxTimer:0,deck:[...bot.deck],drawQueue:[...bot.deck],hand:[],towersDestroyed:0,thinkTimer:0.85,name:bot.name,personality:bot.personality},
       towers:{
@@ -938,21 +1908,20 @@
     if(!id) return;
     const card = cardStatsForBattle(id, "player");
     if(yPct < 52){
-      feed("You can only deploy on your half.");
+      battleLog("You can only deploy on your half.");
       return;
     }
     if(battle.player.flux < card.cost){
-      feed("Not enough Flux.");
+      battleLog("Not enough Flux.");
       return;
     }
 
-    if(card.type === "spell"){
-      battle.player.flux -= card.cost;
-      castSpell("player", card, xPct, yPct);
-    } else {
-      battle.player.flux -= card.cost;
-      summonCard("player", card, xPct, yPct);
-    }
+    battle.player.flux -= card.cost;
+    battle.stats.flux += card.cost;
+    battle.stats.cardsPlayed[id] = (battle.stats.cardsPlayed[id] || 0) + 1;
+
+    if(card.type === "spell") castSpell("player", card, xPct, yPct);
+    else summonCard("player", card, xPct, yPct);
 
     playHandCard("player", handIndex);
     battle.selectedHandIndex = null;
@@ -981,7 +1950,7 @@
       spawnUnitDom(u);
     }
     beep("play");
-    feed(`${side === "player" ? "You played" : "Opponent played"} ${card.name}.`);
+    battleLog(`${side === "player" ? "You played" : "Opponent played"} ${card.name}.`);
   }
 
   function castSpell(side, card, xPct, yPct){
@@ -1021,7 +1990,7 @@
       });
     }
     beep("spell");
-    feed(`${side === "player" ? "You cast" : "Opponent cast"} ${card.name}.`);
+    battleLog(`${side === "player" ? "You cast" : "Opponent cast"} ${card.name}.`);
   }
 
   function spawnUnitDom(unit){
@@ -1137,7 +2106,6 @@
       const ab = e.personality.bias.includes(a.id) ? 1 : 0;
       const bb = e.personality.bias.includes(b.id) ? 1 : 0;
       if(ab !== bb) return bb - ab;
-
       const aScore = botCardScore(a.card);
       const bScore = botCardScore(b.card);
       return bScore - aScore;
@@ -1229,11 +2197,8 @@
         const attackRangePct = (u.range || 30) / 10;
         if(d <= attackRangePct){
           if(u.cooldown <= 0){
-            if(u.projectile){
-              createProjectile(u.x,u.y,target.x,target.y,u.side,u.damage,u.splash||0);
-            } else {
-              applyHitToTarget(target,u.damage,u.splash||0,u.side);
-            }
+            if(u.projectile) createProjectile(u.x,u.y,target.x,target.y,u.side,u.damage,u.splash||0);
+            else applyHitToTarget(target,u.damage,u.splash||0,u.side);
             u.cooldown = u.atkSpeed;
             beep("hit");
           }
@@ -1316,11 +2281,8 @@
 
   function applyDamageToUnit(u, amount){
     u.hp -= amount;
-    if(u.hp <= 0){
-      removeUnit(u);
-    } else {
-      updateUnitDom(u);
-    }
+    if(u.hp <= 0) removeUnit(u);
+    else updateUnitDom(u);
   }
 
   function removeUnit(u){
@@ -1425,8 +2387,14 @@
     renderAllTowers();
 
     if(t.hp === 0){
-      if(t.team === "enemy"){ battle.player.towersDestroyed++; feed(`Enemy ${t.name} was destroyed.`); }
-      else { battle.enemy.towersDestroyed++; feed(`Your ${t.name} was destroyed.`); }
+      if(t.team === "enemy"){
+        battle.player.towersDestroyed++;
+        battle.stats.towers++;
+        battleLog(`Enemy ${t.name} was destroyed.`);
+      } else {
+        battle.enemy.towersDestroyed++;
+        battleLog(`Your ${t.name} was destroyed.`);
+      }
       beep("death");
     }
   }
@@ -1452,6 +2420,7 @@
     if(!battle) return;
     el("hudFlux").textContent = `${battle.player.flux} / ${battle.player.fluxMax}`;
     el("hudTime").textContent = formatTime(battle.matchTime);
+    el("hudTrophies").textContent = save.trophies;
   }
 
   function renderHand(){
@@ -1497,27 +2466,24 @@
       node.classList.add("dragging");
     };
 
-    const move = (clientX, clientY) => {
-      if(!dragState) return;
-      dragState.ghost.style.left = clientX + "px";
-      dragState.ghost.style.top = clientY + "px";
-    };
-
-    const end = (clientX, clientY) => {
-      node.classList.remove("dragging");
-      if(!dragState) return;
-      const pt = getArenaPoint(clientX, clientY);
-      if(pt) tryPlayCardAt(dragState.handIndex, pt.x, pt.y);
-      dragState.ghost.remove();
-      dragState = null;
-    };
-
     node.onpointerdown = (e) => { e.preventDefault(); start(e.clientX, e.clientY); };
-    node.onpointermove = (e) => move(e.clientX, e.clientY);
-    node.onpointerup = (e) => end(e.clientX, e.clientY);
-    node.onpointercancel = (e) => end(e.clientX, e.clientY);
-
+    node.onpointermove = (e) => {
+      if(!dragState) return;
+      dragState.ghost.style.left = e.clientX + "px";
+      dragState.ghost.style.top = e.clientY + "px";
+    };
+    node.onpointerup = (e) => finishDrag(e.clientX, e.clientY);
+    node.onpointercancel = (e) => finishDrag(e.clientX, e.clientY);
     node.ondragstart = () => false;
+  }
+
+  function finishDrag(clientX, clientY){
+    document.querySelectorAll(".hand-card.dragging").forEach(n=>n.classList.remove("dragging"));
+    if(!dragState) return;
+    const pt = getArenaPoint(clientX, clientY);
+    if(pt) tryPlayCardAt(dragState.handIndex, pt.x, pt.y);
+    dragState.ghost.remove();
+    dragState = null;
   }
 
   window.addEventListener("pointermove", (e)=>{
@@ -1526,15 +2492,7 @@
       dragState.ghost.style.top = e.clientY + "px";
     }
   });
-  window.addEventListener("pointerup", (e)=>{
-    if(dragState && dragState.ghost){
-      const pt = getArenaPoint(e.clientX, e.clientY);
-      if(pt) tryPlayCardAt(dragState.handIndex, pt.x, pt.y);
-      dragState.ghost.remove();
-      dragState = null;
-      document.querySelectorAll(".hand-card.dragging").forEach(n=>n.classList.remove("dragging"));
-    }
-  });
+  window.addEventListener("pointerup", (e)=>finishDrag(e.clientX, e.clientY));
 
   function createGhost(card, x, y){
     const d = document.createElement("div");
@@ -1562,32 +2520,93 @@
     }
   }
 
-  function endBattle(result){
+  function updateQuestProgress(type, amount){
+    save.quests.forEach(q=>{
+      if(q.type === type && q.progress < q.goal){
+        q.progress = Math.min(q.goal, q.progress + amount);
+      }
+    });
+  }
+
+  function updateChallengeProgress(type, amount){
+    if(save.challenge.type === type && !save.challenge.claimed){
+      save.challenge.progress = Math.min(save.challenge.goal, save.challenge.progress + amount);
+    }
+  }
+
+  function updateMasteryFromBattle(){
+    Object.entries(battle.stats.cardsPlayed).forEach(([id, count])=>{
+      save.mastery[id].progress += count;
+    });
+  }
+
+  function recordHistory(result, trophyDelta){
+    const league = getLeagueInfo(save.trophies);
+    save.history.unshift({
+      result,
+      opponent:battle.enemy.name,
+      timeLabel:new Date().toLocaleString(),
+      league:league.current.name,
+      trophiesBefore:battle.trophiesBefore,
+      trophiesAfter:save.trophies,
+      playerTowers:battle.player.towersDestroyed,
+      enemyTowers:battle.enemy.towersDestroyed,
+      trophyDelta,
+      log:[...battle.eventLog]
+    });
+    if(save.history.length > 20) save.history = save.history.slice(0, 20);
+  }
+
+  async function endBattle(result){
     battle.ended = true;
     cancelAnimationFrame(battle.loopId);
 
-    let coins = 0, xp = 0, extraCopies = [];
+    let coins = 0, xp = 0, extraCopies = [], trophyDelta = 0, passXp = 0;
     if(result === "victory"){
       coins = 40 + Math.floor(Math.random()*18);
       xp = 30 + Math.floor(Math.random()*12);
+      passXp = 24;
+      trophyDelta = 28 + Math.floor(Math.random()*8);
       save.wins++;
       save.currentStreak++;
+      battle.stats.wins++;
       if(save.currentStreak > save.bestStreak) save.bestStreak = save.currentStreak;
       extraCopies = rewardCopies(2);
     } else if(result === "defeat"){
       coins = 16 + Math.floor(Math.random()*10);
       xp = 14 + Math.floor(Math.random()*8);
+      passXp = 12;
+      trophyDelta = -(12 + Math.floor(Math.random()*6));
       save.losses++;
       save.currentStreak = 0;
       extraCopies = rewardCopies(1);
     } else {
-      coins = 24; xp = 18; save.currentStreak = 0; extraCopies = rewardCopies(1);
+      coins = 24;
+      xp = 18;
+      passXp = 16;
+      trophyDelta = 0;
+      save.currentStreak = 0;
+      extraCopies = rewardCopies(1);
     }
 
     save.coins += coins;
     gainXp(xp);
+    gainPassXp(passXp);
+    save.trophies = Math.max(0, save.trophies + trophyDelta);
     extraCopies.forEach(({id,count})=> save.cardCopies[id] += count);
-    saveData();
+
+    updateQuestProgress("matches", 1);
+    updateQuestProgress("wins", battle.stats.wins);
+    updateQuestProgress("towers", battle.stats.towers);
+    updateQuestProgress("flux", battle.stats.flux);
+
+    updateChallengeProgress("wins", battle.stats.wins);
+    updateChallengeProgress("towers", battle.stats.towers);
+    updateChallengeProgress("flux", battle.stats.flux);
+
+    updateMasteryFromBattle();
+    recordHistory(result, trophyDelta);
+    await persistAll();
 
     el("resultTitle").textContent = result === "victory" ? "Victory" : result === "defeat" ? "Defeat" : "Draw";
     el("resultTag").textContent = result === "victory" ? "Arena Cleared" : result === "defeat" ? "Match Complete" : "Even Match";
@@ -1599,6 +2618,8 @@
     el("rewardRow").innerHTML = `
       <div class="reward">+${coins} Coins</div>
       <div class="reward">+${xp} XP</div>
+      <div class="reward">+${passXp} Pass XP</div>
+      <div class="reward">${trophyDelta >= 0 ? "+" : ""}${trophyDelta} Trophies</div>
       <div class="reward">Level ${save.level}</div>
       ${extraCopies.map(r=>`<div class="reward">+${r.count} ${CARD_LIBRARY[r.id].name}</div>`).join("")}
     `;
@@ -1627,6 +2648,7 @@
 
   function beep(type){
     try{
+      if(save.settings.muted) return;
       if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const now = audioCtx.currentTime;
       const o = audioCtx.createOscillator();
@@ -1658,15 +2680,37 @@
   el("btnCollection").onclick = () => showScreen("collection");
   el("btnShop").onclick = () => { renderShop(); el("shopOverlay").classList.add("show"); };
   el("btnCloseShop").onclick = () => { el("shopOverlay").classList.remove("show"); renderHome(); };
-  el("btnResetSave").onclick = () => {
-    if(!confirm("Reset all local progress?")) return;
-    localStorage.removeItem(SAVE_KEY);
-    save = loadSave();
+  el("btnHistory").onclick = () => { renderHistory(); el("historyOverlay").classList.add("show"); };
+  el("btnCloseHistory").onclick = () => { el("historyOverlay").classList.remove("show"); };
+  el("btnSettings").onclick = () => { renderSettings(); el("settingsOverlay").classList.add("show"); };
+  el("btnCloseSettings").onclick = async () => { el("settingsOverlay").classList.remove("show"); await persistAll(); };
+  el("btnToggleMute").onclick = async () => {
+    save.settings.muted = !save.settings.muted;
+    renderSettings();
+    await persistAll();
+  };
+  el("feedLimitSelect").onchange = async () => {
+    save.settings.feedLimit = Number(el("feedLimitSelect").value);
+    await persistAll();
+  };
+
+  el("btnSavePreset").onclick = async () => {
+    save.presets[selectedPresetIndex].deck = [...save.deck];
+    await persistAll();
+    renderPresets();
+  };
+
+  el("btnResetSave").onclick = async () => {
+    if(!confirm("Reset all progress?")) return;
+    save = hydrateSave(createDefaultSave());
+    await persistAll();
     deckBuilderSelectedSlot = null;
     battle = null;
     clearArenaEntities();
+    renderHome();
     showScreen("home");
   };
+
   document.querySelectorAll("[data-back-home]").forEach(btn=>btn.onclick = ()=>showScreen("home"));
 
   el("btnExitBattle").onclick = () => {
@@ -1676,17 +2720,21 @@
     clearArenaEntities();
     showScreen("home");
   };
+
   el("btnDeselect").onclick = () => {
     if(!battle) return;
     battle.selectedHandIndex = null;
     renderHand();
   };
+
   el("btnResultHome").onclick = () => {
     el("resultOverlay").classList.remove("show");
     battle = null;
     clearArenaEntities();
+    renderHome();
     showScreen("home");
   };
+
   el("btnResultBattleAgain").onclick = () => {
     el("resultOverlay").classList.remove("show");
     battle = null;
@@ -1694,8 +2742,84 @@
     startBattleFlow();
   };
 
+  el("btnOpenAuth").onclick = () => {
+    updateAuthUI();
+    el("authOverlay").classList.add("show");
+  };
+  el("btnCloseAuth").onclick = () => el("authOverlay").classList.remove("show");
+  el("tabLogin").onclick = () => setAuthMode("login");
+  el("tabSignup").onclick = () => setAuthMode("signup");
+  el("btnLoginSubmit").onclick = handleLogin;
+  el("btnSignupSubmit").onclick = handleSignup;
+  el("btnUseGuest").onclick = () => el("authOverlay").classList.remove("show");
+  el("btnLogout").onclick = handleLogout;
+
+  el("btnDailyRewards").onclick = () => {
+    renderDailyRewards();
+    el("dailyOverlay").classList.add("show");
+  };
+  el("btnCloseDaily").onclick = () => el("dailyOverlay").classList.remove("show");
+
+  el("btnBattlePass").onclick = () => {
+    renderBattlePass();
+    el("passOverlay").classList.add("show");
+  };
+  el("btnClosePass").onclick = () => el("passOverlay").classList.remove("show");
+
+  el("btnChallenges").onclick = () => {
+    renderChallenge();
+    el("challengeOverlay").classList.add("show");
+  };
+  el("btnCloseChallenge").onclick = () => el("challengeOverlay").classList.remove("show");
+
+  el("btnTutorial").onclick = () => {
+    tutorialIndex = 0;
+    renderTutorial();
+    el("tutorialOverlay").classList.add("show");
+  };
+  el("btnCloseTutorial").onclick = () => el("tutorialOverlay").classList.remove("show");
+  el("btnTutorialPrev").onclick = () => {
+    tutorialIndex = Math.max(0, tutorialIndex - 1);
+    renderTutorial();
+  };
+  el("btnTutorialNext").onclick = () => {
+    tutorialIndex = Math.min(TUTORIAL_STEPS.length - 1, tutorialIndex + 1);
+    renderTutorial();
+  };
+  el("btnTutorialFinish").onclick = async () => {
+    save.tutorialCompleted = true;
+    await persistAll();
+    el("tutorialOverlay").classList.remove("show");
+    renderHome();
+  };
+
+  if(firebaseReady){
+    onAuthStateChanged(auth, async (user) => {
+      currentUser = user || null;
+      if(currentUser){
+        const cloud = await loadCloud(currentUser.uid);
+        if(cloud){
+          save = cloud;
+        }else{
+          await saveCloud();
+        }
+      }else{
+        save = loadLocalSave();
+      }
+      updateAuthUI();
+      renderHome();
+    });
+  }else{
+    updateAuthUI();
+  }
+
+  setAuthMode("login");
   renderHome();
-})();
+  if(!save.tutorialCompleted){
+    tutorialIndex = 0;
+    renderTutorial();
+    el("tutorialOverlay").classList.add("show");
+  }
 </script>
 </body>
 </html>
