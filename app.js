@@ -9,8 +9,7 @@
   storageBucket: "clash-app-31ad2.firebasestorage.app",
   messagingSenderId: "1043745907914",
   appId: "1:1043745907914:web:f158b76896b36f8b8a8033",
-  measurementId: "G-4XL0NQW0CN"
-    }
+  
   };
 
   const LOCAL_SAVE_KEY = "siege_cards_phase6_local_save_v1";
@@ -19,6 +18,7 @@
   const USERNAME_COLLECTION = "usernames";
 
   const USERNAME_REGEX = /^[A-Za-z][A-Za-z0-9_]{2,15}$/;
+
 
   const BOT_USERNAMES = [
     "RivenVale",
