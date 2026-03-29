@@ -3,12 +3,13 @@
 
   const APP_CONFIG = {
     firebase: {
-      apiKey: "REPLACE_ME",
-      authDomain: "REPLACE_ME.firebaseapp.com",
-      projectId: "REPLACE_ME",
-      storageBucket: "REPLACE_ME.appspot.com",
-      messagingSenderId: "1234567890",
-      appId: "1:1234567890:web:REPLACE_ME"
+      apiKey: "AIzaSyDm-S4Aq-BkXUdJsJA-UO_XpRO_gipPGP8",
+  authDomain: "clash-app-31ad2.firebaseapp.com",
+  projectId: "clash-app-31ad2",
+  storageBucket: "clash-app-31ad2.firebasestorage.app",
+  messagingSenderId: "1043745907914",
+  appId: "1:1043745907914:web:f158b76896b36f8b8a8033",
+  measurementId: "G-4XL0NQW0CN"
     }
   };
 
@@ -20,6 +21,7 @@
   const USERNAME_REGEX = /^[A-Za-z][A-Za-z0-9_]{2,15}$/;
 
   const BOT_NAMES = [
+    "widuba",
     "RivenVale",
     "TalonForge",
     "MiraBloom",
