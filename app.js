@@ -3,17 +3,16 @@
 
   const APP_CONFIG = {
     firebase: {
-      apiKey: "AIzaSyDm-S4Aq-BkXUdJsJA-UO_XpRO_gipPGP8",
-  authDomain: "clash-app-31ad2.firebaseapp.com",
-  projectId: "clash-app-31ad2",
-  storageBucket: "clash-app-31ad2.firebasestorage.app",
-  messagingSenderId: "1043745907914",
-  appId: "1:1043745907914:web:f158b76896b36f8b8a8033",
-  measurementId: "G-4XL0NQW0CN"
+      apiKey: "REPLACE_ME",
+      authDomain: "REPLACE_ME.firebaseapp.com",
+      projectId: "REPLACE_ME",
+      storageBucket: "REPLACE_ME.appspot.com",
+      messagingSenderId: "1234567890",
+      appId: "1:1234567890:web:REPLACE_ME"
     }
   };
 
-  const LOCAL_SAVE_KEY = "siege_cards_phase7_local_save_v1";
+  const LOCAL_SAVE_KEY = "siege_cards_phase7_full_save_v1";
   const CLOUD_SAVE_COLLECTION = "gameSaves";
   const PROFILE_COLLECTION = "profiles";
   const USERNAME_COLLECTION = "usernames";
@@ -21,7 +20,6 @@
   const USERNAME_REGEX = /^[A-Za-z][A-Za-z0-9_]{2,15}$/;
 
   const BOT_NAMES = [
-    "widuba",
     "RivenVale",
     "TalonForge",
     "MiraBloom",
@@ -59,11 +57,11 @@
       cost: 3,
       role: "Tank",
       emoji: "🛡️",
-      power: 12,
-      hp: 34,
-      speed: 12,
-      range: 30,
-      attackSpeed: 1.1,
+      hp: 340,
+      damage: 26,
+      speed: 10,
+      range: 28,
+      attackSpeed: 1.10,
       target: "ground",
       count: 1,
       radius: 20
@@ -74,10 +72,10 @@
       cost: 2,
       role: "Melee",
       emoji: "🪓",
-      power: 13,
-      hp: 18,
-      speed: 20,
-      range: 26,
+      hp: 180,
+      damage: 42,
+      speed: 16,
+      range: 24,
       attackSpeed: 0.85,
       target: "ground",
       count: 1,
@@ -89,11 +87,11 @@
       cost: 3,
       role: "Ranged",
       emoji: "🏹",
-      power: 10,
-      hp: 16,
-      speed: 14,
-      range: 115,
-      attackSpeed: 1.0,
+      hp: 150,
+      damage: 24,
+      speed: 11,
+      range: 96,
+      attackSpeed: 0.95,
       target: "all",
       count: 1,
       radius: 17
@@ -104,13 +102,13 @@
       cost: 4,
       role: "Caster",
       emoji: "🔥",
-      power: 16,
-      hp: 15,
-      speed: 13,
-      range: 105,
-      attackSpeed: 1.3,
+      hp: 155,
+      damage: 38,
+      speed: 10,
+      range: 92,
+      attackSpeed: 1.25,
       target: "all",
-      splash: 24,
+      splash: 22,
       count: 1,
       radius: 17
     },
@@ -120,11 +118,11 @@
       cost: 4,
       role: "Siege",
       emoji: "🐏",
-      power: 22,
-      hp: 26,
-      speed: 22,
-      range: 28,
-      attackSpeed: 1.3,
+      hp: 300,
+      damage: 72,
+      speed: 18,
+      range: 20,
+      attackSpeed: 1.35,
       target: "buildings",
       count: 1,
       radius: 20
@@ -135,14 +133,14 @@
       cost: 3,
       role: "Swarm",
       emoji: "🐺",
-      power: 7,
-      hp: 10,
-      speed: 24,
+      hp: 85,
+      damage: 15,
+      speed: 20,
       range: 18,
-      attackSpeed: 0.65,
+      attackSpeed: 0.62,
       target: "ground",
       count: 3,
-      radius: 14
+      radius: 13
     },
     {
       id: "shield_node",
@@ -150,11 +148,11 @@
       cost: 3,
       role: "Structure",
       emoji: "🔷",
-      power: 8,
-      hp: 42,
+      hp: 400,
+      damage: 18,
       speed: 0,
-      range: 95,
-      attackSpeed: 1.1,
+      range: 82,
+      attackSpeed: 1.05,
       target: "all",
       structure: true,
       lifetime: 24,
@@ -168,8 +166,8 @@
       role: "Spell",
       emoji: "💥",
       spell: true,
-      damage: 28,
-      radiusSpell: 55
+      damage: 85,
+      radiusSpell: 14
     },
     {
       id: "stone_brute",
@@ -177,11 +175,11 @@
       cost: 5,
       role: "Heavy Tank",
       emoji: "🪨",
-      power: 15,
-      hp: 52,
-      speed: 10,
-      range: 26,
-      attackSpeed: 1.2,
+      hp: 520,
+      damage: 32,
+      speed: 8,
+      range: 24,
+      attackSpeed: 1.18,
       target: "ground",
       count: 1,
       radius: 22
@@ -192,11 +190,11 @@
       cost: 4,
       role: "Burst",
       emoji: "⚙️",
-      power: 24,
-      hp: 14,
-      speed: 11,
-      range: 120,
-      attackSpeed: 1.8,
+      hp: 145,
+      damage: 78,
+      speed: 10,
+      range: 110,
+      attackSpeed: 1.75,
       target: "all",
       count: 1,
       radius: 17
@@ -207,11 +205,11 @@
       cost: 2,
       role: "Chip",
       emoji: "🎯",
-      power: 8,
-      hp: 12,
-      speed: 15,
-      range: 128,
-      attackSpeed: 0.85,
+      hp: 120,
+      damage: 18,
+      speed: 12,
+      range: 118,
+      attackSpeed: 0.78,
       target: "all",
       count: 1,
       radius: 15
@@ -222,11 +220,11 @@
       cost: 4,
       role: "DPS",
       emoji: "⚔️",
-      power: 11,
-      hp: 22,
-      speed: 17,
-      range: 22,
-      attackSpeed: 0.5,
+      hp: 230,
+      damage: 24,
+      speed: 15,
+      range: 20,
+      attackSpeed: 0.48,
       target: "ground",
       count: 1,
       radius: 18
@@ -408,6 +406,7 @@
         ...(saveLike?.settings || {})
       }
     };
+
     if (!merged.username) merged.username = "Guest";
     return merged;
   }
@@ -436,6 +435,7 @@
 
   async function saveCloudProgress() {
     if (!state.currentUser || !state.firebaseReady) return;
+
     try {
       const saveRef = state.firebase.doc(state.db, CLOUD_SAVE_COLLECTION, state.currentUser.uid);
       await state.firebase.setDoc(
@@ -623,6 +623,7 @@
 
   async function handleLogout() {
     if (!state.firebaseReady || !state.currentUser) return;
+
     try {
       await persistSave();
       await state.firebase.signOut(state.auth);
@@ -720,10 +721,10 @@
 
   function scaledUnitStats(card) {
     const level = cardLevel(card.id);
-    const mult = 1 + (level - 1) * 0.1;
+    const mult = 1 + (level - 1) * 0.10;
     return {
       hp: Math.round((card.hp || 0) * mult),
-      power: Math.round((card.power || 0) * mult)
+      damage: Math.round((card.damage || 0) * mult)
     };
   }
 
@@ -779,7 +780,6 @@
 
     const homeDeck = $("homeDeckPreview");
     if (homeDeck) {
-      homeDeck.className = "deck-slots";
       homeDeck.innerHTML = state.save.deck.map((cardId, index) => {
         const card = getCard(cardId);
         return `
@@ -830,7 +830,7 @@
           <strong>${card.name}</strong>
           <div class="stats">
             <span>Lvl ${cardLevel(card.id)}</span>
-            ${card.spell ? `<span>Spell ${card.damage}</span>` : `<span>ATK ${stats.power}</span><span>HP ${stats.hp}</span>`}
+            ${card.spell ? `<span>Spell ${card.damage}</span>` : `<span>ATK ${stats.damage}</span><span>HP ${stats.hp}</span>`}
           </div>
           <div class="btn-row">
             <button class="btn ${alreadyInDeck ? "alt" : ""}" data-pick-card="${card.id}">
@@ -892,7 +892,7 @@
           <strong>${card.name}</strong>
           <div class="stats">
             <span>Lvl ${level}</span>
-            ${card.spell ? `<span>Spell ${card.damage}</span>` : `<span>ATK ${stats.power}</span><span>HP ${stats.hp}</span>`}
+            ${card.spell ? `<span>Spell ${card.damage}</span>` : `<span>ATK ${stats.damage}</span><span>HP ${stats.hp}</span>`}
           </div>
           <div class="btn-row">
             <button class="btn ${canUpgrade ? "good" : "alt"}" data-upgrade-card="${card.id}" ${canUpgrade ? "" : "disabled"}>
@@ -1003,8 +1003,6 @@
   }
 
   function renderBattleUi() {
-    if (!$("screen-battle")) return;
-
     if (!state.battle) {
       if ($("battlePlayerName")) $("battlePlayerName").textContent = state.save.username || "Guest";
       if ($("battleOpponentName")) $("battleOpponentName").textContent = "Unknown";
@@ -1018,7 +1016,7 @@
       if ($("enemyKingHp")) $("enemyKingHp").textContent = "200";
       if ($("hand")) $("hand").innerHTML = `<div class="notice">No active battle.</div>`;
       if ($("battleLogLines")) $("battleLogLines").innerHTML = "No actions yet.";
-      if ($("arenaUnits")) $("arenaUnits").className = "arena-units";
+      if ($("arenaUnits")) $("arenaUnits").innerHTML = "";
       return;
     }
 
@@ -1042,7 +1040,7 @@
   }
 
   function setBattleFlux(value) {
-    $$("[id='battleFlux']").forEach((node) => {
+    document.querySelectorAll("[id='battleFlux']").forEach((node) => {
       node.textContent = String(value);
     });
     const percent = Math.max(0, Math.min(100, (value / 10) * 100));
@@ -1095,13 +1093,12 @@
     const host = $("arenaUnits");
     if (!host || !state.battle) return;
 
-    host.className = "arena-units";
     host.innerHTML = state.battle.units.map((unit) => {
-      const width = Math.max(0, Math.min(100, (unit.hp / unit.maxHp) * 100));
+      const hpPct = Math.max(0, Math.min(100, (unit.hp / unit.maxHp) * 100));
       return `
         <div class="unit ${unit.side}" style="left:${unit.x}%;top:${unit.y}%;">
-          <div class="unit-bar"><span style="width:${width}%"></span></div>
-          <div>${escapeHtml(unit.emoji)}</div>
+          <div class="unit-bar"><span style="width:${hpPct}%"></span></div>
+          <div>${unit.emoji}</div>
         </div>
       `;
     }).join("");
@@ -1110,8 +1107,7 @@
   function startMatchmakingFlow() {
     closeResult();
     showQueue(true);
-    const queueText = $("queueText");
-    if (queueText) queueText.textContent = "Finding a match...";
+    if ($("queueText")) $("queueText").textContent = "Finding a match...";
 
     setTimeout(() => {
       beginBattle();
@@ -1245,6 +1241,7 @@
 
     playable.sort((a, b) => b.card.cost - a.card.cost);
     const pick = playable[0];
+
     battle.flux -= pick.card.cost;
     battle.log.push(`${battle.opponentName} played ${pick.card.name}.`);
 
@@ -1282,22 +1279,22 @@
 
     const tower = choosePriorityTower(enemySide);
     if (tower) {
-      tower.hp -= Math.round(card.damage * 0.8);
-      state.battle.log.push(`${card.name} hit a tower for ${Math.round(card.damage * 0.8)}.`);
+      const hit = Math.round(card.damage * 0.8);
+      tower.hp -= hit;
+      state.battle.log.push(`${card.name} hit a tower for ${hit}.`);
     }
   }
 
   function spawnCardUnits(side, card) {
     const stats = scaledUnitStats(card);
     const count = card.count || 1;
-    const baseX = side === "player"
-      ? (Math.random() < 0.5 ? 30 : 70)
-      : (Math.random() < 0.5 ? 30 : 70);
+    const baseX = Math.random() < 0.5 ? 30 : 70;
     const baseY = side === "player" ? 82 : 18;
 
     for (let i = 0; i < count; i++) {
       const spreadX = count === 1 ? 0 : (i - (count - 1) / 2) * 4;
       const spreadY = count === 1 ? 0 : (i % 2 === 0 ? 1.2 : -1.2);
+
       state.battle.units.push({
         uid: `u_${state.battle.idSeq++}`,
         cardId: card.id,
@@ -1307,7 +1304,7 @@
         y: clamp(baseY + spreadY, 8, 92),
         hp: stats.hp,
         maxHp: stats.hp,
-        damage: stats.power,
+        damage: stats.damage,
         speed: card.speed || 12,
         range: card.range || 22,
         attackSpeed: card.attackSpeed || 1,
@@ -1387,9 +1384,11 @@
 
   function choosePriorityTower(side, laneX = 50) {
     const towers = state.battle.towers[side];
-    const crown = laneX < 50 ? towers.left : towers.right;
-    if (crown.hp > 0) return crown;
-    if ((laneX < 50 ? towers.right : towers.left).hp > 0) return laneX < 50 ? towers.right : towers.left;
+    const preferred = laneX < 50 ? towers.left : towers.right;
+    const other = laneX < 50 ? towers.right : towers.left;
+
+    if (preferred.hp > 0) return preferred;
+    if (other.hp > 0) return other;
     if (towers.king.hp > 0) return towers.king;
     return null;
   }
@@ -1398,7 +1397,10 @@
     target.hp -= unit.damage;
 
     if ("cardId" in target) {
-      state.battle.log.push(`${getCard(unit.cardId).name} hit ${getCard(target.cardId).name} for ${unit.damage}.`);
+      const attackerName = getCard(unit.cardId)?.name || "Unit";
+      const defenderName = getCard(target.cardId)?.name || "Unit";
+      state.battle.log.push(`${attackerName} hit ${defenderName} for ${unit.damage}.`);
+
       if (unit.splash) {
         for (const other of state.battle.units) {
           if (other.side !== target.side || other === target) continue;
@@ -1408,7 +1410,8 @@
         }
       }
     } else {
-      state.battle.log.push(`${getCard(unit.cardId).name} hit a tower for ${unit.damage}.`);
+      const attackerName = getCard(unit.cardId)?.name || "Unit";
+      state.battle.log.push(`${attackerName} hit a tower for ${unit.damage}.`);
     }
   }
 
