@@ -2,264 +2,410 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Siege Cards: Arena Rivals</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="app">
 
-<div class="app">
-
-  <!-- HOME -->
-  <section class="screen active" id="screen-home">
-    <div class="wrap">
-
-      <div class="topbar">
-        <div class="brand">
-          <div class="brand-badge">⚔️</div>
-          <div>Siege Cards</div>
-        </div>
-
-        <div class="pill-row">
-          <div class="pill">Level <span id="homeLevel">1</span></div>
-          <div class="pill coins">Coins <span id="homeCoins">0</span></div>
-          <div class="pill trophies">🏆 <span id="homeTrophies">0</span></div>
-          <div class="pill" id="authStatusPill">Guest</div>
-          <button class="btn alt" id="btnOpenAuth">Account</button>
-          <button class="btn alt hidden" id="btnLogout">Logout</button>
-        </div>
-      </div>
-
-      <div class="hero">
-        <div class="card hero-left">
-          <div>
-            <h1>Arena Battler</h1>
-            <p>Build your deck, upgrade cards, and battle in real-time.</p>
+    <!-- HOME -->
+    <section class="screen active" id="screen-home">
+      <div class="wrap">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-badge">⚔️</div>
+            <div>Siege Cards: Arena Rivals</div>
           </div>
 
-          <div class="footer-nav">
-            <button class="menu-btn primary" id="btnPlay">
-              <span>Battle Now</span>
-              <span>▶</span>
+          <div class="pill-row">
+            <div class="pill">Level <span id="homeLevel">1</span></div>
+            <div class="pill coins">Coins <span id="homeCoins">0</span></div>
+            <div class="pill trophies">🏆 <span id="homeTrophies">0</span></div>
+            <div class="pill" id="authStatusPill">Guest</div>
+            <button class="btn alt" id="btnOpenAuth">Account</button>
+            <button class="btn alt hidden" id="btnLogout">Logout</button>
+          </div>
+        </div>
+
+        <div class="hero">
+          <div class="card hero-left">
+            <div>
+              <h1>Arena battler with deck building</h1>
+              <p>
+                Build your deck, upgrade your cards, climb trophies, and battle in a
+                real-time arena.
+              </p>
+            </div>
+
+            <div class="footer-nav">
+              <button class="menu-btn primary" id="btnPlay" style="flex:1;min-width:220px;">
+                <span>Battle Now<small>Fast arena matchmaking</small></span>
+                <span>▶</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="menu-grid">
+            <button class="menu-btn" id="btnDeck">
+              <span>Deck Builder<small>Edit your 8-card deck</small></span>
+              <span>🃏</span>
+            </button>
+
+            <button class="menu-btn" id="btnCollection">
+              <span>Collection<small>Upgrade cards and view stats</small></span>
+              <span>📚</span>
+            </button>
+
+            <button class="menu-btn" id="btnShop">
+              <span>Shop<small>Buy card offers</small></span>
+              <span>🛒</span>
+            </button>
+
+            <button class="menu-btn" id="btnHistory">
+              <span>Match History<small>See your past battles</small></span>
+              <span>📝</span>
+            </button>
+
+            <button class="menu-btn" id="btnSettings">
+              <span>Settings<small>Sound and feed options</small></span>
+              <span>⚙️</span>
+            </button>
+
+            <button class="menu-btn" id="btnRefreshShop">
+              <span>Refresh Shop<small>Re-roll current offers</small></span>
+              <span>🔄</span>
             </button>
           </div>
         </div>
 
-        <div class="menu-grid">
-          <button class="menu-btn" id="btnDeck">Deck</button>
-          <button class="menu-btn" id="btnCollection">Collection</button>
-          <button class="menu-btn" id="btnShop">Shop</button>
-          <button class="menu-btn" id="btnHistory">History</button>
-          <button class="menu-btn" id="btnSettings">Settings</button>
-          <button class="menu-btn" id="btnRefreshShop">Refresh Shop</button>
-        </div>
-      </div>
-
-      <div class="triple-grid">
-
-        <div class="card section">
-          <h2>League</h2>
-          <div id="leagueBadge">Bronze I</div>
-          <div id="leagueTrophies"></div>
-        </div>
-
-        <div class="card section">
-          <h2>Deck</h2>
-          <div id="homeDeckPreview"></div>
-        </div>
-
-        <div class="card section">
-          <h2>Profile</h2>
-          <div>Username: <span id="profileUsername">Guest</span></div>
-          <div>Email: <span id="profileEmail">None</span></div>
-          <div>Wins: <span id="statWins">0</span></div>
-          <div>Losses: <span id="statLosses">0</span></div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- DECK -->
-  <section class="screen" id="screen-deck">
-    <div class="wrap">
-      <div class="topbar">
-        <button data-home class="btn alt">← Home</button>
-        <div>Average Cost: <span id="deckAvgCost"></span></div>
-      </div>
-
-      <div id="deckSlots"></div>
-      <div id="deckCardPool"></div>
-    </div>
-  </section>
-
-
-  <!-- COLLECTION -->
-  <section class="screen" id="screen-collection">
-    <div class="wrap">
-      <div class="topbar">
-        <button data-home class="btn alt">← Home</button>
-        <div>Coins: <span id="collectionCoins"></span></div>
-      </div>
-
-      <div id="collectionGrid"></div>
-    </div>
-  </section>
-
-
-  <!-- BATTLE -->
-  <section class="screen" id="screen-battle">
-    <div class="wrap">
-
-      <div class="topbar">
-        <div class="brand">
-          <div class="brand-badge">🏟️</div>
-          <div>Arena</div>
-        </div>
-
-        <div class="pill-row">
-          <button class="btn alt" id="btnExitBattle">Exit</button>
-          <div class="pill">Time <span id="battleTime">60</span></div>
-          <div class="pill">Flux <span id="battleFlux">0</span></div>
-        </div>
-      </div>
-
-      <div class="battle-layout">
-
-        <div class="battle-side">
+        <div class="triple-grid">
           <div class="card section">
-            <strong>You</strong>
-            <div id="battlePlayerName"></div>
+            <div class="title-row">
+              <h2>League</h2>
+              <div class="league-badge" id="leagueBadge">Bronze I</div>
+            </div>
+            <div class="notice">
+              <div><strong>Trophies:</strong> <span id="leagueTrophies">0</span></div>
+            </div>
           </div>
 
           <div class="card section">
-            <strong>Opponent</strong>
-            <div id="battleOpponentName"></div>
-          </div>
-        </div>
-
-        <div class="battle-main">
-
-          <div class="arena-shell card">
-            <div class="arena">
-
-              <div class="lane-line"></div>
-              <div class="bridge left"></div>
-              <div class="bridge right"></div>
-
-              <!-- enemy -->
-              <div class="crown-tower enemy tower-enemy-left">
-                <div id="enemyLeftHp">100</div>
-              </div>
-
-              <div class="crown-tower enemy tower-enemy-right">
-                <div id="enemyRightHp">100</div>
-              </div>
-
-              <div class="king-tower enemy tower-enemy-king">
-                <div id="enemyKingHp">200</div>
-              </div>
-
-              <!-- player -->
-              <div class="crown-tower player tower-player-left">
-                <div id="playerLeftHp">100</div>
-              </div>
-
-              <div class="crown-tower player tower-player-right">
-                <div id="playerRightHp">100</div>
-              </div>
-
-              <div class="king-tower player tower-player-king">
-                <div id="playerKingHp">200</div>
-              </div>
-
-              <div id="arenaUnits"></div>
-
+            <div class="title-row">
+              <h2>Current Deck</h2>
+              <div class="tag">8 cards</div>
             </div>
+            <div class="deck-slots" id="homeDeckPreview"></div>
           </div>
 
-          <div class="elixir-wrap">
-            <div class="elixir-label">
-              <span>Elixir</span>
-              <span id="battleFlux"></span>
+          <div class="card section">
+            <div class="title-row">
+              <h2>Profile</h2>
+              <div class="tag">Player</div>
             </div>
-            <div class="elixir-bar">
-              <span id="elixirBar"></span>
+            <div class="notice">
+              <div><strong>Username:</strong> <span id="profileUsername">Guest</span></div>
+              <div><strong>Email:</strong> <span id="profileEmail">Not signed in</span></div>
+              <div><strong>Wins:</strong> <span id="statWins">0</span></div>
+              <div><strong>Losses:</strong> <span id="statLosses">0</span></div>
             </div>
           </div>
-
-          <div class="hand" id="hand"></div>
-
         </div>
-
-        <div class="battle-side">
-          <div class="card section" id="battleLogLines"></div>
-        </div>
-
       </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- DECK -->
+    <section class="screen" id="screen-deck">
+      <div class="wrap">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-badge">🛠️</div>
+            <div>Deck Builder</div>
+          </div>
 
+          <div class="pill-row">
+            <button class="btn alt" data-home>← Home</button>
+            <div class="pill">Average Cost <span id="deckAvgCost">0.0</span></div>
+          </div>
+        </div>
+
+        <div class="card section">
+          <div class="title-row">
+            <h2>Your Deck</h2>
+            <div class="tag">Select a slot first</div>
+          </div>
+          <div class="deck-slots" id="deckSlots"></div>
+        </div>
+
+        <div class="card section" style="margin-top:16px;">
+          <div class="title-row">
+            <h2>Card Pool</h2>
+            <div class="tag">Tap a card to use it</div>
+          </div>
+          <div class="collection-grid" id="deckCardPool"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLECTION -->
+    <section class="screen" id="screen-collection">
+      <div class="wrap">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-badge">📚</div>
+            <div>Collection</div>
+          </div>
+
+          <div class="pill-row">
+            <button class="btn alt" data-home>← Home</button>
+            <div class="pill coins">Coins <span id="collectionCoins">0</span></div>
+          </div>
+        </div>
+
+        <div class="card section">
+          <div class="collection-grid" id="collectionGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BATTLE -->
+    <section class="screen" id="screen-battle">
+      <div class="wrap">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-badge">🏟️</div>
+            <div>Arena Match</div>
+          </div>
+
+          <div class="pill-row">
+            <button class="btn alt" id="btnExitBattle">Exit</button>
+            <div class="pill">Time <span id="battleTime">60</span>s</div>
+            <div class="pill">Elixir <span id="battleFlux">0</span>/10</div>
+          </div>
+        </div>
+
+        <div class="battle-layout">
+          <div class="battle-side">
+            <div class="card section">
+              <div class="title-row">
+                <h3>You</h3>
+                <div class="tag">Player</div>
+              </div>
+              <div id="battlePlayerName">Guest</div>
+            </div>
+
+            <div class="card section">
+              <div class="title-row">
+                <h3>Opponent</h3>
+                <div class="tag">Arena</div>
+              </div>
+              <div id="battleOpponentName">Unknown</div>
+            </div>
+
+            <div class="card section">
+              <div class="title-row">
+                <h3>Battle Feed</h3>
+              </div>
+              <div class="feed-box" id="battleLogLines">No actions yet.</div>
+            </div>
+          </div>
+
+          <div class="battle-main">
+            <div class="arena-shell card">
+              <div class="arena">
+                <div class="lane-line"></div>
+                <div class="bridge left"></div>
+                <div class="bridge right"></div>
+
+                <!-- Enemy towers -->
+                <div class="crown-tower enemy tower-enemy-left">
+                  <div class="tower-icon">🏹</div>
+                  <div class="tower-hp" id="enemyLeftHp">100</div>
+                </div>
+
+                <div class="crown-tower enemy tower-enemy-right">
+                  <div class="tower-icon">🏹</div>
+                  <div class="tower-hp" id="enemyRightHp">100</div>
+                </div>
+
+                <div class="king-tower enemy tower-enemy-king">
+                  <div class="tower-icon">👑</div>
+                  <div class="tower-hp" id="enemyKingHp">200</div>
+                </div>
+
+                <!-- Player towers -->
+                <div class="crown-tower player tower-player-left">
+                  <div class="tower-icon">🏹</div>
+                  <div class="tower-hp" id="playerLeftHp">100</div>
+                </div>
+
+                <div class="crown-tower player tower-player-right">
+                  <div class="tower-icon">🏹</div>
+                  <div class="tower-hp" id="playerRightHp">100</div>
+                </div>
+
+                <div class="king-tower player tower-player-king">
+                  <div class="tower-icon">👑</div>
+                  <div class="tower-hp" id="playerKingHp">200</div>
+                </div>
+
+                <div class="arena-units" id="arenaUnits"></div>
+              </div>
+            </div>
+
+            <div class="elixir-wrap">
+              <div class="elixir-label">
+                <span>Elixir</span>
+                <span id="battleFlux">0</span>
+              </div>
+              <div class="elixir-bar">
+                <span id="elixirBar"></span>
+              </div>
+            </div>
+
+            <div class="hand" id="hand"></div>
+          </div>
+
+          <div class="battle-side">
+            <div class="card section">
+              <div class="title-row">
+                <h3>How to Play</h3>
+              </div>
+              <div class="notice">
+                Use elixir to play cards. Units walk up the arena and attack enemy units
+                and towers automatically.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <!-- AUTH -->
   <div class="auth-overlay" id="authModal">
     <div class="auth-box">
-      <input id="authEmail" placeholder="Email">
-      <input id="authPassword" placeholder="Password">
-      <input id="authUsername" placeholder="Username">
+      <div class="title-row">
+        <h2 style="margin:0;">Account</h2>
+        <button class="btn alt" id="btnCloseAuth">Close</button>
+      </div>
 
-      <button id="btnLogin" class="btn good">Login</button>
-      <button id="btnSignup" class="btn purple">Sign Up</button>
+      <div class="auth-tabs">
+        <button class="btn" id="tabLogin">Login</button>
+        <button class="btn alt" id="tabSignup">Sign Up</button>
+      </div>
 
-      <div id="authMessage"></div>
+      <div class="notice" id="authMessage" style="margin-bottom:12px;">
+        Sign in or create an account.
+      </div>
+
+      <div class="form-stack">
+        <div>
+          <label class="tiny muted">Email</label>
+          <input type="email" id="authEmail" placeholder="you@example.com" />
+        </div>
+
+        <div>
+          <label class="tiny muted">Password</label>
+          <input type="password" id="authPassword" placeholder="Minimum 6 characters" />
+        </div>
+
+        <div id="usernameWrap" class="hidden">
+          <label class="tiny muted">Username</label>
+          <input type="text" id="authUsername" maxlength="16" placeholder="Unique username" />
+          <div class="form-help">
+            3–16 characters, start with a letter, letters/numbers/underscore only.
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row" style="margin-top:14px;">
+        <button class="btn good" id="btnLogin">Login</button>
+        <button class="btn purple hidden" id="btnSignup">Create Account</button>
+        <button class="btn alt" id="btnGuest">Continue as Guest</button>
+      </div>
     </div>
   </div>
-
 
   <!-- SHOP -->
   <div class="shop-overlay" id="shopModal">
     <div class="shop-box">
-      <div id="shopGrid"></div>
+      <div class="title-row">
+        <h2 style="margin:0;">Shop</h2>
+        <button class="btn alt" id="closeShop">Close</button>
+      </div>
+      <div class="collection-grid" id="shopGrid"></div>
     </div>
   </div>
 
   <!-- HISTORY -->
   <div class="history-overlay" id="historyModal">
     <div class="history-box">
-      <div id="historyList"></div>
+      <div class="title-row">
+        <h2 style="margin:0;">Match History</h2>
+        <button class="btn alt" id="closeHistory">Close</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
     </div>
   </div>
 
   <!-- SETTINGS -->
   <div class="settings-overlay" id="settingsModal">
     <div class="settings-box">
-      <button id="toggleSound">Toggle Sound</button>
+      <div class="title-row">
+        <h2 style="margin:0;">Settings</h2>
+        <button class="btn alt" id="closeSettings">Close</button>
+      </div>
+
+      <div class="two-col">
+        <div class="switch">
+          <div>
+            <strong>Sound</strong>
+            <div class="tiny muted">Toggle game sounds</div>
+          </div>
+          <button class="btn" id="toggleSound">Sound: On</button>
+        </div>
+
+        <div class="switch">
+          <div>
+            <strong>Battle Feed Limit</strong>
+            <div class="tiny muted">Lines kept in battle feed</div>
+          </div>
+          <select id="feedLimitSelect">
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="60">60</option>
+          </select>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- MATCHMAKING -->
   <div class="queue-screen" id="queueScreen">
-    <div class="queue-box">
+    <div class="queue-box" style="text-align:center;">
       <div class="spinner"></div>
-      <h2>Efficient matchmaking</h2>
+      <h2 style="margin:0 0 8px;">Efficient matchmaking</h2>
+      <div class="muted" id="queueText">Finding a match...</div>
     </div>
   </div>
 
   <!-- RESULT -->
   <div class="result-overlay" id="resultModal">
     <div class="result-box">
-      <h2 id="resultText"></h2>
-      <div id="resultRewards"></div>
-      <button id="backHome">Home</button>
+      <div class="title-row">
+        <h2 id="resultText" style="margin:0;">Victory</h2>
+        <div class="tag" id="resultTag">Match Complete</div>
+      </div>
+
+      <div class="notice" id="resultRewards"></div>
+
+      <div class="footer-nav">
+        <button class="btn alt" id="backHome">Home</button>
+      </div>
     </div>
   </div>
 
-</div>
-
-<script src="app.js"></script>
-
+  <script src="app.js"></script>
 </body>
 </html>
