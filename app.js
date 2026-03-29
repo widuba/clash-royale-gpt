@@ -3,17 +3,16 @@
 
   const APP_CONFIG = {
     firebase: {
-      apiKey: "AIzaSyDm-S4Aq-BkXUdJsJA-UO_XpRO_gipPGP8",
-  authDomain: "clash-app-31ad2.firebaseapp.com",
-  projectId: "clash-app-31ad2",
-  storageBucket: "clash-app-31ad2.firebasestorage.app",
-  messagingSenderId: "1043745907914",
-  appId: "1:1043745907914:web:f158b76896b36f8b8a8033",
-  measurementId: "G-4XL0NQW0CN"
+      apiKey: "REPLACE_ME",
+      authDomain: "REPLACE_ME.firebaseapp.com",
+      projectId: "REPLACE_ME",
+      storageBucket: "REPLACE_ME.appspot.com",
+      messagingSenderId: "1234567890",
+      appId: "1:1234567890:web:REPLACE_ME"
     }
   };
 
-  const LOCAL_SAVE_KEY = "siege_cards_phase7_full_save_v1";
+  const LOCAL_SAVE_KEY = "siege_cards_phase8_save_v1";
   const CLOUD_SAVE_COLLECTION = "gameSaves";
   const PROFILE_COLLECTION = "profiles";
   const USERNAME_COLLECTION = "usernames";
@@ -58,11 +57,11 @@
       cost: 3,
       role: "Tank",
       emoji: "🛡️",
-      hp: 340,
-      damage: 26,
-      speed: 10,
-      range: 28,
-      attackSpeed: 1.10,
+      hp: 520,
+      damage: 34,
+      speed: 11,
+      range: 24,
+      attackSpeed: 1.05,
       target: "ground",
       count: 1,
       radius: 20
@@ -73,11 +72,11 @@
       cost: 2,
       role: "Melee",
       emoji: "🪓",
-      hp: 180,
-      damage: 42,
-      speed: 16,
-      range: 24,
-      attackSpeed: 0.85,
+      hp: 260,
+      damage: 56,
+      speed: 18,
+      range: 22,
+      attackSpeed: 0.8,
       target: "ground",
       count: 1,
       radius: 18
@@ -88,10 +87,10 @@
       cost: 3,
       role: "Ranged",
       emoji: "🏹",
-      hp: 150,
-      damage: 24,
-      speed: 11,
-      range: 96,
+      hp: 220,
+      damage: 36,
+      speed: 12,
+      range: 120,
       attackSpeed: 0.95,
       target: "all",
       count: 1,
@@ -103,13 +102,13 @@
       cost: 4,
       role: "Caster",
       emoji: "🔥",
-      hp: 155,
-      damage: 38,
-      speed: 10,
-      range: 92,
+      hp: 210,
+      damage: 58,
+      speed: 11,
+      range: 108,
       attackSpeed: 1.25,
       target: "all",
-      splash: 22,
+      splash: 20,
       count: 1,
       radius: 17
     },
@@ -119,9 +118,9 @@
       cost: 4,
       role: "Siege",
       emoji: "🐏",
-      hp: 300,
-      damage: 72,
-      speed: 18,
+      hp: 420,
+      damage: 120,
+      speed: 20,
       range: 20,
       attackSpeed: 1.35,
       target: "buildings",
@@ -134,11 +133,11 @@
       cost: 3,
       role: "Swarm",
       emoji: "🐺",
-      hp: 85,
-      damage: 15,
-      speed: 20,
-      range: 18,
-      attackSpeed: 0.62,
+      hp: 120,
+      damage: 21,
+      speed: 22,
+      range: 16,
+      attackSpeed: 0.58,
       target: "ground",
       count: 3,
       radius: 13
@@ -149,14 +148,14 @@
       cost: 3,
       role: "Structure",
       emoji: "🔷",
-      hp: 400,
-      damage: 18,
+      hp: 620,
+      damage: 24,
       speed: 0,
-      range: 82,
-      attackSpeed: 1.05,
+      range: 96,
+      attackSpeed: 1.0,
       target: "all",
       structure: true,
-      lifetime: 24,
+      lifetime: 28,
       count: 1,
       radius: 18
     },
@@ -167,8 +166,8 @@
       role: "Spell",
       emoji: "💥",
       spell: true,
-      damage: 85,
-      radiusSpell: 14
+      damage: 120,
+      radiusSpell: 13
     },
     {
       id: "stone_brute",
@@ -176,11 +175,11 @@
       cost: 5,
       role: "Heavy Tank",
       emoji: "🪨",
-      hp: 520,
-      damage: 32,
+      hp: 760,
+      damage: 42,
       speed: 8,
-      range: 24,
-      attackSpeed: 1.18,
+      range: 22,
+      attackSpeed: 1.15,
       target: "ground",
       count: 1,
       radius: 22
@@ -191,11 +190,11 @@
       cost: 4,
       role: "Burst",
       emoji: "⚙️",
-      hp: 145,
-      damage: 78,
+      hp: 180,
+      damage: 140,
       speed: 10,
-      range: 110,
-      attackSpeed: 1.75,
+      range: 128,
+      attackSpeed: 1.8,
       target: "all",
       count: 1,
       radius: 17
@@ -206,11 +205,11 @@
       cost: 2,
       role: "Chip",
       emoji: "🎯",
-      hp: 120,
-      damage: 18,
-      speed: 12,
-      range: 118,
-      attackSpeed: 0.78,
+      hp: 170,
+      damage: 24,
+      speed: 13,
+      range: 132,
+      attackSpeed: 0.72,
       target: "all",
       count: 1,
       radius: 15
@@ -221,11 +220,11 @@
       cost: 4,
       role: "DPS",
       emoji: "⚔️",
-      hp: 230,
-      damage: 24,
-      speed: 15,
-      range: 20,
-      attackSpeed: 0.48,
+      hp: 320,
+      damage: 34,
+      speed: 16,
+      range: 18,
+      attackSpeed: 0.42,
       target: "ground",
       count: 1,
       radius: 18
@@ -244,6 +243,8 @@
   ];
 
   const SHOP_ROTATION_SIZE = 4;
+  const MAX_ELIXIR = 10;
+  const BATTLE_LENGTH = 180;
 
   const $ = (id) => document.getElementById(id);
   const $$ = (selector) => Array.from(document.querySelectorAll(selector));
@@ -268,7 +269,13 @@
     battle: null,
     authMode: "login",
     animationFrame: null,
-    lastFrameTs: 0
+    lastFrameTs: 0,
+    drag: {
+      active: false,
+      handIndex: null,
+      ghost: null,
+      pointerId: null
+    }
   };
 
   init();
@@ -742,6 +749,16 @@
     }));
   }
 
+  function getTowerStatsForTrophies(trophies) {
+    const tier = Math.floor(trophies / 200);
+    return {
+      crownHp: 1400 + tier * 120,
+      kingHp: 2400 + tier * 180,
+      crownDamage: 42 + tier * 3,
+      kingDamage: 54 + tier * 4
+    };
+  }
+
   function showScreen(name) {
     Object.values(screens).forEach((screen) => screen?.classList.remove("active"));
     screens[name]?.classList.add("active");
@@ -1007,14 +1024,14 @@
     if (!state.battle) {
       if ($("battlePlayerName")) $("battlePlayerName").textContent = state.save.username || "Guest";
       if ($("battleOpponentName")) $("battleOpponentName").textContent = "Unknown";
-      setBattleFlux(0);
-      if ($("battleTime")) $("battleTime").textContent = "60";
-      if ($("playerLeftHp")) $("playerLeftHp").textContent = "100";
-      if ($("playerRightHp")) $("playerRightHp").textContent = "100";
-      if ($("playerKingHp")) $("playerKingHp").textContent = "200";
-      if ($("enemyLeftHp")) $("enemyLeftHp").textContent = "100";
-      if ($("enemyRightHp")) $("enemyRightHp").textContent = "100";
-      if ($("enemyKingHp")) $("enemyKingHp").textContent = "200";
+      setBattleElixir(0, 0);
+      if ($("battleTime")) $("battleTime").textContent = String(BATTLE_LENGTH);
+      if ($("playerLeftHp")) $("playerLeftHp").textContent = "0";
+      if ($("playerRightHp")) $("playerRightHp").textContent = "0";
+      if ($("playerKingHp")) $("playerKingHp").textContent = "0";
+      if ($("enemyLeftHp")) $("enemyLeftHp").textContent = "0";
+      if ($("enemyRightHp")) $("enemyRightHp").textContent = "0";
+      if ($("enemyKingHp")) $("enemyKingHp").textContent = "0";
       if ($("hand")) $("hand").innerHTML = `<div class="notice">No active battle.</div>`;
       if ($("battleLogLines")) $("battleLogLines").innerHTML = "No actions yet.";
       if ($("arenaUnits")) $("arenaUnits").innerHTML = "";
@@ -1026,7 +1043,7 @@
     if ($("battlePlayerName")) $("battlePlayerName").textContent = battle.playerName;
     if ($("battleOpponentName")) $("battleOpponentName").textContent = battle.opponentName;
     if ($("battleTime")) $("battleTime").textContent = String(Math.max(0, Math.ceil(battle.timeLeft)));
-    setBattleFlux(battle.flux);
+    setBattleElixir(battle.player.elixir, battle.enemy.elixir);
 
     if ($("playerLeftHp")) $("playerLeftHp").textContent = String(Math.max(0, Math.round(battle.towers.player.left.hp)));
     if ($("playerRightHp")) $("playerRightHp").textContent = String(Math.max(0, Math.round(battle.towers.player.right.hp)));
@@ -1040,12 +1057,14 @@
     renderUnits();
   }
 
-  function setBattleFlux(value) {
+  function setBattleElixir(playerValue, enemyValue) {
     document.querySelectorAll("[id='battleFlux']").forEach((node) => {
-      node.textContent = String(value);
+      node.textContent = String(playerValue);
     });
-    const percent = Math.max(0, Math.min(100, (value / 10) * 100));
-    if ($("elixirBar")) $("elixirBar").style.width = `${percent}%`;
+    if ($("elixirBar")) {
+      const percent = Math.max(0, Math.min(100, (playerValue / MAX_ELIXIR) * 100));
+      $("elixirBar").style.width = `${percent}%`;
+    }
   }
 
   function renderHand() {
@@ -1054,9 +1073,10 @@
 
     hand.innerHTML = state.battle.player.hand.map((cardId, index) => {
       const card = getCard(cardId);
-      const disabled = state.battle.flux < card.cost || state.battle.finished;
+      const disabled = state.battle.player.elixir < card.cost || state.battle.finished;
+
       return `
-        <button class="hand-card ${disabled ? "disabled" : ""}" data-play-card="${index}" ${disabled ? "disabled" : ""}>
+        <button class="hand-card ${disabled ? "disabled" : ""}" data-hand-index="${index}" ${disabled ? "disabled" : ""}>
           <div class="cost-bubble">${card.cost}</div>
           <div style="font-size:1.4rem;">${card.emoji}</div>
           <div class="name">${card.name}</div>
@@ -1065,12 +1085,125 @@
       `;
     }).join("");
 
-    $$("[data-play-card]").forEach((btn) => {
+    $$("[data-hand-index]").forEach((btn) => {
+      const index = Number(btn.dataset.handIndex);
+
       btn.addEventListener("click", () => {
         if (!state.battle || state.battle.finished) return;
-        playPlayerCard(Number(btn.dataset.playCard));
+        state.battle.selectedHandIndex = index;
+      });
+
+      btn.addEventListener("pointerdown", (e) => {
+        if (!state.battle || state.battle.finished) return;
+        startDrag(index, e);
       });
     });
+
+    wireArenaDrop();
+  }
+
+  function wireArenaDrop() {
+    const arena = document.querySelector(".arena");
+    if (!arena || arena.dataset.dragWired === "1") return;
+    arena.dataset.dragWired = "1";
+
+    arena.addEventListener("pointermove", onArenaPointerMove);
+    arena.addEventListener("pointerup", onArenaPointerUp);
+    arena.addEventListener("pointercancel", cancelDrag);
+    arena.addEventListener("click", onArenaClickDeploy);
+  }
+
+  function startDrag(handIndex, event) {
+    const battle = state.battle;
+    if (!battle || battle.finished) return;
+
+    const cardId = battle.player.hand[handIndex];
+    const card = getCard(cardId);
+    if (!card || battle.player.elixir < card.cost) return;
+
+    cancelDrag();
+
+    state.drag.active = true;
+    state.drag.handIndex = handIndex;
+    state.drag.pointerId = event.pointerId;
+
+    const ghost = document.createElement("div");
+    ghost.className = "hand-card";
+    ghost.style.position = "fixed";
+    ghost.style.left = `${event.clientX - 48}px`;
+    ghost.style.top = `${event.clientY - 56}px`;
+    ghost.style.width = "96px";
+    ghost.style.height = "112px";
+    ghost.style.zIndex = "1000";
+    ghost.style.pointerEvents = "none";
+    ghost.style.opacity = "0.92";
+    ghost.style.transform = "scale(1.02)";
+    ghost.innerHTML = `
+      <div class="cost-bubble">${card.cost}</div>
+      <div style="font-size:1.4rem;">${card.emoji}</div>
+      <div class="name">${card.name}</div>
+      <div class="mini">${card.role}</div>
+    `;
+    document.body.appendChild(ghost);
+    state.drag.ghost = ghost;
+  }
+
+  function onArenaPointerMove(event) {
+    if (!state.drag.active || !state.drag.ghost) return;
+    state.drag.ghost.style.left = `${event.clientX - 48}px`;
+    state.drag.ghost.style.top = `${event.clientY - 56}px`;
+  }
+
+  function onArenaPointerUp(event) {
+    if (!state.drag.active) return;
+    tryDeployDraggedCard(event);
+  }
+
+  function onArenaClickDeploy(event) {
+    const battle = state.battle;
+    if (!battle || battle.finished) return;
+    if (state.drag.active) return;
+    if (battle.selectedHandIndex == null) return;
+
+    deployPlayerCardAtPointer(battle.selectedHandIndex, event);
+    battle.selectedHandIndex = null;
+  }
+
+  function tryDeployDraggedCard(event) {
+    const handIndex = state.drag.handIndex;
+    cancelDrag();
+    if (handIndex == null) return;
+    deployPlayerCardAtPointer(handIndex, event);
+  }
+
+  function cancelDrag() {
+    state.drag.active = false;
+    state.drag.handIndex = null;
+    state.drag.pointerId = null;
+    if (state.drag.ghost) {
+      state.drag.ghost.remove();
+      state.drag.ghost = null;
+    }
+  }
+
+  function deployPlayerCardAtPointer(handIndex, event) {
+    const battle = state.battle;
+    if (!battle || battle.finished) return;
+
+    const arena = document.querySelector(".arena");
+    if (!arena) return;
+
+    const rect = arena.getBoundingClientRect();
+    const xPct = clamp(((event.clientX - rect.left) / rect.width) * 100, 6, 94);
+    const yPctRaw = clamp(((event.clientY - rect.top) / rect.height) * 100, 6, 94);
+
+    if (yPctRaw < 54) {
+      battle.log.push("You can only place cards on your side of the arena.");
+      renderBattleLog();
+      return;
+    }
+
+    playPlayerCard(handIndex, xPct, yPctRaw);
   }
 
   function renderBattleLog() {
@@ -1124,37 +1257,42 @@
   function beginBattle() {
     cancelAnimationFrame(state.animationFrame);
     state.lastFrameTs = 0;
+    cancelDrag();
 
     const playerName = state.save.username || "Guest";
     const opponentName = pickOpponentUsername(playerName);
+    const towerStats = getTowerStatsForTrophies(state.save.trophies);
 
     state.battle = {
       playerName,
       opponentName,
-      timeLeft: 60,
-      flux: 0,
-      fluxTimer: 0,
+      timeLeft: BATTLE_LENGTH,
       finished: false,
       log: [`Match found against ${opponentName}.`],
+      selectedHandIndex: null,
       player: {
+        elixir: 0,
+        elixirTimer: 0,
         drawQueue: [...state.save.deck],
         hand: [...state.save.deck.slice(0, 4)]
       },
       enemy: {
+        elixir: 0,
+        elixirTimer: 0,
         drawQueue: shuffle([...state.save.deck]),
         hand: shuffle([...state.save.deck]).slice(0, 4),
         thinkTimer: 1.0
       },
       towers: {
         player: {
-          left: { x: 14, y: 83, hp: 100, maxHp: 100, type: "crown" },
-          right: { x: 86, y: 83, hp: 100, maxHp: 100, type: "crown" },
-          king: { x: 50, y: 94, hp: 200, maxHp: 200, type: "king" }
+          left: { x: 14, y: 83, hp: towerStats.crownHp, maxHp: towerStats.crownHp, damage: towerStats.crownDamage, type: "crown", cooldown: 0, range: 105 },
+          right: { x: 86, y: 83, hp: towerStats.crownHp, maxHp: towerStats.crownHp, damage: towerStats.crownDamage, type: "crown", cooldown: 0, range: 105 },
+          king: { x: 50, y: 94, hp: towerStats.kingHp, maxHp: towerStats.kingHp, damage: towerStats.kingDamage, type: "king", cooldown: 0, range: 118 }
         },
         enemy: {
-          left: { x: 14, y: 17, hp: 100, maxHp: 100, type: "crown" },
-          right: { x: 86, y: 17, hp: 100, maxHp: 100, type: "crown" },
-          king: { x: 50, y: 6, hp: 200, maxHp: 200, type: "king" }
+          left: { x: 14, y: 17, hp: towerStats.crownHp, maxHp: towerStats.crownHp, damage: towerStats.crownDamage, type: "crown", cooldown: 0, range: 105 },
+          right: { x: 86, y: 17, hp: towerStats.crownHp, maxHp: towerStats.crownHp, damage: towerStats.crownDamage, type: "crown", cooldown: 0, range: 105 },
+          king: { x: 50, y: 6, hp: towerStats.kingHp, maxHp: towerStats.kingHp, damage: towerStats.kingDamage, type: "king", cooldown: 0, range: 118 }
         }
       },
       units: [],
@@ -1175,19 +1313,11 @@
     const battle = state.battle;
 
     battle.timeLeft -= dt;
-    battle.fluxTimer += dt;
-    if (battle.fluxTimer >= 1.15) {
-      battle.fluxTimer = 0;
-      battle.flux = Math.min(10, battle.flux + 1);
-    }
 
-    battle.enemy.thinkTimer -= dt;
-    if (battle.enemy.thinkTimer <= 0) {
-      battle.enemy.thinkTimer = 1.2 + Math.random() * 0.9;
-      botPlayCard();
-    }
-
+    updateElixir(dt);
+    updateBot(dt);
     updateUnits(dt);
+    updateTowers(dt);
     cleanupDeadUnits();
 
     if (battle.timeLeft <= 0) {
@@ -1209,50 +1339,77 @@
     state.animationFrame = requestAnimationFrame(battleLoop);
   }
 
-  function playPlayerCard(index) {
+  function updateElixir(dt) {
     const battle = state.battle;
-    if (!battle || battle.finished) return;
+    if (!battle) return;
 
-    const cardId = battle.player.hand[index];
-    const card = getCard(cardId);
-    if (!card || battle.flux < card.cost) return;
+    battle.player.elixirTimer += dt;
+    battle.enemy.elixirTimer += dt;
 
-    battle.flux -= card.cost;
-    battle.log.push(`${battle.playerName} played ${card.name}.`);
-
-    if (card.spell) {
-      castSpell("player", card);
-    } else {
-      spawnCardUnits("player", card);
+    if (battle.player.elixirTimer >= 1.15) {
+      battle.player.elixirTimer = 0;
+      battle.player.elixir = Math.min(MAX_ELIXIR, battle.player.elixir + 1);
     }
 
-    cycleHandCard("player", index);
-    renderBattleUi();
+    if (battle.enemy.elixirTimer >= 1.15) {
+      battle.enemy.elixirTimer = 0;
+      battle.enemy.elixir = Math.min(MAX_ELIXIR, battle.enemy.elixir + 1);
+    }
   }
 
-  function botPlayCard() {
+  function updateBot(dt) {
     const battle = state.battle;
-    if (!battle || battle.finished) return;
+    if (!battle) return;
+
+    battle.enemy.thinkTimer -= dt;
+    if (battle.enemy.thinkTimer > 0) return;
+
+    battle.enemy.thinkTimer = 1.1 + Math.random() * 0.75;
 
     const playable = battle.enemy.hand
       .map((id, index) => ({ id, index, card: getCard(id) }))
-      .filter((entry) => entry.card && entry.card.cost <= battle.flux);
+      .filter((entry) => entry.card && entry.card.cost <= battle.enemy.elixir);
 
     if (!playable.length) return;
 
     playable.sort((a, b) => b.card.cost - a.card.cost);
     const pick = playable[0];
 
-    battle.flux -= pick.card.cost;
+    const laneLeft = Math.random() < 0.5;
+    const x = laneLeft ? 28 + Math.random() * 8 : 64 + Math.random() * 8;
+    const y = pick.card.spell ? 66 + Math.random() * 8 : 18 + Math.random() * 6;
+
+    battle.enemy.elixir -= pick.card.cost;
     battle.log.push(`${battle.opponentName} played ${pick.card.name}.`);
 
     if (pick.card.spell) {
-      castSpell("enemy", pick.card);
+      castSpell("enemy", pick.card, x, y);
     } else {
-      spawnCardUnits("enemy", pick.card);
+      spawnCardUnits("enemy", pick.card, x, 18 + Math.random() * 6);
     }
 
     cycleHandCard("enemy", pick.index);
+  }
+
+  function playPlayerCard(index, xPct, yPct) {
+    const battle = state.battle;
+    if (!battle || battle.finished) return;
+
+    const cardId = battle.player.hand[index];
+    const card = getCard(cardId);
+    if (!card || battle.player.elixir < card.cost) return;
+
+    battle.player.elixir -= card.cost;
+    battle.log.push(`${battle.playerName} played ${card.name}.`);
+
+    if (card.spell) {
+      castSpell("player", card, xPct, yPct);
+    } else {
+      spawnCardUnits("player", card, xPct, yPct);
+    }
+
+    cycleHandCard("player", index);
+    renderBattleUi();
   }
 
   function cycleHandCard(side, index) {
@@ -1266,35 +1423,40 @@
     holder.hand.push(next);
   }
 
-  function castSpell(side, card) {
+  function castSpell(side, card, xPct, yPct) {
     const enemySide = side === "player" ? "enemy" : "player";
-    const targets = state.battle.units.filter((u) => u.side === enemySide);
+    const radius = card.radiusSpell || 12;
+    let hitSomething = false;
 
-    if (targets.length) {
-      targets.forEach((unit) => {
+    state.battle.units.forEach((unit) => {
+      if (unit.side !== enemySide) return;
+      if (distancePoints(unit.x, unit.y, xPct, yPct) <= radius) {
         unit.hp -= card.damage;
-      });
-      state.battle.log.push(`${side === "player" ? state.battle.playerName : state.battle.opponentName} used ${card.name} for ${card.damage} area damage.`);
-      return;
+        hitSomething = true;
+      }
+    });
+
+    for (const tower of Object.values(state.battle.towers[enemySide])) {
+      if (tower.hp <= 0) continue;
+      if (distancePoints(tower.x, tower.y, xPct, yPct) <= radius) {
+        const hit = Math.round(card.damage * 0.7);
+        tower.hp -= hit;
+        hitSomething = true;
+      }
     }
 
-    const tower = choosePriorityTower(enemySide);
-    if (tower) {
-      const hit = Math.round(card.damage * 0.8);
-      tower.hp -= hit;
-      state.battle.log.push(`${card.name} hit a tower for ${hit}.`);
+    if (hitSomething) {
+      state.battle.log.push(`${side === "player" ? state.battle.playerName : state.battle.opponentName} used ${card.name}.`);
     }
   }
 
-  function spawnCardUnits(side, card) {
+  function spawnCardUnits(side, card, baseX, baseY) {
     const stats = scaledUnitStats(card);
     const count = card.count || 1;
-    const baseX = Math.random() < 0.5 ? 30 : 70;
-    const baseY = side === "player" ? 82 : 18;
 
     for (let i = 0; i < count; i++) {
-      const spreadX = count === 1 ? 0 : (i - (count - 1) / 2) * 4;
-      const spreadY = count === 1 ? 0 : (i % 2 === 0 ? 1.2 : -1.2);
+      const spreadX = count === 1 ? 0 : (i - (count - 1) / 2) * 3.5;
+      const spreadY = count === 1 ? 0 : (i % 2 === 0 ? 1.1 : -1.1);
 
       state.battle.units.push({
         uid: `u_${state.battle.idSeq++}`,
@@ -1309,7 +1471,7 @@
         speed: card.speed || 12,
         range: card.range || 22,
         attackSpeed: card.attackSpeed || 1,
-        attackCd: Math.random() * 0.3,
+        attackCd: Math.random() * 0.25,
         targetMode: card.target || "ground",
         radius: card.radius || 18,
         splash: card.splash || 0,
@@ -1340,9 +1502,9 @@
       const dx = target.x - unit.x;
       const dy = target.y - unit.y;
       const dist = Math.hypot(dx, dy);
-      const attackRangePercent = unit.range / 18;
+      const rangePct = unit.range / 18;
 
-      if (dist <= attackRangePercent) {
+      if (dist <= rangePct) {
         if (unit.attackCd <= 0) {
           dealUnitAttack(unit, target);
           unit.attackCd = unit.attackSpeed;
@@ -1355,6 +1517,44 @@
     }
   }
 
+  function updateTowers(dt) {
+    const battle = state.battle;
+    if (!battle) return;
+
+    for (const sideKey of ["player", "enemy"]) {
+      const enemySide = sideKey === "player" ? "enemy" : "player";
+
+      for (const tower of Object.values(battle.towers[sideKey])) {
+        if (tower.hp <= 0) continue;
+        tower.cooldown -= dt;
+
+        const target = findClosestEnemyUnit(tower, enemySide, tower.range / 18);
+        if (!target) continue;
+
+        if (tower.cooldown <= 0) {
+          target.hp -= tower.damage;
+          tower.cooldown = tower.type === "king" ? 1.05 : 0.95;
+        }
+      }
+    }
+  }
+
+  function findClosestEnemyUnit(origin, enemySide, maxDist) {
+    let best = null;
+    let bestDist = Infinity;
+
+    for (const unit of state.battle.units) {
+      if (unit.side !== enemySide) continue;
+      const d = distancePoints(origin.x, origin.y, unit.x, unit.y);
+      if (d <= maxDist && d < bestDist) {
+        bestDist = d;
+        best = unit;
+      }
+    }
+
+    return best;
+  }
+
   function findUnitTarget(unit) {
     const enemySide = unit.side === "player" ? "enemy" : "player";
 
@@ -1364,7 +1564,7 @@
     if (unit.targetMode !== "buildings") {
       for (const other of state.battle.units) {
         if (other.side !== enemySide) continue;
-        const d = distance(unit, other);
+        const d = distancePoints(unit.x, unit.y, other.x, other.y);
         if (d < bestDist) {
           bestDist = d;
           best = other;
@@ -1374,7 +1574,7 @@
 
     const tower = choosePriorityTower(enemySide, unit.x);
     if (tower) {
-      const d = Math.hypot(tower.x - unit.x, tower.y - unit.y);
+      const d = distancePoints(unit.x, unit.y, tower.x, tower.y);
       if (d < bestDist || unit.targetMode === "buildings") {
         best = tower;
       }
@@ -1405,7 +1605,7 @@
       if (unit.splash) {
         for (const other of state.battle.units) {
           if (other.side !== target.side || other === target) continue;
-          if (distance(target, other) <= unit.splash / 18) {
+          if (distancePoints(target.x, target.y, other.x, other.y) <= unit.splash / 18) {
             other.hp -= Math.round(unit.damage * 0.55);
           }
         }
@@ -1417,17 +1617,14 @@
   }
 
   function cleanupDeadUnits() {
+    if (!state.battle) return;
     state.battle.units = state.battle.units.filter((u) => u.hp > 0);
-    clampTowerHp(state.battle.towers.player.left);
-    clampTowerHp(state.battle.towers.player.right);
-    clampTowerHp(state.battle.towers.player.king);
-    clampTowerHp(state.battle.towers.enemy.left);
-    clampTowerHp(state.battle.towers.enemy.right);
-    clampTowerHp(state.battle.towers.enemy.king);
-  }
 
-  function clampTowerHp(tower) {
-    tower.hp = Math.max(0, tower.hp);
+    for (const sideKey of ["player", "enemy"]) {
+      for (const tower of Object.values(state.battle.towers[sideKey])) {
+        tower.hp = Math.max(0, tower.hp);
+      }
+    }
   }
 
   function decideWinnerOnTime() {
@@ -1449,6 +1646,7 @@
     battle.finished = true;
     cancelAnimationFrame(state.animationFrame);
     state.animationFrame = null;
+    cancelDrag();
 
     let coins = 0;
     let trophiesDelta = 0;
@@ -1505,6 +1703,7 @@
     state.animationFrame = null;
     state.battle = null;
     state.lastFrameTs = 0;
+    cancelDrag();
     renderAll();
     showScreen("home");
   }
@@ -1514,8 +1713,8 @@
     return filtered[Math.floor(Math.random() * filtered.length)] || "ArenaRival";
   }
 
-  function distance(a, b) {
-    return Math.hypot(a.x - b.x, a.y - b.y);
+  function distancePoints(x1, y1, x2, y2) {
+    return Math.hypot(x1 - x2, y1 - y2);
   }
 
   function clamp(n, min, max) {
