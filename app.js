@@ -3,24 +3,23 @@
 
   const APP_CONFIG = {
     firebase: {
-      apiKey: "AIzaSyDm-S4Aq-BkXUdJsJA-UO_XpRO_gipPGP8",
-  authDomain: "clash-app-31ad2.firebaseapp.com",
-  projectId: "clash-app-31ad2",
-  storageBucket: "clash-app-31ad2.firebasestorage.app",
-  messagingSenderId: "1043745907914",
-  appId: "1:1043745907914:web:f158b76896b36f8b8a8033",
+      apiKey: "REPLACE_ME",
+      authDomain: "REPLACE_ME.firebaseapp.com",
+      projectId: "REPLACE_ME",
+      storageBucket: "REPLACE_ME.appspot.com",
+      messagingSenderId: "1234567890",
+      appId: "1:1234567890:web:REPLACE_ME"
     }
   };
 
-  const LOCAL_SAVE_KEY = "siege_cards_phase6_local_save_v1";
+  const LOCAL_SAVE_KEY = "siege_cards_phase7_local_save_v1";
   const CLOUD_SAVE_COLLECTION = "gameSaves";
   const PROFILE_COLLECTION = "profiles";
   const USERNAME_COLLECTION = "usernames";
 
   const USERNAME_REGEX = /^[A-Za-z][A-Za-z0-9_]{2,15}$/;
 
-
-  const BOT_USERNAMES = [
+  const BOT_NAMES = [
     "RivenVale",
     "TalonForge",
     "MiraBloom",
@@ -52,18 +51,184 @@
   ];
 
   const CARDS = [
-    { id: "iron_guard", name: "Iron Guard", cost: 3, role: "Tank", emoji: "🛡️", power: 16, hp: 24 },
-    { id: "axe_runner", name: "Axe Runner", cost: 2, role: "Melee", emoji: "🪓", power: 12, hp: 14 },
-    { id: "arc_archer", name: "Arc Archer", cost: 3, role: "Ranged", emoji: "🏹", power: 15, hp: 12 },
-    { id: "ember_mage", name: "Ember Mage", cost: 4, role: "Spellcaster", emoji: "🔥", power: 22, hp: 11 },
-    { id: "siege_ram", name: "Siege Ram", cost: 4, role: "Siege", emoji: "🐏", power: 26, hp: 20 },
-    { id: "wolf_pack", name: "Wolf Pack", cost: 3, role: "Swarm", emoji: "🐺", power: 18, hp: 10 },
-    { id: "shield_node", name: "Shield Node", cost: 3, role: "Structure", emoji: "🔷", power: 10, hp: 26 },
-    { id: "fire_burst", name: "Fire Burst", cost: 4, role: "Spell", emoji: "💥", power: 24, hp: 0 },
-    { id: "stone_brute", name: "Stone Brute", cost: 5, role: "Heavy Tank", emoji: "🪨", power: 24, hp: 34 },
-    { id: "spark_bot", name: "Spark Bot", cost: 4, role: "Burst", emoji: "⚙️", power: 25, hp: 12 },
-    { id: "dart_hunter", name: "Dart Hunter", cost: 2, role: "Chip", emoji: "🎯", power: 10, hp: 11 },
-    { id: "twin_blade", name: "Twin Blade", cost: 4, role: "DPS", emoji: "⚔️", power: 23, hp: 16 }
+    {
+      id: "iron_guard",
+      name: "Iron Guard",
+      cost: 3,
+      role: "Tank",
+      emoji: "🛡️",
+      power: 12,
+      hp: 34,
+      speed: 12,
+      range: 30,
+      attackSpeed: 1.1,
+      target: "ground",
+      count: 1,
+      radius: 20
+    },
+    {
+      id: "axe_runner",
+      name: "Axe Runner",
+      cost: 2,
+      role: "Melee",
+      emoji: "🪓",
+      power: 13,
+      hp: 18,
+      speed: 20,
+      range: 26,
+      attackSpeed: 0.85,
+      target: "ground",
+      count: 1,
+      radius: 18
+    },
+    {
+      id: "arc_archer",
+      name: "Arc Archer",
+      cost: 3,
+      role: "Ranged",
+      emoji: "🏹",
+      power: 10,
+      hp: 16,
+      speed: 14,
+      range: 115,
+      attackSpeed: 1.0,
+      target: "all",
+      count: 1,
+      radius: 17
+    },
+    {
+      id: "ember_mage",
+      name: "Ember Mage",
+      cost: 4,
+      role: "Caster",
+      emoji: "🔥",
+      power: 16,
+      hp: 15,
+      speed: 13,
+      range: 105,
+      attackSpeed: 1.3,
+      target: "all",
+      splash: 24,
+      count: 1,
+      radius: 17
+    },
+    {
+      id: "siege_ram",
+      name: "Siege Ram",
+      cost: 4,
+      role: "Siege",
+      emoji: "🐏",
+      power: 22,
+      hp: 26,
+      speed: 22,
+      range: 28,
+      attackSpeed: 1.3,
+      target: "buildings",
+      count: 1,
+      radius: 20
+    },
+    {
+      id: "wolf_pack",
+      name: "Wolf Pack",
+      cost: 3,
+      role: "Swarm",
+      emoji: "🐺",
+      power: 7,
+      hp: 10,
+      speed: 24,
+      range: 18,
+      attackSpeed: 0.65,
+      target: "ground",
+      count: 3,
+      radius: 14
+    },
+    {
+      id: "shield_node",
+      name: "Shield Node",
+      cost: 3,
+      role: "Structure",
+      emoji: "🔷",
+      power: 8,
+      hp: 42,
+      speed: 0,
+      range: 95,
+      attackSpeed: 1.1,
+      target: "all",
+      structure: true,
+      lifetime: 24,
+      count: 1,
+      radius: 18
+    },
+    {
+      id: "fire_burst",
+      name: "Fire Burst",
+      cost: 4,
+      role: "Spell",
+      emoji: "💥",
+      spell: true,
+      damage: 28,
+      radiusSpell: 55
+    },
+    {
+      id: "stone_brute",
+      name: "Stone Brute",
+      cost: 5,
+      role: "Heavy Tank",
+      emoji: "🪨",
+      power: 15,
+      hp: 52,
+      speed: 10,
+      range: 26,
+      attackSpeed: 1.2,
+      target: "ground",
+      count: 1,
+      radius: 22
+    },
+    {
+      id: "spark_bot",
+      name: "Spark Bot",
+      cost: 4,
+      role: "Burst",
+      emoji: "⚙️",
+      power: 24,
+      hp: 14,
+      speed: 11,
+      range: 120,
+      attackSpeed: 1.8,
+      target: "all",
+      count: 1,
+      radius: 17
+    },
+    {
+      id: "dart_hunter",
+      name: "Dart Hunter",
+      cost: 2,
+      role: "Chip",
+      emoji: "🎯",
+      power: 8,
+      hp: 12,
+      speed: 15,
+      range: 128,
+      attackSpeed: 0.85,
+      target: "all",
+      count: 1,
+      radius: 15
+    },
+    {
+      id: "twin_blade",
+      name: "Twin Blade",
+      cost: 4,
+      role: "DPS",
+      emoji: "⚔️",
+      power: 11,
+      hp: 22,
+      speed: 17,
+      range: 22,
+      attackSpeed: 0.5,
+      target: "ground",
+      count: 1,
+      radius: 18
+    }
   ];
 
   const STARTER_DECK = [
@@ -79,14 +244,14 @@
 
   const SHOP_ROTATION_SIZE = 4;
 
-  const el = (id) => document.getElementById(id);
-  const qsa = (selector) => Array.from(document.querySelectorAll(selector));
+  const $ = (id) => document.getElementById(id);
+  const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
   const screens = {
-    home: el("screen-home"),
-    deck: el("screen-deck"),
-    collection: el("screen-collection"),
-    battle: el("screen-battle")
+    home: $("screen-home"),
+    deck: $("screen-deck"),
+    collection: $("screen-collection"),
+    battle: $("screen-battle")
   };
 
   const state = {
@@ -100,67 +265,63 @@
     currentUser: null,
     currentProfile: null,
     battle: null,
-    battleTimerId: null,
-    battleBotTimerId: null,
-    authMode: "login"
+    authMode: "login",
+    animationFrame: null,
+    lastFrameTs: 0
   };
 
   init();
 
   async function init() {
-    wireStaticUi();
+    wireUi();
     renderAll();
     await initFirebase();
     renderAll();
   }
 
-  function wireStaticUi() {
-    el("btnPlay")?.addEventListener("click", startMatchmakingFlow);
-    el("btnDeck")?.addEventListener("click", () => showScreen("deck"));
-    el("btnCollection")?.addEventListener("click", () => showScreen("collection"));
-    el("btnShop")?.addEventListener("click", openShop);
-    el("btnHistory")?.addEventListener("click", openHistory);
-    el("btnSettings")?.addEventListener("click", openSettings);
-    el("btnRefreshShop")?.addEventListener("click", async () => {
+  function wireUi() {
+    $("btnPlay")?.addEventListener("click", startMatchmakingFlow);
+    $("btnDeck")?.addEventListener("click", () => showScreen("deck"));
+    $("btnCollection")?.addEventListener("click", () => showScreen("collection"));
+    $("btnShop")?.addEventListener("click", openShop);
+    $("btnHistory")?.addEventListener("click", openHistory);
+    $("btnSettings")?.addEventListener("click", openSettings);
+    $("btnRefreshShop")?.addEventListener("click", async () => {
       state.save.shop = rotateShop();
       await persistSave();
       openShop();
     });
 
-    qsa("[data-home]").forEach((btn) => {
+    $$("[data-home]").forEach((btn) => {
       btn.addEventListener("click", () => showScreen("home"));
     });
 
-    el("btnOpenAuth")?.addEventListener("click", openAuthModal);
-    el("btnCloseAuth")?.addEventListener("click", closeAuthModal);
-    el("btnLogin")?.addEventListener("click", handleLogin);
-    el("btnSignup")?.addEventListener("click", handleSignup);
-    el("btnGuest")?.addEventListener("click", closeAuthModal);
-    el("btnLogout")?.addEventListener("click", handleLogout);
-    el("tabLogin")?.addEventListener("click", () => setAuthMode("login"));
-    el("tabSignup")?.addEventListener("click", () => setAuthMode("signup"));
+    $("btnOpenAuth")?.addEventListener("click", openAuthModal);
+    $("btnCloseAuth")?.addEventListener("click", closeAuthModal);
+    $("btnLogin")?.addEventListener("click", handleLogin);
+    $("btnSignup")?.addEventListener("click", handleSignup);
+    $("btnGuest")?.addEventListener("click", closeAuthModal);
+    $("btnLogout")?.addEventListener("click", handleLogout);
+    $("tabLogin")?.addEventListener("click", () => setAuthMode("login"));
+    $("tabSignup")?.addEventListener("click", () => setAuthMode("signup"));
 
-    el("closeShop")?.addEventListener("click", closeShop);
-    el("closeHistory")?.addEventListener("click", closeHistory);
-    el("closeSettings")?.addEventListener("click", closeSettings);
+    $("closeShop")?.addEventListener("click", closeShop);
+    $("closeHistory")?.addEventListener("click", closeHistory);
+    $("closeSettings")?.addEventListener("click", closeSettings);
 
-    el("toggleSound")?.addEventListener("click", async () => {
+    $("toggleSound")?.addEventListener("click", async () => {
       state.save.settings.soundEnabled = !state.save.settings.soundEnabled;
       await persistSave();
       renderSettings();
     });
 
-    el("feedLimitSelect")?.addEventListener("change", async (e) => {
+    $("feedLimitSelect")?.addEventListener("change", async (e) => {
       state.save.settings.feedLimit = Number(e.target.value) || 40;
       await persistSave();
     });
 
-    el("btnExitBattle")?.addEventListener("click", exitBattleToHome);
-    el("playAgain")?.addEventListener("click", () => {
-      closeResult();
-      startMatchmakingFlow();
-    });
-    el("backHome")?.addEventListener("click", () => {
+    $("btnExitBattle")?.addEventListener("click", exitBattleToHome);
+    $("backHome")?.addEventListener("click", () => {
       closeResult();
       exitBattleToHome();
     });
@@ -173,7 +334,6 @@
       const firebaseFsMod = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");
 
       const app = firebaseAppMod.initializeApp(APP_CONFIG.firebase);
-
       state.auth = firebaseAuthMod.getAuth(app);
       state.db = firebaseFsMod.getFirestore(app);
 
@@ -195,7 +355,6 @@
 
       state.firebase.onAuthStateChanged(state.auth, async (user) => {
         state.currentUser = user || null;
-
         if (state.currentUser) {
           await hydrateFromCloudAfterLogin();
         } else {
@@ -206,7 +365,7 @@
       });
     } catch (err) {
       state.firebaseReady = false;
-      state.firebaseError = "Firebase not ready. Replace config values and ensure your project is enabled.";
+      state.firebaseError = "Firebase not ready. Replace config values.";
       renderAll();
     }
   }
@@ -247,7 +406,6 @@
         ...(saveLike?.settings || {})
       }
     };
-
     if (!merged.username) merged.username = "Guest";
     return merged;
   }
@@ -276,7 +434,6 @@
 
   async function saveCloudProgress() {
     if (!state.currentUser || !state.firebaseReady) return;
-
     try {
       const saveRef = state.firebase.doc(state.db, CLOUD_SAVE_COLLECTION, state.currentUser.uid);
       await state.firebase.setDoc(
@@ -304,8 +461,7 @@
       const saveSnap = await state.firebase.getDoc(saveRef);
 
       if (saveSnap.exists()) {
-        const cloudSave = saveSnap.data()?.save;
-        state.save = hydrateSave(cloudSave);
+        state.save = hydrateSave(saveSnap.data()?.save);
       } else {
         state.save = hydrateSave(state.save);
         if (state.currentProfile?.username) {
@@ -347,14 +503,12 @@
       };
     }
 
-    return { ok: true, value: trimmed };
+    return { ok: true };
   }
 
   async function reserveUsernameForUser(uid, email, username) {
     const validation = validateUsername(username);
-    if (!validation.ok) {
-      throw new Error(validation.message);
-    }
+    if (!validation.ok) throw new Error(validation.message);
 
     const normalized = normalizeUsername(username);
     const displayUsername = username.trim();
@@ -406,9 +560,9 @@
       return;
     }
 
-    const email = (el("authEmail")?.value || "").trim();
-    const password = (el("authPassword")?.value || "").trim();
-    const username = (el("authUsername")?.value || "").trim();
+    const email = ($("authEmail")?.value || "").trim();
+    const password = ($("authPassword")?.value || "").trim();
+    const username = ($("authUsername")?.value || "").trim();
 
     if (!email || !password || !username) {
       setAuthMessage("Email, password, and username are all required.");
@@ -448,8 +602,8 @@
       return;
     }
 
-    const email = (el("authEmail")?.value || "").trim();
-    const password = (el("authPassword")?.value || "").trim();
+    const email = ($("authEmail")?.value || "").trim();
+    const password = ($("authPassword")?.value || "").trim();
 
     if (!email || !password) {
       setAuthMessage("Email and password are required.");
@@ -467,7 +621,6 @@
 
   async function handleLogout() {
     if (!state.firebaseReady || !state.currentUser) return;
-
     try {
       await persistSave();
       await state.firebase.signOut(state.auth);
@@ -483,98 +636,93 @@
   function setAuthMode(mode) {
     state.authMode = mode;
 
-    const loginTab = el("tabLogin");
-    const signupTab = el("tabSignup");
-    const loginBtn = el("btnLogin");
-    const signupBtn = el("btnSignup");
-    const usernameWrap = el("usernameWrap");
+    const loginTab = $("tabLogin");
+    const signupTab = $("tabSignup");
+    const loginBtn = $("btnLogin");
+    const signupBtn = $("btnSignup");
+    const usernameWrap = $("usernameWrap");
 
-    if (mode === "login") {
-      loginTab.className = "btn";
-      signupTab.className = "btn alt";
-      loginBtn.classList.remove("hidden");
-      signupBtn.classList.add("hidden");
-      usernameWrap.classList.add("hidden");
-    } else {
-      loginTab.className = "btn alt";
-      signupTab.className = "btn";
-      loginBtn.classList.add("hidden");
-      signupBtn.classList.remove("hidden");
-      usernameWrap.classList.remove("hidden");
+    if (loginTab && signupTab) {
+      if (mode === "login") {
+        loginTab.className = "btn";
+        signupTab.className = "btn alt";
+      } else {
+        loginTab.className = "btn alt";
+        signupTab.className = "btn";
+      }
     }
+
+    if (loginBtn) loginBtn.classList.toggle("hidden", mode !== "login");
+    if (signupBtn) signupBtn.classList.toggle("hidden", mode !== "signup");
+    if (usernameWrap) usernameWrap.classList.toggle("hidden", mode !== "signup");
   }
 
   function setAuthMessage(text) {
-    const msg = el("authMessage");
-    if (msg) msg.textContent = text;
+    const node = $("authMessage");
+    if (node) node.textContent = text;
   }
 
   function openAuthModal() {
-    setAuthMode(state.authMode || "login");
+    setAuthMode(state.authMode);
     renderAuthUi();
-    el("authModal")?.classList.add("show");
+    $("authModal")?.classList.add("show");
   }
 
   function closeAuthModal() {
-    el("authModal")?.classList.remove("show");
+    $("authModal")?.classList.remove("show");
   }
 
   function openShop() {
     renderShop();
-    el("shopModal")?.classList.add("show");
+    $("shopModal")?.classList.add("show");
   }
 
   function closeShop() {
-    el("shopModal")?.classList.remove("show");
+    $("shopModal")?.classList.remove("show");
   }
 
   function openHistory() {
     renderHistory();
-    el("historyModal")?.classList.add("show");
+    $("historyModal")?.classList.add("show");
   }
 
   function closeHistory() {
-    el("historyModal")?.classList.remove("show");
+    $("historyModal")?.classList.remove("show");
   }
 
   function openSettings() {
     renderSettings();
-    el("settingsModal")?.classList.add("show");
+    $("settingsModal")?.classList.add("show");
   }
 
   function closeSettings() {
-    el("settingsModal")?.classList.remove("show");
+    $("settingsModal")?.classList.remove("show");
   }
 
   function closeResult() {
-    el("resultModal")?.classList.remove("show");
+    $("resultModal")?.classList.remove("show");
   }
 
   function getLeagueInfo(trophies) {
     const current = LEAGUES.find((league) => trophies >= league.min && trophies <= league.max) || LEAGUES[LEAGUES.length - 1];
-    const currentIndex = LEAGUES.findIndex((league) => league.name === current.name);
-    const next = LEAGUES[Math.min(currentIndex + 1, LEAGUES.length - 1)];
-    const range = Math.max(1, current.max - current.min + 1);
-    const progress = currentIndex === LEAGUES.length - 1 ? 100 : ((trophies - current.min) / range) * 100;
-    return {
-      current,
-      next,
-      progress: Math.max(0, Math.min(100, progress))
-    };
+    return { current };
   }
 
   function getCard(cardId) {
     return CARDS.find((card) => card.id === cardId);
   }
 
-  function scaledCardPower(card) {
-    const level = state.save.cardLevels[card.id] || 1;
-    return Math.round(card.power * (1 + (level - 1) * 0.1));
+  function cardLevel(cardId) {
+    return state.save.cardLevels[cardId] || 1;
   }
 
-  function scaledCardHp(card) {
-    const level = state.save.cardLevels[card.id] || 1;
-    return Math.round(card.hp * (1 + (level - 1) * 0.1));
+  function scaledUnitStats(card) {
+    const level = cardLevel(card.id);
+    const mult = 1 + (level - 1) * 0.1;
+    return {
+      hp: Math.round((card.hp || 0) * mult),
+      power: Math.round((card.power || 0) * mult)
+    };
   }
 
   function getUpgradeCost(level) {
@@ -591,7 +739,7 @@
   }
 
   function showScreen(name) {
-    Object.values(screens).forEach((screen) => screen.classList.remove("active"));
+    Object.values(screens).forEach((screen) => screen?.classList.remove("active"));
     screens[name]?.classList.add("active");
     renderAll();
   }
@@ -608,59 +756,52 @@
   }
 
   function renderHome() {
-    const league = getLeagueInfo(state.save.trophies);
+    const league = getLeagueInfo(state.save.trophies).current;
 
-    el("homeLevel").textContent = state.save.level;
-    el("homeCoins").textContent = state.save.coins;
-    el("homeTrophies").textContent = state.save.trophies;
+    if ($("homeLevel")) $("homeLevel").textContent = state.save.level;
+    if ($("homeCoins")) $("homeCoins").textContent = state.save.coins;
+    if ($("homeTrophies")) $("homeTrophies").textContent = state.save.trophies;
+    if ($("leagueBadge")) $("leagueBadge").textContent = league.name;
+    if ($("leagueTrophies")) $("leagueTrophies").textContent = String(state.save.trophies);
 
-    el("leagueBadge").textContent = league.current.name;
-    el("leagueTrophies").textContent = state.save.trophies;
-    el("nextLeagueName").textContent = league.next.name;
-    el("leagueProgress").style.width = `${league.progress}%`;
-    el("leagueProgressText").textContent =
-      league.current.name === league.next.name
-        ? `${state.save.trophies} trophies`
-        : `${state.save.trophies - league.current.min} / ${league.current.max - league.current.min + 1}`;
+    if ($("profileUsername")) $("profileUsername").textContent = state.save.username || "Guest";
+    if ($("profileEmail")) $("profileEmail").textContent = state.currentUser?.email || "Not signed in";
+    if ($("statWins")) $("statWins").textContent = state.save.wins;
+    if ($("statLosses")) $("statLosses").textContent = state.save.losses;
+    if ($("authStatusPill")) {
+      $("authStatusPill").textContent = state.currentUser
+        ? (state.save.username || state.currentUser.email || "Signed In")
+        : "Guest";
+    }
+    if ($("btnLogout")) $("btnLogout").classList.toggle("hidden", !state.currentUser);
 
-    el("profileUsername").textContent = state.save.username || "Guest";
-    el("profileEmail").textContent = state.currentUser?.email || "Not signed in";
-    el("statWins").textContent = state.save.wins;
-    el("statLosses").textContent = state.save.losses;
-
-    el("authStatusPill").textContent = state.currentUser
-      ? (state.save.username || state.currentUser.email || "Signed In")
-      : "Guest";
-
-    el("btnLogout").classList.toggle("hidden", !state.currentUser);
-
-    const avgCost = (state.save.deck.reduce((sum, id) => sum + (getCard(id)?.cost || 0), 0) / state.save.deck.length).toFixed(1);
-    el("avgCostHome").textContent = avgCost;
-
-    el("homeDeckPreview").innerHTML = state.save.deck.map((cardId, index) => {
-      const card = getCard(cardId);
-      return `
-        <div class="slot filled">
-          <div class="tag">Slot ${index + 1}</div>
-          <div style="font-size:1.6rem;margin:8px 0 6px;">${card.emoji}</div>
-          <div style="font-weight:900;">${card.name}</div>
-          <div class="tiny muted">Cost ${card.cost} • Lvl ${state.save.cardLevels[card.id] || 1}</div>
-        </div>
-      `;
-    }).join("");
+    const homeDeck = $("homeDeckPreview");
+    if (homeDeck) {
+      homeDeck.className = "deck-slots";
+      homeDeck.innerHTML = state.save.deck.map((cardId, index) => {
+        const card = getCard(cardId);
+        return `
+          <div class="slot filled">
+            <div class="tag">Slot ${index + 1}</div>
+            <div style="font-size:1.55rem;margin:8px 0 6px;">${card.emoji}</div>
+            <div style="font-weight:900;">${card.name}</div>
+            <div class="tiny muted">Cost ${card.cost} • Lvl ${cardLevel(card.id)}</div>
+          </div>
+        `;
+      }).join("");
+    }
   }
 
   function renderDeck() {
-    const deckSlots = el("deckSlots");
-    const deckCardPool = el("deckCardPool");
-    if (!deckSlots || !deckCardPool) return;
+    const slotsHost = $("deckSlots");
+    const poolHost = $("deckCardPool");
+    if (!slotsHost || !poolHost) return;
 
     const avgCost = (state.save.deck.reduce((sum, id) => sum + (getCard(id)?.cost || 0), 0) / state.save.deck.length).toFixed(1);
-    el("deckAvgCost").textContent = avgCost;
-    el("deckSelectedBanner").textContent =
-      state.selectedDeckSlot === null ? "Selected slot: none" : `Selected slot: ${state.selectedDeckSlot + 1}`;
+    if ($("deckAvgCost")) $("deckAvgCost").textContent = avgCost;
 
-    deckSlots.innerHTML = state.save.deck.map((cardId, index) => {
+    slotsHost.className = "deck-slots";
+    slotsHost.innerHTML = state.save.deck.map((cardId, index) => {
       const card = getCard(cardId);
       const selected = state.selectedDeckSlot === index;
       return `
@@ -668,12 +809,14 @@
           <div class="tag">Slot ${index + 1}</div>
           <div style="font-size:1.5rem;margin:8px 0 6px;">${card.emoji}</div>
           <div style="font-weight:900;">${card.name}</div>
-          <div class="tiny muted">Cost ${card.cost} • Lvl ${state.save.cardLevels[card.id] || 1}</div>
+          <div class="tiny muted">Cost ${card.cost} • Lvl ${cardLevel(card.id)}</div>
         </button>
       `;
     }).join("");
 
-    deckCardPool.innerHTML = CARDS.map((card) => {
+    poolHost.className = "collection-grid";
+    poolHost.innerHTML = CARDS.map((card) => {
+      const stats = scaledUnitStats(card);
       const alreadyInDeck = state.save.deck.includes(card.id);
       return `
         <div class="ccard">
@@ -684,9 +827,8 @@
           <div class="card-art">${card.emoji}</div>
           <strong>${card.name}</strong>
           <div class="stats">
-            <span>Power ${scaledCardPower(card)}</span>
-            <span>HP ${scaledCardHp(card)}</span>
-            <span>Lvl ${state.save.cardLevels[card.id] || 1}</span>
+            <span>Lvl ${cardLevel(card.id)}</span>
+            ${card.spell ? `<span>Spell ${card.damage}</span>` : `<span>ATK ${stats.power}</span><span>HP ${stats.hp}</span>`}
           </div>
           <div class="btn-row">
             <button class="btn ${alreadyInDeck ? "alt" : ""}" data-pick-card="${card.id}">
@@ -697,17 +839,16 @@
       `;
     }).join("");
 
-    qsa("[data-deck-slot]").forEach((btn) => {
+    $$("[data-deck-slot]").forEach((btn) => {
       btn.addEventListener("click", () => {
         state.selectedDeckSlot = Number(btn.dataset.deckSlot);
         renderDeck();
       });
     });
 
-    qsa("[data-pick-card]").forEach((btn) => {
+    $$("[data-pick-card]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const cardId = btn.dataset.pickCard;
-
         if (state.selectedDeckSlot === null) {
           alert("Select a deck slot first.");
           return;
@@ -727,13 +868,15 @@
   }
 
   function renderCollection() {
-    const grid = el("collectionGrid");
+    const grid = $("collectionGrid");
     if (!grid) return;
 
-    el("collectionCoins").textContent = state.save.coins;
+    if ($("collectionCoins")) $("collectionCoins").textContent = state.save.coins;
 
+    grid.className = "collection-grid";
     grid.innerHTML = CARDS.map((card) => {
-      const level = state.save.cardLevels[card.id] || 1;
+      const level = cardLevel(card.id);
+      const stats = scaledUnitStats(card);
       const upgradeCost = getUpgradeCost(level);
       const canUpgrade = state.save.coins >= upgradeCost && level < 10;
 
@@ -747,8 +890,7 @@
           <strong>${card.name}</strong>
           <div class="stats">
             <span>Lvl ${level}</span>
-            <span>Power ${scaledCardPower(card)}</span>
-            <span>HP ${scaledCardHp(card)}</span>
+            ${card.spell ? `<span>Spell ${card.damage}</span>` : `<span>ATK ${stats.power}</span><span>HP ${stats.hp}</span>`}
           </div>
           <div class="btn-row">
             <button class="btn ${canUpgrade ? "good" : "alt"}" data-upgrade-card="${card.id}" ${canUpgrade ? "" : "disabled"}>
@@ -759,12 +901,11 @@
       `;
     }).join("");
 
-    qsa("[data-upgrade-card]").forEach((btn) => {
+    $$("[data-upgrade-card]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const cardId = btn.dataset.upgradeCard;
-        const level = state.save.cardLevels[cardId] || 1;
+        const level = cardLevel(cardId);
         const cost = getUpgradeCost(level);
-
         if (state.save.coins < cost || level >= 10) return;
 
         state.save.coins -= cost;
@@ -775,9 +916,10 @@
   }
 
   function renderShop() {
-    const grid = el("shopGrid");
+    const grid = $("shopGrid");
     if (!grid) return;
 
+    grid.className = "collection-grid";
     grid.innerHTML = state.save.shop.map((offer, index) => {
       const card = getCard(offer.cardId);
       const affordable = state.save.coins >= offer.price;
@@ -802,7 +944,7 @@
       `;
     }).join("");
 
-    qsa("[data-buy-offer]").forEach((btn) => {
+    $$("[data-buy-offer]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const index = Number(btn.dataset.buyOffer);
         const offer = state.save.shop[index];
@@ -816,8 +958,10 @@
   }
 
   function renderHistory() {
-    const list = el("historyList");
+    const list = $("historyList");
     if (!list) return;
+
+    list.className = "history-list";
 
     if (!state.save.history.length) {
       list.innerHTML = `<div class="notice">No matches yet.</div>`;
@@ -837,15 +981,11 @@
   }
 
   function renderSettings() {
-    const toggleSound = el("toggleSound");
-    const feedLimitSelect = el("feedLimitSelect");
-
-    if (toggleSound) {
-      toggleSound.textContent = state.save.settings.soundEnabled ? "Sound: On" : "Sound: Off";
+    if ($("toggleSound")) {
+      $("toggleSound").textContent = state.save.settings.soundEnabled ? "Sound: On" : "Sound: Off";
     }
-
-    if (feedLimitSelect) {
-      feedLimitSelect.value = String(state.save.settings.feedLimit || 40);
+    if ($("feedLimitSelect")) {
+      $("feedLimitSelect").value = String(state.save.settings.feedLimit || 40);
     }
   }
 
@@ -857,43 +997,63 @@
     } else {
       setAuthMessage("Login or create an account with a unique username.");
     }
-
     setAuthMode(state.authMode);
   }
 
   function renderBattleUi() {
+    if (!$("screen-battle")) return;
+
     if (!state.battle) {
-      el("battleStatusTag").textContent = "Waiting";
-      el("battlePlayerName").textContent = state.save.username || "Guest";
-      el("battleOpponentName").textContent = "Unknown";
-      el("battleTime").textContent = "60";
-      el("battleFlux").textContent = "0";
-      el("battlePlayerBar").style.width = "100%";
-      el("battleEnemyBar").style.width = "100%";
-      el("battlePlayerHpText").textContent = "100";
-      el("battleEnemyHpText").textContent = "100";
-      el("hand").innerHTML = `<div class="notice">No active battle.</div>`;
-      el("battleLogLines").innerHTML = "No actions yet.";
+      if ($("battlePlayerName")) $("battlePlayerName").textContent = state.save.username || "Guest";
+      if ($("battleOpponentName")) $("battleOpponentName").textContent = "Unknown";
+      setBattleFlux(0);
+      if ($("battleTime")) $("battleTime").textContent = "60";
+      if ($("playerLeftHp")) $("playerLeftHp").textContent = "100";
+      if ($("playerRightHp")) $("playerRightHp").textContent = "100";
+      if ($("playerKingHp")) $("playerKingHp").textContent = "200";
+      if ($("enemyLeftHp")) $("enemyLeftHp").textContent = "100";
+      if ($("enemyRightHp")) $("enemyRightHp").textContent = "100";
+      if ($("enemyKingHp")) $("enemyKingHp").textContent = "200";
+      if ($("hand")) $("hand").innerHTML = `<div class="notice">No active battle.</div>`;
+      if ($("battleLogLines")) $("battleLogLines").innerHTML = "No actions yet.";
+      if ($("arenaUnits")) $("arenaUnits").className = "arena-units";
       return;
     }
 
     const battle = state.battle;
 
-    el("battleStatusTag").textContent = battle.finished ? "Finished" : "Live";
-    el("battlePlayerName").textContent = battle.playerName;
-    el("battleOpponentName").textContent = battle.opponentName;
-    el("battleTime").textContent = String(battle.timeLeft);
-    el("battleFlux").textContent = String(battle.flux);
+    if ($("battlePlayerName")) $("battlePlayerName").textContent = battle.playerName;
+    if ($("battleOpponentName")) $("battleOpponentName").textContent = battle.opponentName;
+    if ($("battleTime")) $("battleTime").textContent = String(Math.max(0, Math.ceil(battle.timeLeft)));
+    setBattleFlux(battle.flux);
 
-    el("battlePlayerBar").style.width = `${Math.max(0, battle.playerHp)}%`;
-    el("battleEnemyBar").style.width = `${Math.max(0, battle.enemyHp)}%`;
-    el("battlePlayerHpText").textContent = String(Math.max(0, Math.round(battle.playerHp)));
-    el("battleEnemyHpText").textContent = String(Math.max(0, Math.round(battle.enemyHp)));
+    if ($("playerLeftHp")) $("playerLeftHp").textContent = String(Math.max(0, Math.round(battle.towers.player.left.hp)));
+    if ($("playerRightHp")) $("playerRightHp").textContent = String(Math.max(0, Math.round(battle.towers.player.right.hp)));
+    if ($("playerKingHp")) $("playerKingHp").textContent = String(Math.max(0, Math.round(battle.towers.player.king.hp)));
+    if ($("enemyLeftHp")) $("enemyLeftHp").textContent = String(Math.max(0, Math.round(battle.towers.enemy.left.hp)));
+    if ($("enemyRightHp")) $("enemyRightHp").textContent = String(Math.max(0, Math.round(battle.towers.enemy.right.hp)));
+    if ($("enemyKingHp")) $("enemyKingHp").textContent = String(Math.max(0, Math.round(battle.towers.enemy.king.hp)));
 
-    el("hand").innerHTML = battle.hand.map((cardId, index) => {
+    renderHand();
+    renderBattleLog();
+    renderUnits();
+  }
+
+  function setBattleFlux(value) {
+    $$("[id='battleFlux']").forEach((node) => {
+      node.textContent = String(value);
+    });
+    const percent = Math.max(0, Math.min(100, (value / 10) * 100));
+    if ($("elixirBar")) $("elixirBar").style.width = `${percent}%`;
+  }
+
+  function renderHand() {
+    const hand = $("hand");
+    if (!hand || !state.battle) return;
+
+    hand.innerHTML = state.battle.player.hand.map((cardId, index) => {
       const card = getCard(cardId);
-      const disabled = battle.flux < card.cost || battle.finished;
-
+      const disabled = state.battle.flux < card.cost || state.battle.finished;
       return `
         <button class="hand-card ${disabled ? "disabled" : ""}" data-play-card="${index}" ${disabled ? "disabled" : ""}>
           <div class="cost-bubble">${card.cost}</div>
@@ -904,36 +1064,52 @@
       `;
     }).join("");
 
-    qsa("[data-play-card]").forEach((btn) => {
+    $$("[data-play-card]").forEach((btn) => {
       btn.addEventListener("click", () => {
         if (!state.battle || state.battle.finished) return;
         playPlayerCard(Number(btn.dataset.playCard));
       });
     });
-
-    if (!battle.log.length) {
-      el("battleLogLines").innerHTML = "No actions yet.";
-    } else {
-      const limit = state.save.settings.feedLimit || 40;
-      el("battleLogLines").innerHTML = battle.log
-        .slice(-limit)
-        .reverse()
-        .map((line) => `<div style="margin-bottom:8px;">• ${escapeHtml(line)}</div>`)
-        .join("");
-    }
   }
 
-  function escapeHtml(value) {
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;");
+  function renderBattleLog() {
+    const host = $("battleLogLines");
+    if (!host || !state.battle) return;
+
+    const limit = state.save.settings.feedLimit || 40;
+    if (!state.battle.log.length) {
+      host.innerHTML = "No actions yet.";
+      return;
+    }
+
+    host.innerHTML = state.battle.log
+      .slice(-limit)
+      .reverse()
+      .map((line) => `<div class="feed-line">• ${escapeHtml(line)}</div>`)
+      .join("");
+  }
+
+  function renderUnits() {
+    const host = $("arenaUnits");
+    if (!host || !state.battle) return;
+
+    host.className = "arena-units";
+    host.innerHTML = state.battle.units.map((unit) => {
+      const width = Math.max(0, Math.min(100, (unit.hp / unit.maxHp) * 100));
+      return `
+        <div class="unit ${unit.side}" style="left:${unit.x}%;top:${unit.y}%;">
+          <div class="unit-bar"><span style="width:${width}%"></span></div>
+          <div>${escapeHtml(unit.emoji)}</div>
+        </div>
+      `;
+    }).join("");
   }
 
   function startMatchmakingFlow() {
     closeResult();
     showQueue(true);
-    el("queueText").textContent = "Finding a match...";
+    const queueText = $("queueText");
+    if (queueText) queueText.textContent = "Finding a match...";
 
     setTimeout(() => {
       beginBattle();
@@ -943,11 +1119,12 @@
   }
 
   function showQueue(show) {
-    el("queueScreen")?.classList.toggle("show", show);
+    $("queueScreen")?.classList.toggle("show", show);
   }
 
   function beginBattle() {
-    clearBattleTimers();
+    cancelAnimationFrame(state.animationFrame);
+    state.lastFrameTs = 0;
 
     const playerName = state.save.username || "Guest";
     const opponentName = pickOpponentUsername(playerName);
@@ -955,116 +1132,308 @@
     state.battle = {
       playerName,
       opponentName,
-      playerHp: 100,
-      enemyHp: 100,
-      flux: 0,
       timeLeft: 60,
-      hand: drawOpeningHand(),
-      deckCycle: [...state.save.deck],
+      flux: 0,
+      fluxTimer: 0,
       finished: false,
-      log: [`Match found against ${opponentName}.`]
+      log: [`Match found against ${opponentName}.`],
+      player: {
+        drawQueue: [...state.save.deck],
+        hand: [...state.save.deck.slice(0, 4)]
+      },
+      enemy: {
+        drawQueue: shuffle([...state.save.deck]),
+        hand: shuffle([...state.save.deck]).slice(0, 4),
+        thinkTimer: 1.0
+      },
+      towers: {
+        player: {
+          left: { x: 14, y: 83, hp: 100, maxHp: 100, type: "crown" },
+          right: { x: 86, y: 83, hp: 100, maxHp: 100, type: "crown" },
+          king: { x: 50, y: 94, hp: 200, maxHp: 200, type: "king" }
+        },
+        enemy: {
+          left: { x: 14, y: 17, hp: 100, maxHp: 100, type: "crown" },
+          right: { x: 86, y: 17, hp: 100, maxHp: 100, type: "crown" },
+          king: { x: 50, y: 6, hp: 200, maxHp: 200, type: "king" }
+        }
+      },
+      units: [],
+      idSeq: 1
     };
 
     renderBattleUi();
-
-    state.battleTimerId = window.setInterval(() => {
-      if (!state.battle || state.battle.finished) return;
-
-      state.battle.timeLeft -= 1;
-      state.battle.flux = Math.min(10, state.battle.flux + 1);
-
-      if (state.battle.timeLeft <= 0) {
-        endBattleByTimer();
-        return;
-      }
-
-      renderBattleUi();
-    }, 1000);
-
-    state.battleBotTimerId = window.setInterval(() => {
-      if (!state.battle || state.battle.finished) return;
-      botTakeTurn();
-    }, 1800);
+    state.animationFrame = requestAnimationFrame(battleLoop);
   }
 
-  function drawOpeningHand() {
-    return [...state.save.deck.slice(0, 4)];
-  }
+  function battleLoop(ts) {
+    if (!state.battle || state.battle.finished) return;
 
-  function cycleCard(index) {
+    if (!state.lastFrameTs) state.lastFrameTs = ts;
+    const dt = Math.min(0.033, (ts - state.lastFrameTs) / 1000);
+    state.lastFrameTs = ts;
+
     const battle = state.battle;
-    const nextCard = battle.deckCycle.shift();
-    battle.deckCycle.push(nextCard);
-    battle.hand.splice(index, 1);
-    battle.hand.push(nextCard);
+
+    battle.timeLeft -= dt;
+    battle.fluxTimer += dt;
+    if (battle.fluxTimer >= 1.15) {
+      battle.fluxTimer = 0;
+      battle.flux = Math.min(10, battle.flux + 1);
+    }
+
+    battle.enemy.thinkTimer -= dt;
+    if (battle.enemy.thinkTimer <= 0) {
+      battle.enemy.thinkTimer = 1.2 + Math.random() * 0.9;
+      botPlayCard();
+    }
+
+    updateUnits(dt);
+    cleanupDeadUnits();
+
+    if (battle.timeLeft <= 0) {
+      finishBattle(decideWinnerOnTime());
+      return;
+    }
+
+    if (battle.towers.player.king.hp <= 0) {
+      finishBattle("defeat");
+      return;
+    }
+
+    if (battle.towers.enemy.king.hp <= 0) {
+      finishBattle("victory");
+      return;
+    }
+
+    renderBattleUi();
+    state.animationFrame = requestAnimationFrame(battleLoop);
   }
 
   function playPlayerCard(index) {
     const battle = state.battle;
     if (!battle || battle.finished) return;
 
-    const cardId = battle.hand[index];
+    const cardId = battle.player.hand[index];
     const card = getCard(cardId);
     if (!card || battle.flux < card.cost) return;
 
     battle.flux -= card.cost;
+    battle.log.push(`${battle.playerName} played ${card.name}.`);
 
-    const damage = scaledCardPower(card) + Math.floor(Math.random() * 6);
-    battle.enemyHp = Math.max(0, battle.enemyHp - damage);
-    battle.log.push(`${battle.playerName} played ${card.name} for ${damage} damage.`);
-
-    cycleCard(index);
-
-    if (battle.enemyHp <= 0) {
-      finishBattle("victory");
-      return;
-    }
-
-    renderBattleUi();
-  }
-
-  function botTakeTurn() {
-    const battle = state.battle;
-    if (!battle || battle.finished) return;
-
-    const possibleCardId = battle.deckCycle[Math.floor(Math.random() * battle.deckCycle.length)];
-    const card = getCard(possibleCardId);
-    if (!card) return;
-
-    const damage = Math.max(6, Math.floor(card.power * 0.7) + Math.floor(Math.random() * 6));
-    battle.playerHp = Math.max(0, battle.playerHp - damage);
-    battle.log.push(`${battle.opponentName} played ${card.name} for ${damage} damage.`);
-
-    if (battle.playerHp <= 0) {
-      finishBattle("defeat");
-      return;
-    }
-
-    renderBattleUi();
-  }
-
-  function endBattleByTimer() {
-    const battle = state.battle;
-    if (!battle || battle.finished) return;
-
-    if (battle.playerHp > battle.enemyHp) {
-      finishBattle("victory");
-    } else if (battle.enemyHp > battle.playerHp) {
-      finishBattle("defeat");
+    if (card.spell) {
+      castSpell("player", card);
     } else {
-      finishBattle("draw");
+      spawnCardUnits("player", card);
+    }
+
+    cycleHandCard("player", index);
+    renderBattleUi();
+  }
+
+  function botPlayCard() {
+    const battle = state.battle;
+    if (!battle || battle.finished) return;
+
+    const playable = battle.enemy.hand
+      .map((id, index) => ({ id, index, card: getCard(id) }))
+      .filter((entry) => entry.card && entry.card.cost <= battle.flux);
+
+    if (!playable.length) return;
+
+    playable.sort((a, b) => b.card.cost - a.card.cost);
+    const pick = playable[0];
+    battle.flux -= pick.card.cost;
+    battle.log.push(`${battle.opponentName} played ${pick.card.name}.`);
+
+    if (pick.card.spell) {
+      castSpell("enemy", pick.card);
+    } else {
+      spawnCardUnits("enemy", pick.card);
+    }
+
+    cycleHandCard("enemy", pick.index);
+  }
+
+  function cycleHandCard(side, index) {
+    const holder = state.battle[side];
+    const queue = holder.drawQueue;
+    if (!queue.length) return;
+
+    const next = queue.shift();
+    queue.push(next);
+    holder.hand.splice(index, 1);
+    holder.hand.push(next);
+  }
+
+  function castSpell(side, card) {
+    const enemySide = side === "player" ? "enemy" : "player";
+    const targets = state.battle.units.filter((u) => u.side === enemySide);
+
+    if (targets.length) {
+      targets.forEach((unit) => {
+        unit.hp -= card.damage;
+      });
+      state.battle.log.push(`${side === "player" ? state.battle.playerName : state.battle.opponentName} used ${card.name} for ${card.damage} area damage.`);
+      return;
+    }
+
+    const tower = choosePriorityTower(enemySide);
+    if (tower) {
+      tower.hp -= Math.round(card.damage * 0.8);
+      state.battle.log.push(`${card.name} hit a tower for ${Math.round(card.damage * 0.8)}.`);
     }
   }
 
-  function clearBattleTimers() {
-    if (state.battleTimerId) {
-      clearInterval(state.battleTimerId);
-      state.battleTimerId = null;
+  function spawnCardUnits(side, card) {
+    const stats = scaledUnitStats(card);
+    const count = card.count || 1;
+    const baseX = side === "player"
+      ? (Math.random() < 0.5 ? 30 : 70)
+      : (Math.random() < 0.5 ? 30 : 70);
+    const baseY = side === "player" ? 82 : 18;
+
+    for (let i = 0; i < count; i++) {
+      const spreadX = count === 1 ? 0 : (i - (count - 1) / 2) * 4;
+      const spreadY = count === 1 ? 0 : (i % 2 === 0 ? 1.2 : -1.2);
+      state.battle.units.push({
+        uid: `u_${state.battle.idSeq++}`,
+        cardId: card.id,
+        side,
+        emoji: card.emoji,
+        x: clamp(baseX + spreadX, 8, 92),
+        y: clamp(baseY + spreadY, 8, 92),
+        hp: stats.hp,
+        maxHp: stats.hp,
+        damage: stats.power,
+        speed: card.speed || 12,
+        range: card.range || 22,
+        attackSpeed: card.attackSpeed || 1,
+        attackCd: Math.random() * 0.3,
+        targetMode: card.target || "ground",
+        radius: card.radius || 18,
+        splash: card.splash || 0,
+        structure: !!card.structure,
+        lifetime: card.lifetime || null
+      });
     }
-    if (state.battleBotTimerId) {
-      clearInterval(state.battleBotTimerId);
-      state.battleBotTimerId = null;
+  }
+
+  function updateUnits(dt) {
+    const battle = state.battle;
+    if (!battle) return;
+
+    for (const unit of battle.units) {
+      if (unit.lifetime !== null) {
+        unit.lifetime -= dt;
+        if (unit.lifetime <= 0) {
+          unit.hp = 0;
+          continue;
+        }
+      }
+
+      unit.attackCd -= dt;
+
+      const target = findUnitTarget(unit);
+      if (!target) continue;
+
+      const dx = target.x - unit.x;
+      const dy = target.y - unit.y;
+      const dist = Math.hypot(dx, dy);
+      const attackRangePercent = unit.range / 18;
+
+      if (dist <= attackRangePercent) {
+        if (unit.attackCd <= 0) {
+          dealUnitAttack(unit, target);
+          unit.attackCd = unit.attackSpeed;
+        }
+      } else if (!unit.structure) {
+        const moveAmt = (unit.speed / 10) * dt;
+        unit.x += (dx / (dist || 1)) * moveAmt;
+        unit.y += (dy / (dist || 1)) * moveAmt;
+      }
     }
+  }
+
+  function findUnitTarget(unit) {
+    const enemySide = unit.side === "player" ? "enemy" : "player";
+
+    let best = null;
+    let bestDist = Infinity;
+
+    if (unit.targetMode !== "buildings") {
+      for (const other of state.battle.units) {
+        if (other.side !== enemySide) continue;
+        const d = distance(unit, other);
+        if (d < bestDist) {
+          bestDist = d;
+          best = other;
+        }
+      }
+    }
+
+    const tower = choosePriorityTower(enemySide, unit.x);
+    if (tower) {
+      const d = Math.hypot(tower.x - unit.x, tower.y - unit.y);
+      if (d < bestDist || unit.targetMode === "buildings") {
+        best = tower;
+      }
+    }
+
+    return best;
+  }
+
+  function choosePriorityTower(side, laneX = 50) {
+    const towers = state.battle.towers[side];
+    const crown = laneX < 50 ? towers.left : towers.right;
+    if (crown.hp > 0) return crown;
+    if ((laneX < 50 ? towers.right : towers.left).hp > 0) return laneX < 50 ? towers.right : towers.left;
+    if (towers.king.hp > 0) return towers.king;
+    return null;
+  }
+
+  function dealUnitAttack(unit, target) {
+    target.hp -= unit.damage;
+
+    if ("cardId" in target) {
+      state.battle.log.push(`${getCard(unit.cardId).name} hit ${getCard(target.cardId).name} for ${unit.damage}.`);
+      if (unit.splash) {
+        for (const other of state.battle.units) {
+          if (other.side !== target.side || other === target) continue;
+          if (distance(target, other) <= unit.splash / 18) {
+            other.hp -= Math.round(unit.damage * 0.55);
+          }
+        }
+      }
+    } else {
+      state.battle.log.push(`${getCard(unit.cardId).name} hit a tower for ${unit.damage}.`);
+    }
+  }
+
+  function cleanupDeadUnits() {
+    state.battle.units = state.battle.units.filter((u) => u.hp > 0);
+    clampTowerHp(state.battle.towers.player.left);
+    clampTowerHp(state.battle.towers.player.right);
+    clampTowerHp(state.battle.towers.player.king);
+    clampTowerHp(state.battle.towers.enemy.left);
+    clampTowerHp(state.battle.towers.enemy.right);
+    clampTowerHp(state.battle.towers.enemy.king);
+  }
+
+  function clampTowerHp(tower) {
+    tower.hp = Math.max(0, tower.hp);
+  }
+
+  function decideWinnerOnTime() {
+    const p = totalHp(state.battle.towers.player);
+    const e = totalHp(state.battle.towers.enemy);
+    if (e < p) return "victory";
+    if (p < e) return "defeat";
+    return "draw";
+  }
+
+  function totalHp(sideTowers) {
+    return sideTowers.left.hp + sideTowers.right.hp + sideTowers.king.hp;
   }
 
   async function finishBattle(result) {
@@ -1072,7 +1441,8 @@
     if (!battle || battle.finished) return;
 
     battle.finished = true;
-    clearBattleTimers();
+    cancelAnimationFrame(state.animationFrame);
+    state.animationFrame = null;
 
     let coins = 0;
     let trophiesDelta = 0;
@@ -1109,38 +1479,60 @@
 
     await persistSave();
 
-    el("resultText").textContent = capitalize(result);
-    el("resultTag").textContent = "Match Complete";
-    el("resultRewards").innerHTML = `
-      <div><strong>Opponent:</strong> ${escapeHtml(battle.opponentName)}</div>
-      <div><strong>Coins:</strong> +${coins}</div>
-      <div><strong>Trophies:</strong> ${trophiesDelta >= 0 ? "+" : ""}${trophiesDelta}</div>
-      <div><strong>Final HP:</strong> You ${Math.round(battle.playerHp)} • Opponent ${Math.round(battle.enemyHp)}</div>
-    `;
+    if ($("resultText")) $("resultText").textContent = capitalize(result);
+    if ($("resultTag")) $("resultTag").textContent = "Match Complete";
+    if ($("resultRewards")) {
+      $("resultRewards").innerHTML = `
+        <div><strong>Opponent:</strong> ${escapeHtml(battle.opponentName)}</div>
+        <div><strong>Coins:</strong> +${coins}</div>
+        <div><strong>Trophies:</strong> ${trophiesDelta >= 0 ? "+" : ""}${trophiesDelta}</div>
+        <div><strong>Final HP:</strong> You ${Math.round(totalHp(battle.towers.player))} • Opponent ${Math.round(totalHp(battle.towers.enemy))}</div>
+      `;
+    }
 
-    el("resultModal")?.classList.add("show");
+    $("resultModal")?.classList.add("show");
     renderAll();
   }
 
-  function closeResult() {
-    el("resultModal")?.classList.remove("show");
+  function exitBattleToHome() {
+    cancelAnimationFrame(state.animationFrame);
+    state.animationFrame = null;
+    state.battle = null;
+    state.lastFrameTs = 0;
+    renderAll();
+    showScreen("home");
+  }
+
+  function pickOpponentUsername(playerUsername) {
+    const filtered = BOT_NAMES.filter((name) => name.toLowerCase() !== String(playerUsername).toLowerCase());
+    return filtered[Math.floor(Math.random() * filtered.length)] || "ArenaRival";
+  }
+
+  function distance(a, b) {
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  }
+
+  function clamp(n, min, max) {
+    return Math.max(min, Math.min(max, n));
+  }
+
+  function shuffle(arr) {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
   }
 
   function capitalize(value) {
     return value.charAt(0).toUpperCase() + value.slice(1);
   }
 
-  function exitBattleToHome() {
-    clearBattleTimers();
-    state.battle = null;
-    renderAll();
-    showScreen("home");
-  }
-
-  function pickOpponentUsername(playerUsername) {
-    const filtered = BOT_USERNAMES.filter(
-      (name) => name.toLowerCase() !== String(playerUsername).toLowerCase()
-    );
-    return filtered[Math.floor(Math.random() * filtered.length)] || "ArenaRival";
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
   }
 })();
